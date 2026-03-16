@@ -13,7 +13,7 @@ image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - API
 created: '2025-02-06'
-modified: '2025-02-06'
+modified: '2026-03-16'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/web-of-science-apis/refs/heads/main/apis.yml
 specificationVersion: '0.19'
@@ -34,4 +34,4 @@ apis:
         url: ' https://researchguides.dartmouth.edu/c.php?g=59725&p=9913657'
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
