@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-record-summary-schema.json",
+  "title": "RecordSummary",
+  "description": "Summary fields of a WOS record",
+  "type": "object",
+  "properties": {
+    "names": {
+      "type": "object",
+      "description": "Author and editor names"
+    },
+    "doctypes": {
+      "type": "object",
+      "description": "Document types"
+    },
+    "titles": {
+      "type": "object",
+      "description": "Titles (article, source, etc.)"
+    },
+    "pub_info": {
+      "$ref": "#/components/schemas/PubInfo"
+    },
+    "identifiers": {
+      "type": "object",
+      "description": "Document identifiers (DOI, ISSN, etc.)"
+    }
+  }
+}

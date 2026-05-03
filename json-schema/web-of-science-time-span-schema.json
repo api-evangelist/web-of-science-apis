@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-time-span-schema.json",
+  "title": "TimeSpan",
+  "description": "Date range for filtering",
+  "type": "object",
+  "properties": {
+    "begin": {
+      "type": "string",
+      "description": "Start date in YYYY-MM-DD format",
+      "format": "date"
+    },
+    "end": {
+      "type": "string",
+      "description": "End date in YYYY-MM-DD format",
+      "format": "date"
+    }
+  }
+}

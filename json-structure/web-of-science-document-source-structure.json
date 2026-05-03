@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-document-source-structure.json",
+  "title": "DocumentSource",
+  "description": "Source publication information",
+  "type": "object",
+  "properties": {
+    "sourceTitle": {
+      "type": "str",
+      "description": "Title of the source journal or book"
+    },
+    "publishYear": {
+      "type": "int32",
+      "description": "Year of publication"
+    },
+    "publishMonth": {
+      "type": "str",
+      "description": "Month of publication"
+    },
+    "volume": {
+      "type": "str",
+      "description": "Volume number"
+    },
+    "issue": {
+      "type": "str",
+      "description": "Issue number"
+    },
+    "pages": {
+      "type": "#DocumentPages"
+    },
+    "articleNumber": {
+      "type": "str",
+      "description": "Article number (for electronic journals)"
+    },
+    "supplement": {
+      "type": "str",
+      "description": "Supplement identifier"
+    }
+  }
+}

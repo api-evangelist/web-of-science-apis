@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-wos-record-structure.json",
+  "title": "WosRecord",
+  "description": "A full Web of Science record with all metadata fields",
+  "type": "object",
+  "properties": {
+    "UID": {
+      "type": "str",
+      "description": "Web of Science unique identifier"
+    },
+    "static_data": {
+      "type": "#StaticData"
+    },
+    "dynamic_data": {
+      "type": "#DynamicData"
+    }
+  }
+}

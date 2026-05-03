@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-year-count-structure.json",
+  "title": "YearCount",
+  "description": "Count value for a specific year",
+  "type": "object",
+  "properties": {
+    "year": {
+      "type": "int32",
+      "description": "Year"
+    },
+    "count": {
+      "type": "int32",
+      "description": "Count for that year"
+    }
+  }
+}

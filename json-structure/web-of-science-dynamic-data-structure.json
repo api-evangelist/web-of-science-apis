@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-dynamic-data-structure.json",
+  "title": "DynamicData",
+  "description": "Dynamic data including citation counts",
+  "type": "object",
+  "properties": {
+    "citation_related": {
+      "type": "map",
+      "description": "Citation count information"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-journals-search-response-schema.json",
+  "title": "JournalsSearchResponse",
+  "description": "Response from journal search containing results and metadata",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "integer",
+      "description": "Total number of journals matching the query"
+    },
+    "page": {
+      "type": "integer",
+      "description": "Current page number"
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Number of records per page"
+    },
+    "hits": {
+      "type": "array",
+      "description": "Array of journal records",
+      "items": {
+        "$ref": "#/components/schemas/Journal"
+      }
+    }
+  }
+}

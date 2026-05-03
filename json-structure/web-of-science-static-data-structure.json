@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-static-data-structure.json",
+  "title": "StaticData",
+  "description": "Static (non-citation) metadata for a WOS record",
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "#RecordSummary"
+    },
+    "fullrecord_metadata": {
+      "type": "#FullRecordMetadata"
+    }
+  }
+}

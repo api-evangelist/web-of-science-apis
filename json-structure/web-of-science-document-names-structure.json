@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-document-names-structure.json",
+  "title": "DocumentNames",
+  "description": "Author and editor names",
+  "type": "object",
+  "properties": {
+    "authors": {
+      "type": "array",
+      "description": "List of authors"
+    }
+  }
+}

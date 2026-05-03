@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-document-schema.json",
+  "title": "Document",
+  "description": "A Web of Science document record with bibliographic metadata",
+  "type": "object",
+  "properties": {
+    "uid": {
+      "type": "string",
+      "description": "Unique identifier for the document (e.g., WOS:000349044100001)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the document"
+    },
+    "types": {
+      "type": "array",
+      "description": "Document types (article, review, etc.)",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sourceTypes": {
+      "type": "array",
+      "description": "Source types (journal, book, etc.)",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source": {
+      "$ref": "#/components/schemas/DocumentSource"
+    },
+    "names": {
+      "$ref": "#/components/schemas/DocumentNames"
+    },
+    "links": {
+      "$ref": "#/components/schemas/DocumentLinks"
+    },
+    "citations": {
+      "type": "array",
+      "description": "Citation counts by database",
+      "items": {
+        "$ref": "#/components/schemas/CitationCount"
+      }
+    },
+    "identifiers": {
+      "$ref": "#/components/schemas/DocumentIdentifiers"
+    },
+    "keywords": {
+      "$ref": "#/components/schemas/DocumentKeywords"
+    }
+  }
+}

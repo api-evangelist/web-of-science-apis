@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-document-structure.json",
+  "title": "Document",
+  "description": "A Web of Science document record with bibliographic metadata",
+  "type": "object",
+  "properties": {
+    "uid": {
+      "type": "str",
+      "description": "Unique identifier for the document (e.g., WOS:000349044100001)"
+    },
+    "title": {
+      "type": "str",
+      "description": "Title of the document"
+    },
+    "types": {
+      "type": "array",
+      "description": "Document types (article, review, etc.)"
+    },
+    "sourceTypes": {
+      "type": "array",
+      "description": "Source types (journal, book, etc.)"
+    },
+    "source": {
+      "type": "#DocumentSource"
+    },
+    "names": {
+      "type": "#DocumentNames"
+    },
+    "links": {
+      "type": "#DocumentLinks"
+    },
+    "citations": {
+      "type": "array",
+      "description": "Citation counts by database"
+    },
+    "identifiers": {
+      "type": "#DocumentIdentifiers"
+    },
+    "keywords": {
+      "type": "#DocumentKeywords"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-document-keywords-schema.json",
+  "title": "DocumentKeywords",
+  "description": "Keywords associated with the document",
+  "type": "object",
+  "properties": {
+    "authorKeywords": {
+      "type": "array",
+      "description": "Keywords provided by the authors",
+      "items": {
+        "type": "string"
+      }
+    },
+    "keywordsPlus": {
+      "type": "array",
+      "description": "Keywords Plus generated from references",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

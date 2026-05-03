@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-document-pages-structure.json",
+  "title": "DocumentPages",
+  "description": "Page range information",
+  "type": "object",
+  "properties": {
+    "range": {
+      "type": "str",
+      "description": "Page range (e.g., 145-152)"
+    },
+    "begin": {
+      "type": "str",
+      "description": "First page number"
+    },
+    "end": {
+      "type": "str",
+      "description": "Last page number"
+    },
+    "count": {
+      "type": "int32",
+      "description": "Total number of pages"
+    }
+  }
+}

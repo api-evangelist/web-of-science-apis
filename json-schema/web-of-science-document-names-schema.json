@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-document-names-schema.json",
+  "title": "DocumentNames",
+  "description": "Author and editor names",
+  "type": "object",
+  "properties": {
+    "authors": {
+      "type": "array",
+      "description": "List of authors",
+      "items": {
+        "$ref": "#/components/schemas/Author"
+      }
+    }
+  }
+}

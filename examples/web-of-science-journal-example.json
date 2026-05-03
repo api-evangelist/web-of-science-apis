@@ -1,0 +1,18 @@
+{
+  "id": "example-string",
+  "name": "example-string",
+  "issn": "example-string",
+  "eissn": "example-string",
+  "publisher": "example-string",
+  "country": "example-string",
+  "openAccess": {
+    "value": "example-string"
+  },
+  "categories": [
+    "example-string"
+  ],
+  "jcrProfile": "https://example.com",
+  "links": {
+    "record": "https://example.com"
+  }
+}

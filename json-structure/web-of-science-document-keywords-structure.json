@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-document-keywords-structure.json",
+  "title": "DocumentKeywords",
+  "description": "Keywords associated with the document",
+  "type": "object",
+  "properties": {
+    "authorKeywords": {
+      "type": "array",
+      "description": "Keywords provided by the authors"
+    },
+    "keywordsPlus": {
+      "type": "array",
+      "description": "Keywords Plus generated from references"
+    }
+  }
+}

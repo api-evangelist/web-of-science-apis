@@ -1,0 +1,426 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "wos": "https://clarivate.com/webofsciencegroup/solutions/web-of-science/#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "DocumentSource": {
+      "@id": "wos:DocumentSource",
+      "@type": "@id"
+    },
+    "sourceTitle": {
+      "@id": "wos:sourceTitle",
+      "@type": "xsd:string"
+    },
+    "publishYear": {
+      "@id": "wos:publishYear",
+      "@type": "xsd:integer"
+    },
+    "publishMonth": {
+      "@id": "wos:publishMonth",
+      "@type": "xsd:string"
+    },
+    "volume": {
+      "@id": "wos:volume",
+      "@type": "xsd:string"
+    },
+    "issue": {
+      "@id": "wos:issue",
+      "@type": "xsd:string"
+    },
+    "pages": {
+      "@id": "wos:pages"
+    },
+    "articleNumber": {
+      "@id": "wos:articleNumber",
+      "@type": "xsd:string"
+    },
+    "supplement": {
+      "@id": "wos:supplement",
+      "@type": "xsd:string"
+    },
+    "ErrorResponse": {
+      "@id": "wos:ErrorResponse",
+      "@type": "@id"
+    },
+    "code": {
+      "@id": "wos:code",
+      "@type": "xsd:integer"
+    },
+    "message": {
+      "@id": "wos:message",
+      "@type": "xsd:string"
+    },
+    "StaticData": {
+      "@id": "wos:StaticData",
+      "@type": "@id"
+    },
+    "summary": {
+      "@id": "wos:summary"
+    },
+    "fullrecord_metadata": {
+      "@id": "wos:fullrecord_metadata"
+    },
+    "Journal": {
+      "@id": "wos:Journal",
+      "@type": "@id"
+    },
+    "id": {
+      "@id": "wos:id",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "wos:name",
+      "@type": "xsd:string"
+    },
+    "issn": {
+      "@id": "wos:issn",
+      "@type": "xsd:string"
+    },
+    "eissn": {
+      "@id": "wos:eissn",
+      "@type": "xsd:string"
+    },
+    "publisher": {
+      "@id": "wos:publisher",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "wos:country",
+      "@type": "xsd:string"
+    },
+    "openAccess": {
+      "@id": "wos:openAccess"
+    },
+    "categories": {
+      "@id": "wos:categories"
+    },
+    "jcrProfile": {
+      "@id": "wos:jcrProfile",
+      "@type": "xsd:anyURI"
+    },
+    "links": {
+      "@id": "wos:links"
+    },
+    "PubInfo": {
+      "@id": "wos:PubInfo",
+      "@type": "@id"
+    },
+    "pubtype": {
+      "@id": "wos:pubtype",
+      "@type": "xsd:string"
+    },
+    "pubyear": {
+      "@id": "wos:pubyear",
+      "@type": "xsd:string"
+    },
+    "sortdate": {
+      "@id": "wos:sortdate",
+      "@type": "xsd:string"
+    },
+    "vol": {
+      "@id": "wos:vol",
+      "@type": "xsd:string"
+    },
+    "DocumentPages": {
+      "@id": "wos:DocumentPages",
+      "@type": "@id"
+    },
+    "range": {
+      "@id": "wos:range",
+      "@type": "xsd:string"
+    },
+    "begin": {
+      "@id": "wos:begin",
+      "@type": "xsd:string"
+    },
+    "end": {
+      "@id": "wos:end",
+      "@type": "xsd:string"
+    },
+    "count": {
+      "@id": "wos:count",
+      "@type": "xsd:integer"
+    },
+    "CategoryCount": {
+      "@id": "wos:CategoryCount",
+      "@type": "@id"
+    },
+    "CategoryContext": {
+      "@id": "wos:CategoryContext",
+      "@type": "@id"
+    },
+    "Document": {
+      "@id": "wos:Document",
+      "@type": "@id"
+    },
+    "uid": {
+      "@id": "wos:uid",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "wos:title",
+      "@type": "xsd:string"
+    },
+    "types": {
+      "@id": "wos:types"
+    },
+    "sourceTypes": {
+      "@id": "wos:sourceTypes"
+    },
+    "source": {
+      "@id": "wos:source"
+    },
+    "names": {
+      "@id": "wos:names"
+    },
+    "citations": {
+      "@id": "wos:citations"
+    },
+    "identifiers": {
+      "@id": "wos:identifiers"
+    },
+    "keywords": {
+      "@id": "wos:keywords"
+    },
+    "TimeSpan": {
+      "@id": "wos:TimeSpan",
+      "@type": "@id"
+    },
+    "WosRecord": {
+      "@id": "wos:WosRecord",
+      "@type": "@id"
+    },
+    "UID": {
+      "@id": "wos:UID",
+      "@type": "xsd:string"
+    },
+    "static_data": {
+      "@id": "wos:static_data"
+    },
+    "dynamic_data": {
+      "@id": "wos:dynamic_data"
+    },
+    "CitationReport": {
+      "@id": "wos:CitationReport",
+      "@type": "@id"
+    },
+    "timesCited": {
+      "@id": "wos:timesCited",
+      "@type": "xsd:integer"
+    },
+    "averagePerItem": {
+      "@id": "wos:averagePerItem",
+      "@type": "xsd:float"
+    },
+    "hIndex": {
+      "@id": "wos:hIndex",
+      "@type": "xsd:integer"
+    },
+    "citingArticlesLinks": {
+      "@id": "wos:citingArticlesLinks",
+      "@type": "xsd:anyURI"
+    },
+    "yearPublished": {
+      "@id": "wos:yearPublished"
+    },
+    "citationsByYear": {
+      "@id": "wos:citationsByYear"
+    },
+    "QueryResult": {
+      "@id": "wos:QueryResult",
+      "@type": "@id"
+    },
+    "queryId": {
+      "@id": "wos:queryId",
+      "@type": "xsd:integer"
+    },
+    "recordsFound": {
+      "@id": "wos:recordsFound",
+      "@type": "xsd:integer"
+    },
+    "recordsSearched": {
+      "@id": "wos:recordsSearched",
+      "@type": "xsd:integer"
+    },
+    "RecordIdsResponse": {
+      "@id": "wos:RecordIdsResponse",
+      "@type": "@id"
+    },
+    "queryResult": {
+      "@id": "wos:queryResult"
+    },
+    "ids": {
+      "@id": "wos:ids"
+    },
+    "DocumentIdentifiers": {
+      "@id": "wos:DocumentIdentifiers",
+      "@type": "@id"
+    },
+    "doi": {
+      "@id": "wos:doi",
+      "@type": "xsd:string"
+    },
+    "pmid": {
+      "@id": "wos:pmid",
+      "@type": "xsd:string"
+    },
+    "DynamicData": {
+      "@id": "wos:DynamicData",
+      "@type": "@id"
+    },
+    "citation_related": {
+      "@id": "wos:citation_related"
+    },
+    "CitationCount": {
+      "@id": "wos:CitationCount",
+      "@type": "@id"
+    },
+    "db": {
+      "@id": "wos:db",
+      "@type": "xsd:string"
+    },
+    "RecordSummary": {
+      "@id": "wos:RecordSummary",
+      "@type": "@id"
+    },
+    "doctypes": {
+      "@id": "wos:doctypes"
+    },
+    "titles": {
+      "@id": "wos:titles"
+    },
+    "pub_info": {
+      "@id": "wos:pub_info"
+    },
+    "DocumentKeywords": {
+      "@id": "wos:DocumentKeywords",
+      "@type": "@id"
+    },
+    "authorKeywords": {
+      "@id": "wos:authorKeywords"
+    },
+    "keywordsPlus": {
+      "@id": "wos:keywordsPlus"
+    },
+    "SearchResponse": {
+      "@id": "wos:SearchResponse",
+      "@type": "@id"
+    },
+    "records": {
+      "@id": "wos:records"
+    },
+    "DocumentNames": {
+      "@id": "wos:DocumentNames",
+      "@type": "@id"
+    },
+    "authors": {
+      "@id": "wos:authors"
+    },
+    "SearchRequest": {
+      "@id": "wos:SearchRequest",
+      "@type": "@id"
+    },
+    "databaseId": {
+      "@id": "wos:databaseId",
+      "@type": "xsd:string"
+    },
+    "usrQuery": {
+      "@id": "wos:usrQuery",
+      "@type": "xsd:string"
+    },
+    "firstRecord": {
+      "@id": "wos:firstRecord",
+      "@type": "xsd:integer"
+    },
+    "editions": {
+      "@id": "wos:editions"
+    },
+    "publishTimeSpan": {
+      "@id": "wos:publishTimeSpan"
+    },
+    "sortField": {
+      "@id": "wos:sortField",
+      "@type": "xsd:string"
+    },
+    "Records": {
+      "@id": "wos:Records",
+      "@type": "@id"
+    },
+    "JournalsSearchResponse": {
+      "@id": "wos:JournalsSearchResponse",
+      "@type": "@id"
+    },
+    "total": {
+      "@id": "wos:total",
+      "@type": "xsd:integer"
+    },
+    "page": {
+      "@id": "wos:page",
+      "@type": "xsd:integer"
+    },
+    "limit": {
+      "@id": "wos:limit",
+      "@type": "xsd:integer"
+    },
+    "hits": {
+      "@id": "wos:hits"
+    },
+    "DocumentsSearchResponse": {
+      "@id": "wos:DocumentsSearchResponse",
+      "@type": "@id"
+    },
+    "YearCount": {
+      "@id": "wos:YearCount",
+      "@type": "@id"
+    },
+    "year": {
+      "@id": "wos:year",
+      "@type": "xsd:integer"
+    },
+    "Author": {
+      "@id": "wos:Author",
+      "@type": "@id"
+    },
+    "displayName": {
+      "@id": "wos:displayName",
+      "@type": "xsd:string"
+    },
+    "wosStandard": {
+      "@id": "wos:wosStandard",
+      "@type": "xsd:string"
+    },
+    "researcherId": {
+      "@id": "wos:researcherId",
+      "@type": "xsd:string"
+    },
+    "FullRecordMetadata": {
+      "@id": "wos:FullRecordMetadata",
+      "@type": "@id"
+    },
+    "languages": {
+      "@id": "wos:languages"
+    },
+    "addresses": {
+      "@id": "wos:addresses"
+    },
+    "fund_ack": {
+      "@id": "wos:fund_ack"
+    },
+    "DocumentLinks": {
+      "@id": "wos:DocumentLinks",
+      "@type": "@id"
+    },
+    "record": {
+      "@id": "wos:record",
+      "@type": "xsd:anyURI"
+    },
+    "references": {
+      "@id": "wos:references",
+      "@type": "xsd:anyURI"
+    },
+    "related": {
+      "@id": "wos:related",
+      "@type": "xsd:anyURI"
+    }
+  }
+}

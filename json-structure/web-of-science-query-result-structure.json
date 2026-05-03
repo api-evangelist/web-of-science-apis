@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-query-result-structure.json",
+  "title": "QueryResult",
+  "description": "Metadata about the search query and result set",
+  "type": "object",
+  "properties": {
+    "queryId": {
+      "type": "int32",
+      "description": "Identifier for this query (for subsequent pagination calls)"
+    },
+    "recordsFound": {
+      "type": "int32",
+      "description": "Total number of records matching the query"
+    },
+    "recordsSearched": {
+      "type": "int32",
+      "description": "Number of records searched (may differ from total database size)"
+    }
+  }
+}

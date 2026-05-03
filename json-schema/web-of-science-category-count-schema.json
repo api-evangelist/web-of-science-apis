@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-category-count-schema.json",
+  "title": "CategoryCount",
+  "description": "A category with its record count",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Category name"
+    },
+    "count": {
+      "type": "integer",
+      "description": "Number of records in this category"
+    }
+  }
+}

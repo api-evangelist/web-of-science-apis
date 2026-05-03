@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-search-response-schema.json",
+  "title": "SearchResponse",
+  "description": "Response from search and retrieval operations",
+  "type": "object",
+  "properties": {
+    "queryResult": {
+      "$ref": "#/components/schemas/QueryResult"
+    },
+    "records": {
+      "$ref": "#/components/schemas/Records"
+    }
+  }
+}

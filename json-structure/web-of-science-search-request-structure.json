@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-search-request-structure.json",
+  "title": "SearchRequest",
+  "description": "Search request body for POST endpoint",
+  "type": "object",
+  "properties": {
+    "databaseId": {
+      "type": "str",
+      "description": "Database to search"
+    },
+    "usrQuery": {
+      "type": "str",
+      "description": "Advanced search query using WOS query syntax"
+    },
+    "count": {
+      "type": "int32",
+      "description": "Number of records to return"
+    },
+    "firstRecord": {
+      "type": "int32",
+      "description": "Starting record number"
+    },
+    "editions": {
+      "type": "array",
+      "description": "Database editions to search"
+    },
+    "publishTimeSpan": {
+      "type": "#TimeSpan"
+    },
+    "sortField": {
+      "type": "str",
+      "description": "Sort field and direction"
+    }
+  }
+}

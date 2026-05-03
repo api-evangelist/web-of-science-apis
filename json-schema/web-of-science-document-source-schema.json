@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-document-source-schema.json",
+  "title": "DocumentSource",
+  "description": "Source publication information",
+  "type": "object",
+  "properties": {
+    "sourceTitle": {
+      "type": "string",
+      "description": "Title of the source journal or book"
+    },
+    "publishYear": {
+      "type": "integer",
+      "description": "Year of publication"
+    },
+    "publishMonth": {
+      "type": "string",
+      "description": "Month of publication"
+    },
+    "volume": {
+      "type": "string",
+      "description": "Volume number"
+    },
+    "issue": {
+      "type": "string",
+      "description": "Issue number"
+    },
+    "pages": {
+      "$ref": "#/components/schemas/DocumentPages"
+    },
+    "articleNumber": {
+      "type": "string",
+      "description": "Article number (for electronic journals)"
+    },
+    "supplement": {
+      "type": "string",
+      "description": "Supplement identifier"
+    }
+  }
+}

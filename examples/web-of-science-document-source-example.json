@@ -1,0 +1,12 @@
+{
+  "sourceTitle": "example-string",
+  "publishYear": 58,
+  "publishMonth": "example-string",
+  "volume": "example-string",
+  "issue": "example-string",
+  "pages": {
+    "id": "example-ref"
+  },
+  "articleNumber": "example-string",
+  "supplement": "example-string"
+}

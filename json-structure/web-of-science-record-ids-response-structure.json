@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-record-ids-response-structure.json",
+  "title": "RecordIdsResponse",
+  "description": "Response containing only record UIDs",
+  "type": "object",
+  "properties": {
+    "queryResult": {
+      "type": "#QueryResult"
+    },
+    "ids": {
+      "type": "array",
+      "description": "Array of WOS unique identifiers"
+    }
+  }
+}

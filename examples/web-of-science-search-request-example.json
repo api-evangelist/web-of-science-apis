@@ -1,0 +1,13 @@
+{
+  "databaseId": "WOS",
+  "usrQuery": "example-string",
+  "count": 10,
+  "firstRecord": 1,
+  "editions": [
+    "example-string"
+  ],
+  "publishTimeSpan": {
+    "id": "example-ref"
+  },
+  "sortField": "example-string"
+}

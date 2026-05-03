@@ -1,0 +1,215 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Web of Science Academic Research"
+  description: "Unified academic research workflow combining Web of Science Starter and Expanded APIs for bibliographic search, citation analysis, journal discovery, and bibliometric reporting. Used by researchers, librarians, and data analysts to automate literature review and citation analysis."
+  tags:
+    - Research
+    - Academic
+    - Bibliometrics
+    - Citations
+    - Literature Review
+    - Science
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WOS_API_KEY: WOS_API_KEY
+
+capability:
+  consumes:
+    - import: wos-starter
+      location: ./shared/web-of-science-starter-api.yaml
+    - import: wos-expanded
+      location: ./shared/web-of-science-expanded-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8084
+      namespace: academic-research-api
+      description: "Unified REST API for Web of Science academic research operations."
+      resources:
+        - path: /v1/documents/search
+          name: document-search
+          description: "Document search"
+          operations:
+            - method: GET
+              name: search-documents
+              description: "Search Web of Science documents"
+              call: "wos-starter.search-documents"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/documents/{uid}
+          name: document
+          description: "Individual document"
+          operations:
+            - method: GET
+              name: get-document
+              description: "Get document by UID"
+              call: "wos-starter.get-document"
+              with:
+                uid: "rest.uid"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/journals
+          name: journals
+          description: "Journal search"
+          operations:
+            - method: GET
+              name: search-journals
+              description: "Search journals by ISSN or name"
+              call: "wos-starter.search-journals"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/citations/citing
+          name: citing-articles
+          description: "Articles citing a document"
+          operations:
+            - method: GET
+              name: get-citing-articles
+              description: "Get citing articles"
+              call: "wos-expanded.get-citing-articles"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/citations/references
+          name: references
+          description: "Document references"
+          operations:
+            - method: GET
+              name: get-references
+              description: "Get document reference list"
+              call: "wos-expanded.get-references"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/citations/related
+          name: related-records
+          description: "Related records"
+          operations:
+            - method: GET
+              name: get-related-records
+              description: "Get related records"
+              call: "wos-expanded.get-related-records"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/reports/citations/{queryId}
+          name: citation-report
+          description: "Citation report"
+          operations:
+            - method: GET
+              name: get-citation-report
+              description: "Get citation report for query"
+              call: "wos-expanded.get-citation-report"
+              with:
+                queryId: "rest.queryId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9094
+      namespace: academic-research-mcp
+      transport: http
+      description: "MCP server for AI-assisted Web of Science academic research."
+      tools:
+        - name: search-literature
+          description: "Search Web of Science literature using advanced query syntax (e.g., TS=climate change AND PY=2020-2024)"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "wos-starter.search-documents"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-paper-details
+          description: "Get full bibliographic details for a specific Web of Science document by UID"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "wos-starter.get-document"
+          with:
+            uid: "tools.uid"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: find-journal
+          description: "Look up a journal in Web of Science by ISSN or name to get impact metrics"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "wos-starter.search-journals"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-journal-details
+          description: "Get detailed information about a journal including JCR profile and categories"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "wos-starter.get-journal"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: advanced-search
+          description: "Run advanced Web of Science search with full field tag syntax for comprehensive literature review"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "wos-expanded.search-documents"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: find-citing-papers
+          description: "Find all papers that have cited a specific article (forward citation tracking)"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "wos-expanded.get-citing-articles"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-references
+          description: "Get the complete reference list of a paper (backward citation tracking)"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "wos-expanded.get-references"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: find-related-research
+          description: "Discover research papers related to a given article based on shared references"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "wos-expanded.get-related-records"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: generate-citation-report
+          description: "Generate a bibliometric citation report including h-index and year-by-year citation counts"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "wos-expanded.get-citation-report"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-record-by-uid
+          description: "Retrieve a full Web of Science record directly by its unique identifier"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "wos-expanded.get-record-by-id"
+          outputParameters:
+            - type: object
+              mapping: "$."

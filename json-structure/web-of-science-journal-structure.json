@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-journal-structure.json",
+  "title": "Journal",
+  "description": "A Web of Science journal record",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "str",
+      "description": "Web of Science journal identifier"
+    },
+    "name": {
+      "type": "str",
+      "description": "Journal title"
+    },
+    "issn": {
+      "type": "str",
+      "description": "Print ISSN"
+    },
+    "eissn": {
+      "type": "str",
+      "description": "Electronic ISSN"
+    },
+    "publisher": {
+      "type": "str",
+      "description": "Publisher name"
+    },
+    "country": {
+      "type": "str",
+      "description": "Country of publication"
+    },
+    "openAccess": {
+      "type": "map",
+      "description": "Open access information"
+    },
+    "categories": {
+      "type": "array",
+      "description": "Web of Science subject categories"
+    },
+    "jcrProfile": {
+      "type": "uri",
+      "description": "URL to the Journal Citation Reports profile"
+    },
+    "links": {
+      "type": "map",
+      "description": "Links to journal information"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "timesCited": 22,
+  "averagePerItem": 14.45,
+  "hIndex": 66,
+  "citingArticlesLinks": "https://example.com",
+  "yearPublished": [
+    {
+      "id": "example-ref"
+    }
+  ],
+  "citationsByYear": [
+    {
+      "id": "example-ref"
+    }
+  ]
+}

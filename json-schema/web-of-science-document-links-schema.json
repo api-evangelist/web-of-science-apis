@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-document-links-schema.json",
+  "title": "DocumentLinks",
+  "description": "Links to the document in Web of Science",
+  "type": "object",
+  "properties": {
+    "record": {
+      "type": "string",
+      "description": "Direct link to the full record in Web of Science",
+      "format": "uri"
+    },
+    "references": {
+      "type": "string",
+      "description": "Link to the references list",
+      "format": "uri"
+    },
+    "related": {
+      "type": "string",
+      "description": "Link to related records",
+      "format": "uri"
+    }
+  }
+}

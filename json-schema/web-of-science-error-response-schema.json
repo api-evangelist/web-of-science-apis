@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-error-response-schema.json",
+  "title": "ErrorResponse",
+  "description": "Error response from the API",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "HTTP error code"
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable error message"
+    }
+  }
+}

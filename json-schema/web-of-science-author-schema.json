@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-author-schema.json",
+  "title": "Author",
+  "description": "An author of a Web of Science document",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "Full display name of the author"
+    },
+    "wosStandard": {
+      "type": "string",
+      "description": "Standardized author name format used in Web of Science"
+    },
+    "researcherId": {
+      "type": "string",
+      "description": "Researcher ID if available"
+    }
+  }
+}

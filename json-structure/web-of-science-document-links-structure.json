@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-document-links-structure.json",
+  "title": "DocumentLinks",
+  "description": "Links to the document in Web of Science",
+  "type": "object",
+  "properties": {
+    "record": {
+      "type": "uri",
+      "description": "Direct link to the full record in Web of Science"
+    },
+    "references": {
+      "type": "uri",
+      "description": "Link to the references list"
+    },
+    "related": {
+      "type": "uri",
+      "description": "Link to related records"
+    }
+  }
+}

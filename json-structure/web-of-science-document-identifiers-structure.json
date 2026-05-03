@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-document-identifiers-structure.json",
+  "title": "DocumentIdentifiers",
+  "description": "Document identifiers (DOI, PMID, etc.)",
+  "type": "object",
+  "properties": {
+    "doi": {
+      "type": "str",
+      "description": "Digital Object Identifier"
+    },
+    "pmid": {
+      "type": "str",
+      "description": "PubMed identifier"
+    },
+    "issn": {
+      "type": "str",
+      "description": "ISSN of the source journal"
+    },
+    "eissn": {
+      "type": "str",
+      "description": "Electronic ISSN of the source journal"
+    }
+  }
+}

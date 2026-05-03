@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-full-record-metadata-schema.json",
+  "title": "FullRecordMetadata",
+  "description": "Full record metadata including keywords and addresses",
+  "type": "object",
+  "properties": {
+    "languages": {
+      "type": "object",
+      "description": "Publication language information"
+    },
+    "keywords": {
+      "type": "object",
+      "description": "Author keywords and Keywords Plus"
+    },
+    "addresses": {
+      "type": "object",
+      "description": "Author affiliation addresses"
+    },
+    "fund_ack": {
+      "type": "object",
+      "description": "Funding acknowledgment information"
+    }
+  }
+}

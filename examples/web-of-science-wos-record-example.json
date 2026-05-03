@@ -1,0 +1,9 @@
+{
+  "UID": "example-string",
+  "static_data": {
+    "id": "example-ref"
+  },
+  "dynamic_data": {
+    "id": "example-ref"
+  }
+}

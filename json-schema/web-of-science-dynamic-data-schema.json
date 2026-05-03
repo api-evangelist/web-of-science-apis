@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-dynamic-data-schema.json",
+  "title": "DynamicData",
+  "description": "Dynamic data including citation counts",
+  "type": "object",
+  "properties": {
+    "citation_related": {
+      "type": "object",
+      "description": "Citation count information",
+      "properties": {
+        "tc_list": {
+          "type": "object",
+          "description": "Times-cited list by database"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-journal-schema.json",
+  "title": "Journal",
+  "description": "A Web of Science journal record",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Web of Science journal identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Journal title"
+    },
+    "issn": {
+      "type": "string",
+      "description": "Print ISSN"
+    },
+    "eissn": {
+      "type": "string",
+      "description": "Electronic ISSN"
+    },
+    "publisher": {
+      "type": "string",
+      "description": "Publisher name"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country of publication"
+    },
+    "openAccess": {
+      "type": "object",
+      "description": "Open access information",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "description": "Web of Science subject categories",
+      "items": {
+        "type": "string"
+      }
+    },
+    "jcrProfile": {
+      "type": "string",
+      "description": "URL to the Journal Citation Reports profile",
+      "format": "uri"
+    },
+    "links": {
+      "type": "object",
+      "description": "Links to journal information",
+      "properties": {
+        "record": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    }
+  }
+}

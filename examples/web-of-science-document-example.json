@@ -1,0 +1,30 @@
+{
+  "uid": "example-string",
+  "title": "example-string",
+  "types": [
+    "example-string"
+  ],
+  "sourceTypes": [
+    "example-string"
+  ],
+  "source": {
+    "id": "example-ref"
+  },
+  "names": {
+    "id": "example-ref"
+  },
+  "links": {
+    "id": "example-ref"
+  },
+  "citations": [
+    {
+      "id": "example-ref"
+    }
+  ],
+  "identifiers": {
+    "id": "example-ref"
+  },
+  "keywords": {
+    "id": "example-ref"
+  }
+}

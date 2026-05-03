@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-record-summary-structure.json",
+  "title": "RecordSummary",
+  "description": "Summary fields of a WOS record",
+  "type": "object",
+  "properties": {
+    "names": {
+      "type": "map",
+      "description": "Author and editor names"
+    },
+    "doctypes": {
+      "type": "map",
+      "description": "Document types"
+    },
+    "titles": {
+      "type": "map",
+      "description": "Titles (article, source, etc.)"
+    },
+    "pub_info": {
+      "type": "#PubInfo"
+    },
+    "identifiers": {
+      "type": "map",
+      "description": "Document identifiers (DOI, ISSN, etc.)"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-search-response-structure.json",
+  "title": "SearchResponse",
+  "description": "Response from search and retrieval operations",
+  "type": "object",
+  "properties": {
+    "queryResult": {
+      "type": "#QueryResult"
+    },
+    "records": {
+      "type": "#Records"
+    }
+  }
+}

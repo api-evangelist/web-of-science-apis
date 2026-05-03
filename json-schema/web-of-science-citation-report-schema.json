@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-citation-report-schema.json",
+  "title": "CitationReport",
+  "description": "Citation report for a query result set",
+  "type": "object",
+  "properties": {
+    "timesCited": {
+      "type": "integer",
+      "description": "Total times cited for all records in the result set"
+    },
+    "averagePerItem": {
+      "type": "number",
+      "description": "Average citations per item",
+      "format": "float"
+    },
+    "hIndex": {
+      "type": "integer",
+      "description": "h-index for the result set"
+    },
+    "citingArticlesLinks": {
+      "type": "string",
+      "description": "Link to citing articles",
+      "format": "uri"
+    },
+    "yearPublished": {
+      "type": "array",
+      "description": "Year-by-year publication counts",
+      "items": {
+        "$ref": "#/components/schemas/YearCount"
+      }
+    },
+    "citationsByYear": {
+      "type": "array",
+      "description": "Year-by-year citation counts",
+      "items": {
+        "$ref": "#/components/schemas/YearCount"
+      }
+    }
+  }
+}

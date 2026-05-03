@@ -1,0 +1,214 @@
+rules:
+  wos-openapi-version:
+    description: Web of Science API specs must use OpenAPI 3.0.x
+    message: "OpenAPI version must be 3.0.x"
+    severity: error
+    given: "$"
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: "^3\\.0\\."
+
+  wos-info-title:
+    description: API must have a title
+    message: "Info object must have a title"
+    severity: error
+    given: "$.info"
+    then:
+      field: title
+      function: truthy
+
+  wos-info-description:
+    description: API must have a description
+    message: "Info object must have a description"
+    severity: warn
+    given: "$.info"
+    then:
+      field: description
+      function: truthy
+
+  wos-info-version:
+    description: API must have a version
+    message: "Info object must have a version"
+    severity: error
+    given: "$.info"
+    then:
+      field: version
+      function: truthy
+
+  wos-operation-summary:
+    description: All operations must have a summary
+    message: "Operation must have a summary"
+    severity: warn
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: summary
+      function: truthy
+
+  wos-operation-description:
+    description: All operations should have a description
+    message: "Operation should have a description"
+    severity: info
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: description
+      function: truthy
+
+  wos-operation-operationid:
+    description: All operations must have an operationId
+    message: "Operation must have an operationId"
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: operationId
+      function: truthy
+
+  wos-operation-tags:
+    description: All operations must have tags
+    message: "Operation must have tags"
+    severity: warn
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: tags
+      function: truthy
+
+  wos-operation-responses:
+    description: All operations must have responses defined
+    message: "Operation must have responses defined"
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: responses
+      function: truthy
+
+  wos-response-200:
+    description: GET operations must have a 200 response
+    message: "GET operations must define a 200 response"
+    severity: error
+    given: "$.paths[*][get]"
+    then:
+      field: responses.200
+      function: truthy
+
+  wos-response-401:
+    description: All operations should have a 401 response
+    message: "Operations should define a 401 Unauthorized response"
+    severity: warn
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: responses.401
+      function: truthy
+
+  wos-schema-properties-description:
+    description: Schema properties should have descriptions
+    message: "Schema properties should have descriptions"
+    severity: info
+    given: "$.components.schemas[*].properties[*]"
+    then:
+      field: description
+      function: truthy
+
+  wos-parameter-description:
+    description: Parameters should have descriptions
+    message: "Parameter should have a description"
+    severity: warn
+    given: "$.paths[*][get,post,put,delete,patch].parameters[*]"
+    then:
+      field: description
+      function: truthy
+
+  wos-apikey-security:
+    description: API must define API key security scheme
+    message: "API must require API key authentication"
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: ApiKeyAuth
+      function: truthy
+
+  wos-security-defined:
+    description: API must have global security defined
+    message: "API must have security defined at global level"
+    severity: warn
+    given: "$"
+    then:
+      field: security
+      function: truthy
+
+  wos-operation-tags-valid:
+    description: Operations should use valid Web of Science tags
+    message: "Operations should use standard WOS API tags"
+    severity: info
+    given: "$.paths[*][get,post].tags[*]"
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - documents
+          - journals
+          - search
+          - records
+          - citations
+          - reports
+
+  wos-servers-defined:
+    description: API must define servers
+    message: "Servers array must be defined"
+    severity: error
+    given: "$"
+    then:
+      field: servers
+      function: truthy
+
+  wos-pagination-limit:
+    description: Search operations should support limit/count parameter
+    message: "Search/list operations should support pagination limit parameter"
+    severity: info
+    given: "$.paths.~1documents[get]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required: [parameters]
+
+  wos-microcks-operation:
+    description: Operations should have Microcks extensions for testing
+    message: "Operation should include x-microcks-operation extension"
+    severity: info
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  wos-search-query-parameter:
+    description: Search endpoints should have query parameter
+    message: "Search operations must have a query parameter"
+    severity: warn
+    given: "$.paths.~1documents[get].parameters[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          properties:
+            name:
+              type: string
+          required: [name]
+
+  wos-uid-format:
+    description: UID parameters should describe Web of Science identifier format
+    message: "UID parameters should describe WOS unique identifier format"
+    severity: info
+    given: "$.paths[*][get].parameters[?(@.name == 'uniqueId')]"
+    then:
+      field: description
+      function: truthy
+
+  wos-info-contact:
+    description: API info should include contact details
+    message: "Info object should have contact information"
+    severity: info
+    given: "$.info"
+    then:
+      field: contact
+      function: truthy

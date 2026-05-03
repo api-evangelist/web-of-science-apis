@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-pub-info-structure.json",
+  "title": "PubInfo",
+  "description": "Publication information",
+  "type": "object",
+  "properties": {
+    "pubtype": {
+      "type": "str",
+      "description": "Publication type"
+    },
+    "pubyear": {
+      "type": "str",
+      "description": "Year of publication"
+    },
+    "sortdate": {
+      "type": "str",
+      "description": "Sort date"
+    },
+    "issue": {
+      "type": "str",
+      "description": "Issue number"
+    },
+    "vol": {
+      "type": "str",
+      "description": "Volume number"
+    }
+  }
+}

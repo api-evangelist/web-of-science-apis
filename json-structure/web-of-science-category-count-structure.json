@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-category-count-structure.json",
+  "title": "CategoryCount",
+  "description": "A category with its record count",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "str",
+      "description": "Category name"
+    },
+    "count": {
+      "type": "int32",
+      "description": "Number of records in this category"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-records-schema.json",
+  "title": "Records",
+  "description": "Container for record results",
+  "type": "object",
+  "properties": {
+    "records": {
+      "type": "array",
+      "description": "Array of WOS records",
+      "items": {
+        "$ref": "#/components/schemas/WosRecord"
+      }
+    }
+  }
+}

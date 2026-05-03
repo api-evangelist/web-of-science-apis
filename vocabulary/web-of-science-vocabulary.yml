@@ -1,0 +1,264 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Web of Science APIs"
+  description: "Vocabulary for Web of Science APIs covering document search, citation analysis, journal discovery, and bibliometric reporting."
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+operational:
+  apis:
+    - name: "Web of Science Starter API"
+      namespace: wos-starter
+      version: "1.0.0"
+      baseUrl: https://api.clarivate.com/apis/wos-starter/v1
+      status: active
+    - name: "Web of Science API Expanded"
+      namespace: wos-expanded
+      version: "1.0.0"
+      baseUrl: https://api.clarivate.com/api/wos
+      status: active
+
+  resources:
+    - name: documents
+      api: wos-starter
+      description: "Web of Science document records with bibliographic metadata"
+      actions: [search, get]
+    - name: journals
+      api: wos-starter
+      description: "Web of Science journal records with impact metrics"
+      actions: [search, get]
+    - name: search-queries
+      api: wos-expanded
+      description: "Advanced search queries with query ID for pagination"
+      actions: [create, paginate, get-ids]
+    - name: records
+      api: wos-expanded
+      description: "Full item-level WOS records with affiliations"
+      actions: [get]
+    - name: citing-articles
+      api: wos-expanded
+      description: "Articles that cite a specific document"
+      actions: [list]
+    - name: references
+      api: wos-expanded
+      description: "Reference lists cited by a document"
+      actions: [list]
+    - name: related-records
+      api: wos-expanded
+      description: "Records sharing cited references with a document"
+      actions: [list]
+    - name: citation-reports
+      api: wos-expanded
+      description: "Bibliometric citation reports for query result sets"
+      actions: [get]
+    - name: category-context
+      api: wos-expanded
+      description: "ASCA category distribution for citing/cited references"
+      actions: [get]
+
+  actions:
+    - name: search
+      httpMethod: GET
+      pattern: read
+    - name: get
+      httpMethod: GET
+      pattern: read
+    - name: create
+      httpMethod: POST
+      pattern: write
+    - name: paginate
+      httpMethod: GET
+      pattern: read
+    - name: get-ids
+      httpMethod: GET
+      pattern: read
+    - name: list
+      httpMethod: GET
+      pattern: read
+
+  schemas:
+    core:
+      - name: Document
+        description: "A Web of Science document with bibliographic metadata"
+        keyProperties: [uid, title, source, names, identifiers, citations, keywords]
+      - name: DocumentsSearchResponse
+        description: "Paginated search results for documents"
+        keyProperties: [total, page, limit, hits]
+      - name: Journal
+        description: "A Web of Science journal with impact metrics"
+        keyProperties: [id, name, issn, eissn, publisher, categories, jcrProfile]
+      - name: SearchResponse
+        description: "Response from expanded API search"
+        keyProperties: [queryResult, records]
+      - name: QueryResult
+        description: "Metadata about a search query result set"
+        keyProperties: [queryId, recordsFound, recordsSearched]
+      - name: WosRecord
+        description: "Full Web of Science record with static and dynamic data"
+        keyProperties: [UID, static_data, dynamic_data]
+      - name: CitationReport
+        description: "Bibliometric citation report for a result set"
+        keyProperties: [timesCited, averagePerItem, hIndex, citationsByYear]
+      - name: Author
+        description: "Author of a Web of Science document"
+        keyProperties: [displayName, wosStandard, researcherId]
+
+  parameters:
+    identifiers:
+      - name: uid
+        type: string
+        description: "Web of Science unique identifier (e.g., WOS:000349044100001)"
+      - name: queryId
+        type: integer
+        description: "Query identifier returned from search endpoint"
+      - name: id
+        type: string
+        description: "Journal identifier"
+    search:
+      - name: q
+        type: string
+        description: "Advanced query syntax string with field tags"
+      - name: usrQuery
+        type: string
+        description: "WOS advanced search query string"
+      - name: db
+        type: string
+        description: "Database to search (WOS, MEDLINE, BIOABS, etc.)"
+      - name: databaseId
+        type: string
+        description: "Database identifier for expanded API"
+    pagination:
+      - name: limit
+        type: integer
+        description: "Number of records per page (starter API)"
+      - name: count
+        type: integer
+        description: "Number of records per request (expanded API)"
+      - name: page
+        type: integer
+        description: "Page number (starter API)"
+      - name: firstRecord
+        type: integer
+        description: "Starting record number (expanded API)"
+    filtering:
+      - name: publishTimeSpan
+        type: string
+        description: "Publication date range filter"
+      - name: sortField
+        type: string
+        description: "Field for sorting results"
+      - name: issn
+        type: string
+        description: "Journal ISSN filter"
+
+  enums:
+    database:
+      - WOS
+      - BIOABS
+      - BIOSIS
+      - CCC
+      - DIIDW
+      - MEDLINE
+      - NWS
+      - PPRN
+      - RSCI
+      - RSCIPROC
+      - ZOOREC
+    sort-field:
+      - LD
+      - PY
+      - RS
+      - TC
+    report-level:
+      - WOS
+      - AllDB
+    cite-type:
+      - Citing
+      - Referenced
+      - Aggregated
+
+  authentication:
+    - type: apiKey
+      in: header
+      name: X-ApiKey
+      description: "Clarivate API key required for all endpoints"
+
+capability:
+  workflows:
+    - name: Academic Research
+      file: capabilities/academic-research.yaml
+      description: "Web of Science academic research including document search, citation analysis, and bibliometric reporting"
+      apisUsed: [wos-starter, wos-expanded]
+      toolCount: 10
+      personas: [Researcher, Librarian, Data Analyst]
+      domains: [Literature Search, Citation Analysis, Journal Discovery, Bibliometrics]
+
+  personas:
+    - id: researcher
+      name: Researcher
+      description: "Conducts literature review and citation analysis for academic research"
+      workflows: [Academic Research]
+    - id: librarian
+      name: Librarian
+      description: "Manages research database access and supports scholarly information retrieval"
+      workflows: [Academic Research]
+    - id: data-analyst
+      name: Data Analyst
+      description: "Analyzes bibliometric data for research impact assessment and reporting"
+      workflows: [Academic Research]
+
+  domains:
+    - name: Literature Search
+      description: "Searching and discovering academic literature in Web of Science"
+      resources: [documents, search-queries, records]
+    - name: Citation Analysis
+      description: "Tracking citations, references, and related research"
+      resources: [citing-articles, references, related-records]
+    - name: Journal Discovery
+      description: "Finding journal metadata and impact metrics"
+      resources: [journals]
+    - name: Bibliometrics
+      description: "Generating statistical reports on research output and impact"
+      resources: [citation-reports, category-context]
+
+  namespaces:
+    - name: wos-starter
+      type: consumed
+      baseUri: https://api.clarivate.com/apis/wos-starter/v1
+    - name: wos-expanded
+      type: consumed
+      baseUri: https://api.clarivate.com/api/wos
+    - name: academic-research-api
+      type: rest-exposed
+      port: 8084
+    - name: academic-research-mcp
+      type: mcp-exposed
+      port: 9094
+
+  binds:
+    - name: WOS_API_KEY
+      description: "Clarivate API key for Web of Science authentication"
+      workflows: [Academic Research]
+
+crossReference:
+  - resource: documents
+    operations: [searchDocuments, getDocument]
+    workflows: [Academic Research]
+    personas: [Researcher, Librarian]
+  - resource: journals
+    operations: [getJournals, getJournal]
+    workflows: [Academic Research]
+    personas: [Researcher, Librarian]
+  - resource: citing-articles
+    operations: [getCitingArticles]
+    workflows: [Academic Research]
+    personas: [Researcher, Data Analyst]
+  - resource: references
+    operations: [getReferences]
+    workflows: [Academic Research]
+    personas: [Researcher, Data Analyst]
+  - resource: citation-reports
+    operations: [getCitationReport]
+    workflows: [Academic Research]
+    personas: [Data Analyst, Librarian]

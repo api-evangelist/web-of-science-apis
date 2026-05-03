@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-structure/web-of-science-documents-search-response-structure.json",
+  "title": "DocumentsSearchResponse",
+  "description": "Response from document search containing results and metadata",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "int32",
+      "description": "Total number of documents matching the query"
+    },
+    "page": {
+      "type": "int32",
+      "description": "Current page number"
+    },
+    "limit": {
+      "type": "int32",
+      "description": "Number of records per page"
+    },
+    "hits": {
+      "type": "array",
+      "description": "Array of document records"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/web-of-science-apis/json-schema/web-of-science-document-identifiers-schema.json",
+  "title": "DocumentIdentifiers",
+  "description": "Document identifiers (DOI, PMID, etc.)",
+  "type": "object",
+  "properties": {
+    "doi": {
+      "type": "string",
+      "description": "Digital Object Identifier"
+    },
+    "pmid": {
+      "type": "string",
+      "description": "PubMed identifier"
+    },
+    "issn": {
+      "type": "string",
+      "description": "ISSN of the source journal"
+    },
+    "eissn": {
+      "type": "string",
+      "description": "Electronic ISSN of the source journal"
+    }
+  }
+}

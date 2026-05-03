@@ -1,0 +1,10 @@
+{
+  "total": 85,
+  "page": 77,
+  "limit": 48,
+  "hits": [
+    {
+      "id": "example-ref"
+    }
+  ]
+}
