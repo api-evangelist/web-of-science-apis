@@ -1,0 +1,141 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Web of Science Starter API — journals
+  description: 'Web of Science Starter API — journals. 2 operations. Lead operation: Web of Science Starter Search Journals
+    by ISSN. Self-contained Naftiko capability covering one Web Of Science Apis business surface.'
+  tags:
+  - Web Of Science Apis
+  - journals
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEB_OF_SCIENCE_APIS_API_KEY: WEB_OF_SCIENCE_APIS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: web-of-science-starter-journals
+    baseUri: https://api.clarivate.com/apis/wos-starter/v1
+    description: Web of Science Starter API — journals business capability. Self-contained, no shared references.
+    resources:
+    - name: journals
+      path: /journals
+      operations:
+      - name: getjournals
+        method: GET
+        description: Web of Science Starter Search Journals by ISSN
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: issn
+          in: query
+          type: string
+          description: ISSN (print or electronic) of the journal to retrieve.
+        - name: q
+          in: query
+          type: string
+          description: Free-text query to search journals by name or related terms.
+        - name: limit
+          in: query
+          type: integer
+          description: Number of journals to return.
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination.
+    - name: journals-id
+      path: /journals/{id}
+      operations:
+      - name: getjournal
+        method: GET
+        description: Web of Science Starter Get Journal by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Web of Science journal identifier.
+          required: true
+    authentication:
+      type: apikey
+      key: X-ApiKey
+      value: '{{env.WEB_OF_SCIENCE_APIS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: web-of-science-starter-journals-rest
+    port: 8080
+    description: REST adapter for Web of Science Starter API — journals. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/journals
+      name: journals
+      description: REST surface for journals.
+      operations:
+      - method: GET
+        name: getjournals
+        description: Web of Science Starter Search Journals by ISSN
+        call: web-of-science-starter-journals.getjournals
+        with:
+          issn: rest.issn
+          q: rest.q
+          limit: rest.limit
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/journals/{id}
+      name: journals-id
+      description: REST surface for journals-id.
+      operations:
+      - method: GET
+        name: getjournal
+        description: Web of Science Starter Get Journal by ID
+        call: web-of-science-starter-journals.getjournal
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: web-of-science-starter-journals-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Web of Science Starter API — journals. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: web-science-starter-search-journals
+      description: Web of Science Starter Search Journals by ISSN
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-of-science-starter-journals.getjournals
+      with:
+        issn: tools.issn
+        q: tools.q
+        limit: tools.limit
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: web-science-starter-get-journal
+      description: Web of Science Starter Get Journal by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-of-science-starter-journals.getjournal
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

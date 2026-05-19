@@ -1,0 +1,100 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Web of Science API Expanded — records
+  description: 'Web of Science API Expanded — records. 1 operations. Lead operation: Web of Science Expanded Get Records by
+    Unique ID. Self-contained Naftiko capability covering one Web Of Science Apis business surface.'
+  tags:
+  - Web Of Science Apis
+  - records
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEB_OF_SCIENCE_APIS_API_KEY: WEB_OF_SCIENCE_APIS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: web-of-science-expanded-records
+    baseUri: https://api.clarivate.com/api/wos
+    description: Web of Science API Expanded — records business capability. Self-contained, no shared references.
+    resources:
+    - name: id-uniqueId
+      path: /id/{uniqueId}
+      operations:
+      - name: getrecordbyid
+        method: GET
+        description: Web of Science Expanded Get Records by Unique ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: uniqueId
+          in: path
+          type: string
+          description: Single WOS unique identifier or comma-separated list of UIDs (e.g., WOS:000349044100001,WOS:000349044100002).
+          required: true
+        - name: databaseId
+          in: query
+          type: string
+          description: Database identifier. Defaults to WOS.
+        - name: count
+          in: query
+          type: integer
+          description: Number of records to return.
+        - name: firstRecord
+          in: query
+          type: integer
+          description: Starting record number.
+    authentication:
+      type: apikey
+      key: X-ApiKey
+      value: '{{env.WEB_OF_SCIENCE_APIS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: web-of-science-expanded-records-rest
+    port: 8080
+    description: REST adapter for Web of Science API Expanded — records. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/id/{uniqueid}
+      name: id-uniqueid
+      description: REST surface for id-uniqueId.
+      operations:
+      - method: GET
+        name: getrecordbyid
+        description: Web of Science Expanded Get Records by Unique ID
+        call: web-of-science-expanded-records.getrecordbyid
+        with:
+          uniqueId: rest.uniqueId
+          databaseId: rest.databaseId
+          count: rest.count
+          firstRecord: rest.firstRecord
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: web-of-science-expanded-records-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Web of Science API Expanded — records. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: web-science-expanded-get-records
+      description: Web of Science Expanded Get Records by Unique ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-of-science-expanded-records.getrecordbyid
+      with:
+        uniqueId: tools.uniqueId
+        databaseId: tools.databaseId
+        count: tools.count
+        firstRecord: tools.firstRecord
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,148 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Web of Science API Expanded — reports
+  description: 'Web of Science API Expanded — reports. 2 operations. Lead operation: Web of Science Expanded Get Category
+    Context for Record. Self-contained Naftiko capability covering one Web Of Science Apis business surface.'
+  tags:
+  - Web Of Science Apis
+  - reports
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WEB_OF_SCIENCE_APIS_API_KEY: WEB_OF_SCIENCE_APIS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: web-of-science-expanded-reports
+    baseUri: https://api.clarivate.com/api/wos
+    description: Web of Science API Expanded — reports business capability. Self-contained, no shared references.
+    resources:
+    - name: category-context-uniqueId
+      path: /category-context/{uniqueId}
+      operations:
+      - name: getcategorycontext
+        method: GET
+        description: Web of Science Expanded Get Category Context for Record
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: uniqueId
+          in: path
+          type: string
+          description: WOS unique identifier of the article.
+          required: true
+        - name: databaseId
+          in: query
+          type: string
+          description: Database identifier.
+        - name: citeType
+          in: query
+          type: string
+          description: Scope of category context (Citing, Referenced, or Aggregated).
+    - name: citation-report-queryId
+      path: /citation-report/{queryId}
+      operations:
+      - name: getcitationreport
+        method: GET
+        description: Web of Science Expanded Get Citation Report for Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: queryId
+          in: path
+          type: integer
+          description: Query identifier for the result set to report on.
+          required: true
+        - name: databaseId
+          in: query
+          type: string
+          description: Database identifier.
+        - name: reportLevel
+          in: query
+          type: string
+          description: Report aggregation level (WOS or AllDB).
+    authentication:
+      type: apikey
+      key: X-ApiKey
+      value: '{{env.WEB_OF_SCIENCE_APIS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: web-of-science-expanded-reports-rest
+    port: 8080
+    description: REST adapter for Web of Science API Expanded — reports. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/category-context/{uniqueid}
+      name: category-context-uniqueid
+      description: REST surface for category-context-uniqueId.
+      operations:
+      - method: GET
+        name: getcategorycontext
+        description: Web of Science Expanded Get Category Context for Record
+        call: web-of-science-expanded-reports.getcategorycontext
+        with:
+          uniqueId: rest.uniqueId
+          databaseId: rest.databaseId
+          citeType: rest.citeType
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/citation-report/{queryid}
+      name: citation-report-queryid
+      description: REST surface for citation-report-queryId.
+      operations:
+      - method: GET
+        name: getcitationreport
+        description: Web of Science Expanded Get Citation Report for Query
+        call: web-of-science-expanded-reports.getcitationreport
+        with:
+          queryId: rest.queryId
+          databaseId: rest.databaseId
+          reportLevel: rest.reportLevel
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: web-of-science-expanded-reports-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Web of Science API Expanded — reports. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: web-science-expanded-get-category
+      description: Web of Science Expanded Get Category Context for Record
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-of-science-expanded-reports.getcategorycontext
+      with:
+        uniqueId: tools.uniqueId
+        databaseId: tools.databaseId
+        citeType: tools.citeType
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: web-science-expanded-get-citation
+      description: Web of Science Expanded Get Citation Report for Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-of-science-expanded-reports.getcitationreport
+      with:
+        queryId: tools.queryId
+        databaseId: tools.databaseId
+        reportLevel: tools.reportLevel
+      outputParameters:
+      - type: object
+        mapping: $.
