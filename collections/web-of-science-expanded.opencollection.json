@@ -1,0 +1,428 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Web of Science API Expanded",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-ApiKey",
+      "value": "{{X-ApiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Web of Science Expanded Search Documents via GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/",
+            "params": [
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database to search (e.g., WOS for Web of Science Core Collection)."
+              },
+              {
+                "name": "usrQuery",
+                "value": "",
+                "type": "query",
+                "description": "Advanced search query string using Web of Science query syntax. Field tags include TS (topic), AU (author), TI (title), SO (source), DO (DOI), OG (organization), etc."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (1-100)."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number for pagination."
+              },
+              {
+                "name": "lang",
+                "value": "",
+                "type": "query",
+                "description": "Language of the results (default en)."
+              },
+              {
+                "name": "editions",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of WOS database editions to search."
+              },
+              {
+                "name": "publishTimeSpan",
+                "value": "",
+                "type": "query",
+                "description": "Publication date range filter in format begin=YYYY-MM-DD&end=YYYY-MM-DD."
+              },
+              {
+                "name": "sortField",
+                "value": "",
+                "type": "query",
+                "description": "Field and direction for sorting results."
+              },
+              {
+                "name": "loadRecord",
+                "value": "",
+                "type": "query",
+                "description": "Include full record in response."
+              }
+            ]
+          },
+          "docs": "Submit search queries to retrieve Web of Science document metadata. Supports the Web of Science Advanced Search Query syntax with field tags, boolean operators, and wildcard characters. Returns a query ID and initial results page for subsequent pagination."
+        },
+        {
+          "info": {
+            "name": "Web of Science Expanded Search Documents via POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clarivate.com/api/wos/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit search queries via POST to retrieve Web of Science document metadata. Equivalent to the GET search endpoint but allows larger query parameters in the request body."
+        },
+        {
+          "info": {
+            "name": "Web of Science Expanded Fetch Query Results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/query/:queryId",
+            "params": [
+              {
+                "name": "queryId",
+                "value": "",
+                "type": "path",
+                "description": "Query identifier returned from the search endpoint."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (1-100)."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number for pagination."
+              },
+              {
+                "name": "sortField",
+                "value": "",
+                "type": "query",
+                "description": "Field and direction for sorting results."
+              },
+              {
+                "name": "viewField",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in response."
+              }
+            ]
+          },
+          "docs": "Retrieve records from a previously submitted search query using the query ID returned from the search endpoint. Supports pagination through large result sets with configurable record counts and sorting."
+        },
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Record IDs for Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/recordids/:queryId",
+            "params": [
+              {
+                "name": "queryId",
+                "value": "",
+                "type": "path",
+                "description": "Query identifier returned from the search endpoint."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of record IDs to return."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve only the unique identifiers for records matching a previously submitted search query. More efficient than retrieving full records when only UIDs are needed for deduplication or subsequent lookups."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Records by Unique ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/id/:uniqueId",
+            "params": [
+              {
+                "name": "uniqueId",
+                "value": "",
+                "type": "path",
+                "description": "Single WOS unique identifier or comma-separated list of UIDs (e.g., WOS:000349044100001,WOS:000349044100002)."
+              },
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier. Defaults to WOS."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number."
+              }
+            ]
+          },
+          "docs": "Retrieve one or more Web of Science records directly by their unique identifiers. Supports comma-separated lists of UIDs for batch retrieval. Returns full item-level metadata including addresses and affiliations."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "citations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Citing Articles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/citing",
+            "params": [
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier (WOS for Core Collection)."
+              },
+              {
+                "name": "uniqueId",
+                "value": "",
+                "type": "query",
+                "description": "WOS unique identifier of the article to find citing articles for."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number."
+              },
+              {
+                "name": "publishTimeSpan",
+                "value": "",
+                "type": "query",
+                "description": "Publication time span filter."
+              },
+              {
+                "name": "sortField",
+                "value": "",
+                "type": "query",
+                "description": "Sort field and direction."
+              }
+            ]
+          },
+          "docs": "Find articles that cite a specific Web of Science document identified by its unique identifier. Returns citation metadata and times-cited counts from the Web of Science Core Collection."
+        },
+        {
+          "info": {
+            "name": "Web of Science Expanded Get References for Article",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/references",
+            "params": [
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier."
+              },
+              {
+                "name": "uniqueId",
+                "value": "",
+                "type": "query",
+                "description": "WOS unique identifier of the article to get references for."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of references to return."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number."
+              }
+            ]
+          },
+          "docs": "Retrieve the reference list cited by a specific Web of Science document. Returns all cited works including those outside the Web of Science Core Collection."
+        },
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Related Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/related",
+            "params": [
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier."
+              },
+              {
+                "name": "uniqueId",
+                "value": "",
+                "type": "query",
+                "description": "WOS unique identifier of the article to find related records for."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of related records to return."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number."
+              }
+            ]
+          },
+          "docs": "Discover records that share cited references with a specified Web of Science article. Returns the parent record plus related documents ranked by the number of shared references."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Citation Report for Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/citation-report/:queryId",
+            "params": [
+              {
+                "name": "queryId",
+                "value": "",
+                "type": "path",
+                "description": "Query identifier for the result set to report on."
+              },
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier."
+              },
+              {
+                "name": "reportLevel",
+                "value": "",
+                "type": "query",
+                "description": "Report aggregation level (WOS or AllDB)."
+              }
+            ]
+          },
+          "docs": "Generate a citation report for a query result set, providing aggregate citation statistics including total citations, average citations per item, h-index, and year-by-year citation counts."
+        },
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Category Context for Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/category-context/:uniqueId",
+            "params": [
+              {
+                "name": "uniqueId",
+                "value": "",
+                "type": "path",
+                "description": "WOS unique identifier of the article."
+              },
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier."
+              },
+              {
+                "name": "citeType",
+                "value": "",
+                "type": "query",
+                "description": "Scope of category context (Citing, Referenced, or Aggregated)."
+              }
+            ]
+          },
+          "docs": "Retrieve the categorization context for citing and cited references of a Web of Science article. Returns ASCA traditional category distribution for the specified scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

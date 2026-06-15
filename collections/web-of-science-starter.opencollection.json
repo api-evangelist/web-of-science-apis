@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Web of Science Starter API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-ApiKey",
+      "value": "{{X-ApiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Web of Science Starter Search Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/apis/wos-starter/v1/documents",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Advanced query syntax string. Supports field tags such as TS (topic), AU (author), SO (source), DO (DOI), and others."
+              },
+              {
+                "name": "db",
+                "value": "",
+                "type": "query",
+                "description": "Database to search. Options include WOS, BIOABS, MEDLINE, etc. Defaults to WOS (Web of Science Core Collection)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (1-50)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "sortField",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort results by."
+              },
+              {
+                "name": "publishTimeSpan",
+                "value": "",
+                "type": "query",
+                "description": "Time span for publication date filter in format YYYY-MM-DD+YYYY-MM-DD."
+              },
+              {
+                "name": "modifiedTimeSpan",
+                "value": "",
+                "type": "query",
+                "description": "Time span for last modified date filter in format YYYY-MM-DD+YYYY-MM-DD."
+              }
+            ]
+          },
+          "docs": "Search Web of Science documents using the advanced query syntax. Returns bibliographic metadata including titles, authors, sources, DOIs, and times-cited counts. Supports pagination, sorting, and filtering by database and time span."
+        },
+        {
+          "info": {
+            "name": "Web of Science Starter Get Document by UID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/apis/wos-starter/v1/documents/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Web of Science unique identifier (e.g., WOS:000000000000001)."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Web of Science document by its unique identifier (UID). Returns full bibliographic metadata including title, authors, source, abstract, keywords, DOI, and times-cited count."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "journals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Web of Science Starter Search Journals by ISSN",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/apis/wos-starter/v1/journals",
+            "params": [
+              {
+                "name": "issn",
+                "value": "",
+                "type": "query",
+                "description": "ISSN (print or electronic) of the journal to retrieve."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Free-text query to search journals by name or related terms."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of journals to return."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              }
+            ]
+          },
+          "docs": "Search and retrieve journal information from the Web of Science Journal Citation Reports. Query journals by ISSN to get metadata including impact factor, category, and JCR profile URL."
+        },
+        {
+          "info": {
+            "name": "Web of Science Starter Get Journal by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/apis/wos-starter/v1/journals/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Web of Science journal identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific journal using its Web of Science journal identifier. Returns journal title, ISSN, publisher, categories, impact metrics, and JCR profile URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

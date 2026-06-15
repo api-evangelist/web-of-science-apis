@@ -1,0 +1,1066 @@
+{
+  "item": [
+    {
+      "id": "72829ff8-a7b3-4913-954c-593d32b67056",
+      "name": "documents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9e07b852-82e6-4233-ae2d-e162cdb19329",
+          "name": "Web of Science Starter Search Documents",
+          "request": {
+            "name": "Web of Science Starter Search Documents",
+            "description": {
+              "content": "Search Web of Science documents using the advanced query syntax. Returns bibliographic metadata including titles, authors, sources, DOIs, and times-cited counts. Supports pagination, sorting, and filtering by database and time span.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Advanced query syntax string. Supports field tags such as TS (topic), AU (author), SO (source), DO (DOI), and others."
+                },
+                {
+                  "disabled": false,
+                  "key": "db",
+                  "value": "WOS",
+                  "description": "Database to search. Options include WOS, BIOABS, MEDLINE, etc. Defaults to WOS (Web of Science Core Collection)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records to return per page (1-50)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortField",
+                  "value": "RS",
+                  "description": "Field to sort results by."
+                },
+                {
+                  "disabled": false,
+                  "key": "publishTimeSpan",
+                  "value": "<string>",
+                  "description": "Time span for publication date filter in format YYYY-MM-DD+YYYY-MM-DD."
+                },
+                {
+                  "disabled": false,
+                  "key": "modifiedTimeSpan",
+                  "value": "<string>",
+                  "description": "Time span for last modified date filter in format YYYY-MM-DD+YYYY-MM-DD."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "029234a9-c36f-4af5-9983-307438c3f909",
+              "name": "Successful response with document search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "TS=climate change"
+                    },
+                    {
+                      "key": "db",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "RS"
+                    },
+                    {
+                      "key": "publishTimeSpan",
+                      "value": "2020-01-01+2024-12-31"
+                    },
+                    {
+                      "key": "modifiedTimeSpan",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1264,\n  \"page\": 6068,\n  \"limit\": 1077,\n  \"hits\": [\n    {\n      \"uid\": \"string\",\n      \"title\": \"string\",\n      \"types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sourceTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"source\": {\n        \"sourceTitle\": \"string\",\n        \"publishYear\": 8160,\n        \"publishMonth\": \"string\",\n        \"volume\": \"string\",\n        \"issue\": \"string\",\n        \"pages\": {\n          \"range\": \"string\",\n          \"begin\": \"string\",\n          \"end\": \"string\",\n          \"count\": 7862\n        },\n        \"articleNumber\": \"string\",\n        \"supplement\": \"string\"\n      },\n      \"names\": {\n        \"authors\": [\n          {\n            \"displayName\": \"string\",\n            \"wosStandard\": \"string\",\n            \"researcherId\": \"string\"\n          },\n          {\n            \"displayName\": \"string\",\n            \"wosStandard\": \"string\",\n            \"researcherId\": \"string\"\n          }\n        ]\n      },\n      \"links\": {\n        \"record\": \"https://wKWgrdQdW.fmbtwTIV2yJxfVFaWMgv+-LnCcqkjkkpMyG5vJO8753sz\",\n        \"references\": \"http://puUoMVRbTpsvadpkyugbhLYXn.lrbx9K0QptJ0ru2sAkVtX5Ra89DdmIvSUhBvJjY\",\n        \"related\": \"https://BNfwiwrg.rdru48Zs+ljtC6fNRdCKfHvhewEgQEM35,v+WAg8l8D9\"\n      },\n      \"citations\": [\n        {\n          \"db\": \"string\",\n          \"count\": 6171\n        },\n        {\n          \"db\": \"string\",\n          \"count\": 4527\n        }\n      ],\n      \"identifiers\": {\n        \"doi\": \"string\",\n        \"pmid\": \"string\",\n        \"issn\": \"string\",\n        \"eissn\": \"string\"\n      },\n      \"keywords\": {\n        \"authorKeywords\": [\n          \"string\",\n          \"string\"\n        ],\n        \"keywordsPlus\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"uid\": \"string\",\n      \"title\": \"string\",\n      \"types\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sourceTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"source\": {\n        \"sourceTitle\": \"string\",\n        \"publishYear\": 5761,\n        \"publishMonth\": \"string\",\n        \"volume\": \"string\",\n        \"issue\": \"string\",\n        \"pages\": {\n          \"range\": \"string\",\n          \"begin\": \"string\",\n          \"end\": \"string\",\n          \"count\": 906\n        },\n        \"articleNumber\": \"string\",\n        \"supplement\": \"string\"\n      },\n      \"names\": {\n        \"authors\": [\n          {\n            \"displayName\": \"string\",\n            \"wosStandard\": \"string\",\n            \"researcherId\": \"string\"\n          },\n          {\n            \"displayName\": \"string\",\n            \"wosStandard\": \"string\",\n            \"researcherId\": \"string\"\n          }\n        ]\n      },\n      \"links\": {\n        \"record\": \"https://MOzDZbnYZUmjtgGhLSSgARfxo.kdQezS9dJ9JFTQf7nEolu3z8lh35vLQ.MkAuHgO7H,3kTh8FrKxd72gf2cpMY2L7klQFKignGvlLT7cduE8Zrj3d\",\n        \"references\": \"http://J.nrnvleAYdE0LUYyJEYx1YIeEEDQeHYYlXaVCk.1\",\n        \"related\": \"http://Rs.gvzk88OTSRVq4DSvgvPohQHeiPYvLMrMJbPOzqGacEZAXtNgoFypP1LKfMKuVKVD+BOKnPCrnzY00\"\n      },\n      \"citations\": [\n        {\n          \"db\": \"string\",\n          \"count\": 9280\n        },\n        {\n          \"db\": \"string\",\n          \"count\": 8107\n        }\n      ],\n      \"identifiers\": {\n        \"doi\": \"string\",\n        \"pmid\": \"string\",\n        \"issn\": \"string\",\n        \"eissn\": \"string\"\n      },\n      \"keywords\": {\n        \"authorKeywords\": [\n          \"string\",\n          \"string\"\n        ],\n        \"keywordsPlus\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a6c9793-641d-4b1d-b059-4b0f9b7faa4a",
+              "name": "Bad request - invalid query syntax",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "TS=climate change"
+                    },
+                    {
+                      "key": "db",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "RS"
+                    },
+                    {
+                      "key": "publishTimeSpan",
+                      "value": "2020-01-01+2024-12-31"
+                    },
+                    {
+                      "key": "modifiedTimeSpan",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a52e2952-21a3-4ef2-ab2f-4f7d99a5c2c1",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "TS=climate change"
+                    },
+                    {
+                      "key": "db",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "RS"
+                    },
+                    {
+                      "key": "publishTimeSpan",
+                      "value": "2020-01-01+2024-12-31"
+                    },
+                    {
+                      "key": "modifiedTimeSpan",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65bfd18a-fb05-4c3a-8707-10d1b1bacc79",
+              "name": "Too many requests - rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "TS=climate change"
+                    },
+                    {
+                      "key": "db",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "RS"
+                    },
+                    {
+                      "key": "publishTimeSpan",
+                      "value": "2020-01-01+2024-12-31"
+                    },
+                    {
+                      "key": "modifiedTimeSpan",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0349b75-c9e3-4d68-b881-6aa0ad39d6ec",
+          "name": "Web of Science Starter Get Document by UID",
+          "request": {
+            "name": "Web of Science Starter Get Document by UID",
+            "description": {
+              "content": "Retrieve a specific Web of Science document by its unique identifier (UID). Returns full bibliographic metadata including title, authors, source, abstract, keywords, DOI, and times-cited count.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Web of Science unique identifier (e.g., WOS:000000000000001)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8cf2db79-4390-48d3-98ff-a59199ecd56d",
+              "name": "Successful response with document details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Web of Science unique identifier (e.g., WOS:000000000000001)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\",\n  \"title\": \"string\",\n  \"types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sourceTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"source\": {\n    \"sourceTitle\": \"string\",\n    \"publishYear\": 3294,\n    \"publishMonth\": \"string\",\n    \"volume\": \"string\",\n    \"issue\": \"string\",\n    \"pages\": {\n      \"range\": \"string\",\n      \"begin\": \"string\",\n      \"end\": \"string\",\n      \"count\": 5574\n    },\n    \"articleNumber\": \"string\",\n    \"supplement\": \"string\"\n  },\n  \"names\": {\n    \"authors\": [\n      {\n        \"displayName\": \"string\",\n        \"wosStandard\": \"string\",\n        \"researcherId\": \"string\"\n      },\n      {\n        \"displayName\": \"string\",\n        \"wosStandard\": \"string\",\n        \"researcherId\": \"string\"\n      }\n    ]\n  },\n  \"links\": {\n    \"record\": \"http://zNnIOJKQXXXrkbnXY.lnsSesxs0allM\",\n    \"references\": \"https://LlhlmJjmVqWdSDgjM.yimsr2LPdy6gp6twIJv70G.xSrL6W84cD2jFnn-m6cGx,BqXH+,\",\n    \"related\": \"https://NzbmlJPBh.qhhMHD2Z,Xlq+b-8bgO7ZBkH1JW-Dg3zGZhDANJKJ3n1,wZ\"\n  },\n  \"citations\": [\n    {\n      \"db\": \"string\",\n      \"count\": 7103\n    },\n    {\n      \"db\": \"string\",\n      \"count\": 6699\n    }\n  ],\n  \"identifiers\": {\n    \"doi\": \"string\",\n    \"pmid\": \"string\",\n    \"issn\": \"string\",\n    \"eissn\": \"string\"\n  },\n  \"keywords\": {\n    \"authorKeywords\": [\n      \"string\",\n      \"string\"\n    ],\n    \"keywordsPlus\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c76bc925-0afd-4ec1-8d0d-a9b04fa60160",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Web of Science unique identifier (e.g., WOS:000000000000001)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ad328cf-b871-4f20-b464-f8e798939227",
+              "name": "Document not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Web of Science unique identifier (e.g., WOS:000000000000001)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "87b73380-f103-4757-9bb3-271f4f96ca2a",
+      "name": "journals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4968f73a-7cc1-4dbb-8b3e-36ac830d8170",
+          "name": "Web of Science Starter Search Journals by ISSN",
+          "request": {
+            "name": "Web of Science Starter Search Journals by ISSN",
+            "description": {
+              "content": "Search and retrieve journal information from the Web of Science Journal Citation Reports. Query journals by ISSN to get metadata including impact factor, category, and JCR profile URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "journals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "issn",
+                  "value": "<string>",
+                  "description": "ISSN (print or electronic) of the journal to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Free-text query to search journals by name or related terms."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of journals to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ba16c8c-ddd9-43b4-8d34-a8a91cdb1c45",
+              "name": "Successful response with journal search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "issn",
+                      "value": "0028-0836"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 646,\n  \"page\": 1009,\n  \"limit\": 1403,\n  \"hits\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"issn\": \"string\",\n      \"eissn\": \"string\",\n      \"publisher\": \"string\",\n      \"country\": \"string\",\n      \"openAccess\": {\n        \"value\": \"string\"\n      },\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"jcrProfile\": \"https://sbksXQPtvARq.oqD0lQ.vxzKDSsXT6zi7lRPMtLpPYyS\",\n      \"links\": {\n        \"record\": \"https://LZEgE.pzolRQxOj+DRBi45u\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"issn\": \"string\",\n      \"eissn\": \"string\",\n      \"publisher\": \"string\",\n      \"country\": \"string\",\n      \"openAccess\": {\n        \"value\": \"string\"\n      },\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"jcrProfile\": \"https://QSUGZaSwaVxmszJkwnu.uskAIIQf1kbPoFGoLF-DK1jXwXk7f3K2fY9z1oL62cCilk3PFvr+4FUdbIM,75oePJeopsA2r\",\n      \"links\": {\n        \"record\": \"https://RoiUjIjeKseKS.gqyNTJQg,sMla3B.Fu6v\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3709ebe1-3e30-4724-8889-5f8244db568a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "issn",
+                      "value": "0028-0836"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9951693-61de-46a0-b5c1-091e3ebfe4dc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "issn",
+                      "value": "0028-0836"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb82997b-7228-4407-b27d-591116ebbd13",
+          "name": "Web of Science Starter Get Journal by ID",
+          "request": {
+            "name": "Web of Science Starter Get Journal by ID",
+            "description": {
+              "content": "Retrieve detailed information about a specific journal using its Web of Science journal identifier. Returns journal title, ISSN, publisher, categories, impact metrics, and JCR profile URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "journals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Web of Science journal identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55792829-24ed-433f-91b0-a482a7607ea1",
+              "name": "Successful response with journal details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Web of Science journal identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"issn\": \"string\",\n  \"eissn\": \"string\",\n  \"publisher\": \"string\",\n  \"country\": \"string\",\n  \"openAccess\": {\n    \"value\": \"string\"\n  },\n  \"categories\": [\n    \"string\",\n    \"string\"\n  ],\n  \"jcrProfile\": \"https://ylwpARntpyGfFGgrTuOMgAB.fpFk\",\n  \"links\": {\n    \"record\": \"https://YnhfvTZVUYaLmgZCeolCuDoyj.lsikJHLKwBqj++b-CMwsKyRims4bGmYgtc4wN2njGKqPN--SdiLSl-joenM2NGG5Qc\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "311d700d-788c-4d96-976a-0494882f2b6e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Web of Science journal identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c078c737-55fc-4896-8fea-1b2212fbf8fc",
+              "name": "Journal not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Web of Science journal identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clarivate.com/apis/wos-starter/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-ApiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b062d884-02ac-486e-9d70-7ed0bce1e937",
+    "name": "Web of Science Starter API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Web of Science Starter API provides basic metadata and search functionality for Web of Science documents and journals. It enables real-time check of bibliographic metadata such as DOI, author, source title, and times-cited counts against the Web of Science Core Collection and other Web of Science product databases. The API uses REST-based GET endpoints with JSON output.\n\nContact Support:\n Name: Clarivate Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
