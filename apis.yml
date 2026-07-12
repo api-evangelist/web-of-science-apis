@@ -62,6 +62,10 @@ apis:
       - url: https://developer.clarivate.com/apis/wos/swagger
         type: SwaggerUI
 common:
+  - type: DomainSecurity
+    url: security/web-of-science-apis-domain-security.yml
+  - type: Authentication
+    url: authentication/web-of-science-apis-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/clarivate
   - type: LinkedIn

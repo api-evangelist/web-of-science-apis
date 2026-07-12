@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/web-of-science-expanded-openapi.yml, openapi/web-of-science-starter-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-ApiKey
+  description: Clarivate API key for Web of Science API Expanded
+  sources:
+  - openapi/web-of-science-expanded-openapi.yml
+  - openapi/web-of-science-starter-openapi.yml
