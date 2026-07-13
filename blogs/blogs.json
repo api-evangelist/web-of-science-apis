@@ -3,13 +3,13 @@
   "feeds": [
     {
       "source": "https://clarivate.com/blog/",
-      "feed_url": "",
+      "feed_url": "https://clarivate.com/blog/",
       "title": "",
-      "saved": 5,
-      "method": "agent-scrape"
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-06-27T13:21:42Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 8,
   "agent_pulled": "2026-06-27"
 }
