@@ -62,6 +62,8 @@ apis:
       - url: https://developer.clarivate.com/apis/wos/swagger
         type: SwaggerUI
 common:
+  - type: AgenticAccess
+    url: agentic-access/web-of-science-apis-agentic-access.yml
   - type: DomainSecurity
     url: security/web-of-science-apis-domain-security.yml
   - type: Authentication
