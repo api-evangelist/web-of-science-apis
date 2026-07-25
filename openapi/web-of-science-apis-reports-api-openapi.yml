@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: Web of Science API Expanded citations reports API
+  description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
+  version: 1.0.0
+  contact:
+    name: Clarivate Developer Support
+    url: https://developer.clarivate.com/support
+  license:
+    name: Clarivate Terms of Use
+    url: https://clarivate.com/legal/terms-conditions/
+servers:
+- url: https://api.clarivate.com/api/wos
+  description: Web of Science API Expanded
+security:
+- ApiKeyAuth: []
+tags:
+- name: reports
+paths:
+  /citation-report/{queryId}:
+    get:
+      summary: Web of Science Expanded Get Citation Report for Query
+      description: Generate a citation report for a query result set, providing aggregate citation statistics including total citations, average citations per item, h-index, and year-by-year citation counts.
+      operationId: getCitationReport
+      tags:
+      - reports
+      x-microcks-operation:
+        delay: 100
+      parameters:
+      - name: queryId
+        in: path
+        required: true
+        description: Query identifier for the result set to report on.
+        schema:
+          type: integer
+      - name: databaseId
+        in: query
+        required: false
+        description: Database identifier.
+        schema:
+          type: string
+          default: WOS
+      - name: reportLevel
+        in: query
+        required: false
+        description: Report aggregation level (WOS or AllDB).
+        schema:
+          type: string
+          enum:
+          - WOS
+          - AllDB
+          default: WOS
+      responses:
+        '200':
+          description: Successful response with citation report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CitationReport'
+        '400':
+          description: Bad request or result set too large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /category-context/{uniqueId}:
+    get:
+      summary: Web of Science Expanded Get Category Context for Record
+      description: Retrieve the categorization context for citing and cited references of a Web of Science article. Returns ASCA traditional category distribution for the specified scope.
+      operationId: getCategoryContext
+      tags:
+      - reports
+      x-microcks-operation:
+        delay: 100
+      parameters:
+      - name: uniqueId
+        in: path
+        required: true
+        description: WOS unique identifier of the article.
+        schema:
+          type: string
+          example: WOS:000349044100001
+      - name: databaseId
+        in: query
+        required: false
+        description: Database identifier.
+        schema:
+          type: string
+          default: WOS
+      - name: citeType
+        in: query
+        required: false
+        description: Scope of category context (Citing, Referenced, or Aggregated).
+        schema:
+          type: string
+          enum:
+          - Citing
+          - Referenced
+          - Aggregated
+          default: Citing
+      responses:
+        '200':
+          description: Successful response with category context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryContext'
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CitationReport:
+      type: object
+      description: Citation report for a query result set
+      properties:
+        timesCited:
+          type: integer
+          description: Total times cited for all records in the result set
+        averagePerItem:
+          type: number
+          description: Average citations per item
+          format: float
+        hIndex:
+          type: integer
+          description: h-index for the result set
+        citingArticlesLinks:
+          type: string
+          description: Link to citing articles
+          format: uri
+        yearPublished:
+          type: array
+          description: Year-by-year publication counts
+          items:
+            $ref: '#/components/schemas/YearCount'
+        citationsByYear:
+          type: array
+          description: Year-by-year citation counts
+          items:
+            $ref: '#/components/schemas/YearCount'
+    CategoryCount:
+      type: object
+      description: A category with its record count
+      properties:
+        name:
+          type: string
+          description: Category name
+        count:
+          type: integer
+          description: Number of records in this category
+    YearCount:
+      type: object
+      description: Count value for a specific year
+      properties:
+        year:
+          type: integer
+          description: Year
+        count:
+          type: integer
+          description: Count for that year
+    CategoryContext:
+      type: object
+      description: Category context for citing or referenced records
+      properties:
+        categories:
+          type: array
+          description: ASCA traditional categories with counts
+          items:
+            $ref: '#/components/schemas/CategoryCount'
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP error code
+        message:
+          type: string
+          description: Human-readable error message
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-ApiKey
+      description: Clarivate API key for Web of Science API Expanded

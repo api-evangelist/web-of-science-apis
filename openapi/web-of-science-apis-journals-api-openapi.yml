@@ -1,0 +1,196 @@
+openapi: 3.0.3
+info:
+  title: Web of Science API Expanded citations journals API
+  description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
+  version: 1.0.0
+  contact:
+    name: Clarivate Developer Support
+    url: https://developer.clarivate.com/support
+  license:
+    name: Clarivate Terms of Use
+    url: https://clarivate.com/legal/terms-conditions/
+servers:
+- url: https://api.clarivate.com/api/wos
+  description: Web of Science API Expanded
+security:
+- ApiKeyAuth: []
+tags:
+- name: journals
+paths:
+  /journals:
+    get:
+      summary: Web of Science Starter Search Journals by ISSN
+      description: Search and retrieve journal information from the Web of Science Journal Citation Reports. Query journals by ISSN to get metadata including impact factor, category, and JCR profile URL.
+      operationId: getJournals
+      tags:
+      - journals
+      x-microcks-operation:
+        delay: 100
+      parameters:
+      - name: issn
+        in: query
+        required: false
+        description: ISSN (print or electronic) of the journal to retrieve.
+        schema:
+          type: string
+          example: 0028-0836
+      - name: q
+        in: query
+        required: false
+        description: Free-text query to search journals by name or related terms.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Number of journals to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+          default: 10
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination.
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      responses:
+        '200':
+          description: Successful response with journal search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JournalsSearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /journals/{id}:
+    get:
+      summary: Web of Science Starter Get Journal by ID
+      description: Retrieve detailed information about a specific journal using its Web of Science journal identifier. Returns journal title, ISSN, publisher, categories, impact metrics, and JCR profile URL.
+      operationId: getJournal
+      tags:
+      - journals
+      x-microcks-operation:
+        delay: 100
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Web of Science journal identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with journal details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Journal'
+        '404':
+          description: Journal not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        error:
+          type: string
+          description: Error code or type
+        message:
+          type: string
+          description: Human-readable error message
+        detail:
+          type: string
+          description: Additional error details
+    Journal:
+      type: object
+      description: A Web of Science journal record
+      properties:
+        id:
+          type: string
+          description: Web of Science journal identifier
+        name:
+          type: string
+          description: Journal title
+        issn:
+          type: string
+          description: Print ISSN
+        eissn:
+          type: string
+          description: Electronic ISSN
+        publisher:
+          type: string
+          description: Publisher name
+        country:
+          type: string
+          description: Country of publication
+        openAccess:
+          type: object
+          description: Open access information
+          properties:
+            value:
+              type: string
+        categories:
+          type: array
+          description: Web of Science subject categories
+          items:
+            type: string
+        jcrProfile:
+          type: string
+          description: URL to the Journal Citation Reports profile
+          format: uri
+        links:
+          type: object
+          description: Links to journal information
+          properties:
+            record:
+              type: string
+              format: uri
+    JournalsSearchResponse:
+      type: object
+      description: Response from journal search containing results and metadata
+      properties:
+        total:
+          type: integer
+          description: Total number of journals matching the query
+        page:
+          type: integer
+          description: Current page number
+        limit:
+          type: integer
+          description: Number of records per page
+        hits:
+          type: array
+          description: Array of journal records
+          items:
+            $ref: '#/components/schemas/Journal'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-ApiKey
+      description: Clarivate API key for Web of Science API Expanded
