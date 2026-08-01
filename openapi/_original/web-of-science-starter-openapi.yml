@@ -1,0 +1,553 @@
+openapi: 3.0.3
+info:
+  title: Web of Science Starter API
+  description: >-
+    The Web of Science Starter API provides basic metadata and search
+    functionality for Web of Science documents and journals. It enables
+    real-time check of bibliographic metadata such as DOI, author, source
+    title, and times-cited counts against the Web of Science Core Collection
+    and other Web of Science product databases. The API uses REST-based GET
+    endpoints with JSON output.
+  version: 1.0.0
+  contact:
+    name: Clarivate Developer Support
+    url: https://developer.clarivate.com/support
+  license:
+    name: Clarivate Terms of Use
+    url: https://clarivate.com/legal/terms-conditions/
+servers:
+  - url: https://api.clarivate.com/apis/wos-starter/v1
+    description: Web of Science Starter API v1
+security:
+  - ApiKeyAuth: []
+paths:
+  /documents:
+    get:
+      summary: Web of Science Starter Search Documents
+      description: >-
+        Search Web of Science documents using the advanced query syntax.
+        Returns bibliographic metadata including titles, authors, sources,
+        DOIs, and times-cited counts. Supports pagination, sorting, and
+        filtering by database and time span.
+      operationId: searchDocuments
+      tags:
+        - documents
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: >-
+            Advanced query syntax string. Supports field tags such as TS
+            (topic), AU (author), SO (source), DO (DOI), and others.
+          schema:
+            type: string
+            example: TS=climate change
+        - name: db
+          in: query
+          required: false
+          description: >-
+            Database to search. Options include WOS, BIOABS, MEDLINE, etc.
+            Defaults to WOS (Web of Science Core Collection).
+          schema:
+            type: string
+            default: WOS
+            enum:
+              - WOS
+              - BIOABS
+              - BIOSIS
+              - CCC
+              - DIIDW
+              - MEDLINE
+              - NWS
+              - PPRN
+              - RSCI
+              - RSCIPROC
+              - ZOOREC
+        - name: limit
+          in: query
+          required: false
+          description: Number of records to return per page (1-50).
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+        - name: page
+          in: query
+          required: false
+          description: Page number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: sortField
+          in: query
+          required: false
+          description: Field to sort results by.
+          schema:
+            type: string
+            enum:
+              - LD
+              - PY
+              - RS
+              - TC
+            default: RS
+        - name: publishTimeSpan
+          in: query
+          required: false
+          description: >-
+            Time span for publication date filter in format
+            YYYY-MM-DD+YYYY-MM-DD.
+          schema:
+            type: string
+            example: 2020-01-01+2024-12-31
+        - name: modifiedTimeSpan
+          in: query
+          required: false
+          description: >-
+            Time span for last modified date filter in format
+            YYYY-MM-DD+YYYY-MM-DD.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with document search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentsSearchResponse'
+        '400':
+          description: Bad request - invalid query syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many requests - rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /documents/{uid}:
+    get:
+      summary: Web of Science Starter Get Document by UID
+      description: >-
+        Retrieve a specific Web of Science document by its unique identifier
+        (UID). Returns full bibliographic metadata including title, authors,
+        source, abstract, keywords, DOI, and times-cited count.
+      operationId: getDocument
+      tags:
+        - documents
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: >-
+            Web of Science unique identifier (e.g.,
+            WOS:000000000000001).
+          schema:
+            type: string
+            example: WOS:000349044100001
+      responses:
+        '200':
+          description: Successful response with document details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          description: Document not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /journals:
+    get:
+      summary: Web of Science Starter Search Journals by ISSN
+      description: >-
+        Search and retrieve journal information from the Web of Science
+        Journal Citation Reports. Query journals by ISSN to get metadata
+        including impact factor, category, and JCR profile URL.
+      operationId: getJournals
+      tags:
+        - journals
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: issn
+          in: query
+          required: false
+          description: ISSN (print or electronic) of the journal to retrieve.
+          schema:
+            type: string
+            example: 0028-0836
+        - name: q
+          in: query
+          required: false
+          description: Free-text query to search journals by name or related terms.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Number of journals to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+        - name: page
+          in: query
+          required: false
+          description: Page number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+      responses:
+        '200':
+          description: Successful response with journal search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JournalsSearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /journals/{id}:
+    get:
+      summary: Web of Science Starter Get Journal by ID
+      description: >-
+        Retrieve detailed information about a specific journal using its
+        Web of Science journal identifier. Returns journal title, ISSN,
+        publisher, categories, impact metrics, and JCR profile URL.
+      operationId: getJournal
+      tags:
+        - journals
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Web of Science journal identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with journal details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Journal'
+        '404':
+          description: Journal not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-ApiKey
+      description: Clarivate API key for authentication
+
+  schemas:
+    DocumentsSearchResponse:
+      type: object
+      description: Response from document search containing results and metadata
+      properties:
+        total:
+          type: integer
+          description: Total number of documents matching the query
+        page:
+          type: integer
+          description: Current page number
+        limit:
+          type: integer
+          description: Number of records per page
+        hits:
+          type: array
+          description: Array of document records
+          items:
+            $ref: '#/components/schemas/Document'
+
+    Document:
+      type: object
+      description: A Web of Science document record with bibliographic metadata
+      properties:
+        uid:
+          type: string
+          description: Unique identifier for the document (e.g., WOS:000349044100001)
+        title:
+          type: string
+          description: Title of the document
+        types:
+          type: array
+          description: Document types (article, review, etc.)
+          items:
+            type: string
+        sourceTypes:
+          type: array
+          description: Source types (journal, book, etc.)
+          items:
+            type: string
+        source:
+          $ref: '#/components/schemas/DocumentSource'
+        names:
+          $ref: '#/components/schemas/DocumentNames'
+        links:
+          $ref: '#/components/schemas/DocumentLinks'
+        citations:
+          type: array
+          description: Citation counts by database
+          items:
+            $ref: '#/components/schemas/CitationCount'
+        identifiers:
+          $ref: '#/components/schemas/DocumentIdentifiers'
+        keywords:
+          $ref: '#/components/schemas/DocumentKeywords'
+
+    DocumentSource:
+      type: object
+      description: Source publication information
+      properties:
+        sourceTitle:
+          type: string
+          description: Title of the source journal or book
+        publishYear:
+          type: integer
+          description: Year of publication
+        publishMonth:
+          type: string
+          description: Month of publication
+        volume:
+          type: string
+          description: Volume number
+        issue:
+          type: string
+          description: Issue number
+        pages:
+          $ref: '#/components/schemas/DocumentPages'
+        articleNumber:
+          type: string
+          description: Article number (for electronic journals)
+        supplement:
+          type: string
+          description: Supplement identifier
+
+    DocumentPages:
+      type: object
+      description: Page range information
+      properties:
+        range:
+          type: string
+          description: Page range (e.g., 145-152)
+        begin:
+          type: string
+          description: First page number
+        end:
+          type: string
+          description: Last page number
+        count:
+          type: integer
+          description: Total number of pages
+
+    DocumentNames:
+      type: object
+      description: Author and editor names
+      properties:
+        authors:
+          type: array
+          description: List of authors
+          items:
+            $ref: '#/components/schemas/Author'
+
+    Author:
+      type: object
+      description: An author of a Web of Science document
+      properties:
+        displayName:
+          type: string
+          description: Full display name of the author
+        wosStandard:
+          type: string
+          description: Standardized author name format used in Web of Science
+        researcherId:
+          type: string
+          description: Researcher ID if available
+
+    DocumentLinks:
+      type: object
+      description: Links to the document in Web of Science
+      properties:
+        record:
+          type: string
+          description: Direct link to the full record in Web of Science
+          format: uri
+        references:
+          type: string
+          description: Link to the references list
+          format: uri
+        related:
+          type: string
+          description: Link to related records
+          format: uri
+
+    CitationCount:
+      type: object
+      description: Citation count for a specific database
+      properties:
+        db:
+          type: string
+          description: Database code (e.g., WOS)
+        count:
+          type: integer
+          description: Number of times cited
+
+    DocumentIdentifiers:
+      type: object
+      description: Document identifiers (DOI, PMID, etc.)
+      properties:
+        doi:
+          type: string
+          description: Digital Object Identifier
+        pmid:
+          type: string
+          description: PubMed identifier
+        issn:
+          type: string
+          description: ISSN of the source journal
+        eissn:
+          type: string
+          description: Electronic ISSN of the source journal
+
+    DocumentKeywords:
+      type: object
+      description: Keywords associated with the document
+      properties:
+        authorKeywords:
+          type: array
+          description: Keywords provided by the authors
+          items:
+            type: string
+        keywordsPlus:
+          type: array
+          description: Keywords Plus generated from references
+          items:
+            type: string
+
+    JournalsSearchResponse:
+      type: object
+      description: Response from journal search containing results and metadata
+      properties:
+        total:
+          type: integer
+          description: Total number of journals matching the query
+        page:
+          type: integer
+          description: Current page number
+        limit:
+          type: integer
+          description: Number of records per page
+        hits:
+          type: array
+          description: Array of journal records
+          items:
+            $ref: '#/components/schemas/Journal'
+
+    Journal:
+      type: object
+      description: A Web of Science journal record
+      properties:
+        id:
+          type: string
+          description: Web of Science journal identifier
+        name:
+          type: string
+          description: Journal title
+        issn:
+          type: string
+          description: Print ISSN
+        eissn:
+          type: string
+          description: Electronic ISSN
+        publisher:
+          type: string
+          description: Publisher name
+        country:
+          type: string
+          description: Country of publication
+        openAccess:
+          type: object
+          description: Open access information
+          properties:
+            value:
+              type: string
+        categories:
+          type: array
+          description: Web of Science subject categories
+          items:
+            type: string
+        jcrProfile:
+          type: string
+          description: URL to the Journal Citation Reports profile
+          format: uri
+        links:
+          type: object
+          description: Links to journal information
+          properties:
+            record:
+              type: string
+              format: uri
+
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        error:
+          type: string
+          description: Error code or type
+        message:
+          type: string
+          description: Human-readable error message
+        detail:
+          type: string
+          description: Additional error details

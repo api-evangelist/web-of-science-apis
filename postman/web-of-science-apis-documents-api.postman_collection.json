@@ -1,0 +1,626 @@
+{
+  "info": {
+    "_postman_id": "b53f4bb7-a597-4e3c-9b6d-7b8308551d1f",
+    "name": "Web of Science API Expanded citations documents API",
+    "description": "The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.\n\nContact Support:\n Name: Clarivate Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:37.000Z",
+    "updatedAt": "2026-07-28T03:29:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b53f4bb7-a597-4e3c-9b6d-7b8308551d1f"
+  },
+  "item": [
+    {
+      "name": "documents",
+      "item": [
+        {
+          "name": "{uid}",
+          "item": [
+            {
+              "name": "Web of Science Starter Get Document by UID",
+              "id": "6776b06d-e931-4288-9e0d-9aae6ea06924",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/documents/:uid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "documents",
+                    ":uid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "eaf2b61a-ec54-47c9-91a3-95ed4ff819eb",
+                      "key": "uid",
+                      "value": "<string>",
+                      "description": "(Required) Web of Science unique identifier (e.g., WOS:000000000000001)."
+                    }
+                  ]
+                },
+                "description": "Retrieve a specific Web of Science document by its unique identifier (UID). Returns full bibliographic metadata including title, authors, source, abstract, keywords, DOI, and times-cited count."
+              },
+              "response": [
+                {
+                  "id": "819a79ae-2811-42c2-a9de-715dcad1a7a0",
+                  "name": "Successful response with document details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-ApiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/documents/:uid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "documents",
+                        ":uid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"uid\": \"<string>\",\n  \"title\": \"<string>\",\n  \"types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sourceTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source\": {\n    \"sourceTitle\": \"<string>\",\n    \"publishYear\": \"<integer>\",\n    \"publishMonth\": \"<string>\",\n    \"volume\": \"<string>\",\n    \"issue\": \"<string>\",\n    \"pages\": {\n      \"range\": \"<string>\",\n      \"begin\": \"<string>\",\n      \"end\": \"<string>\",\n      \"count\": \"<integer>\"\n    },\n    \"articleNumber\": \"<string>\",\n    \"supplement\": \"<string>\"\n  },\n  \"names\": {\n    \"authors\": [\n      {\n        \"displayName\": \"<string>\",\n        \"wosStandard\": \"<string>\",\n        \"researcherId\": \"<string>\"\n      },\n      {\n        \"displayName\": \"<string>\",\n        \"wosStandard\": \"<string>\",\n        \"researcherId\": \"<string>\"\n      }\n    ]\n  },\n  \"links\": {\n    \"record\": \"<uri>\",\n    \"references\": \"<uri>\",\n    \"related\": \"<uri>\"\n  },\n  \"citations\": [\n    {\n      \"db\": \"<string>\",\n      \"count\": \"<integer>\"\n    },\n    {\n      \"db\": \"<string>\",\n      \"count\": \"<integer>\"\n    }\n  ],\n  \"identifiers\": {\n    \"doi\": \"<string>\",\n    \"pmid\": \"<string>\",\n    \"issn\": \"<string>\",\n    \"eissn\": \"<string>\"\n  },\n  \"keywords\": {\n    \"authorKeywords\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywordsPlus\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-819a79ae-2811-42c2-a9de-715dcad1a7a0"
+                },
+                {
+                  "id": "d88ebc85-93c4-4201-86cc-c65ae8af3475",
+                  "name": "Unauthorized - invalid or missing API key",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-ApiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/documents/:uid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "documents",
+                        ":uid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-d88ebc85-93c4-4201-86cc-c65ae8af3475"
+                },
+                {
+                  "id": "15ce1618-0f1c-4342-801b-b9a086f3d70c",
+                  "name": "Document not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-ApiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/documents/:uid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "documents",
+                        ":uid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "uid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:29:38.000Z",
+                  "updatedAt": "2026-07-28T03:29:38.000Z",
+                  "uid": "35240-15ce1618-0f1c-4342-801b-b9a086f3d70c"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-6776b06d-e931-4288-9e0d-9aae6ea06924"
+            }
+          ],
+          "id": "81bb238f-61e9-4d82-9da7-cd0c7ae747b0",
+          "createdAt": "2026-07-28T03:29:38.000Z",
+          "updatedAt": "2026-07-28T03:29:38.000Z",
+          "uid": "35240-81bb238f-61e9-4d82-9da7-cd0c7ae747b0"
+        },
+        {
+          "name": "Web of Science Starter Search Documents",
+          "id": "a6565218-558b-49a8-983c-b371cee811ff",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/documents?q=<string>&db=WOS&limit=10&page=1&sortField=RS&publishTimeSpan=<string>&modifiedTimeSpan=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "documents"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Advanced query syntax string. Supports field tags such as TS (topic), AU (author), SO (source), DO (DOI), and others.",
+                  "key": "q",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Database to search. Options include WOS, BIOABS, MEDLINE, etc. Defaults to WOS (Web of Science Core Collection).",
+                  "key": "db",
+                  "value": "WOS"
+                },
+                {
+                  "description": "Number of records to return per page (1-50).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Page number for pagination.",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Field to sort results by.",
+                  "key": "sortField",
+                  "value": "RS"
+                },
+                {
+                  "description": "Time span for publication date filter in format YYYY-MM-DD+YYYY-MM-DD.",
+                  "key": "publishTimeSpan",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Time span for last modified date filter in format YYYY-MM-DD+YYYY-MM-DD.",
+                  "key": "modifiedTimeSpan",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Search Web of Science documents using the advanced query syntax. Returns bibliographic metadata including titles, authors, sources, DOIs, and times-cited counts. Supports pagination, sorting, and filtering by database and time span."
+          },
+          "response": [
+            {
+              "id": "922e668d-ee50-48e7-b764-820bddcd9513",
+              "name": "Successful response with document search results",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/documents?q=<string>&db=WOS&limit=10&page=1&sortField=RS&publishTimeSpan=<string>&modifiedTimeSpan=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "documents"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Advanced query syntax string. Supports field tags such as TS (topic), AU (author), SO (source), DO (DOI), and others.",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Database to search. Options include WOS, BIOABS, MEDLINE, etc. Defaults to WOS (Web of Science Core Collection).",
+                      "key": "db",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "Number of records to return per page (1-50).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Field to sort results by.",
+                      "key": "sortField",
+                      "value": "RS"
+                    },
+                    {
+                      "description": "Time span for publication date filter in format YYYY-MM-DD+YYYY-MM-DD.",
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Time span for last modified date filter in format YYYY-MM-DD+YYYY-MM-DD.",
+                      "key": "modifiedTimeSpan",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"page\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"hits\": [\n    {\n      \"uid\": \"<string>\",\n      \"title\": \"<string>\",\n      \"types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"sourceTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"source\": {\n        \"sourceTitle\": \"<string>\",\n        \"publishYear\": \"<integer>\",\n        \"publishMonth\": \"<string>\",\n        \"volume\": \"<string>\",\n        \"issue\": \"<string>\",\n        \"pages\": {\n          \"range\": \"<string>\",\n          \"begin\": \"<string>\",\n          \"end\": \"<string>\",\n          \"count\": \"<integer>\"\n        },\n        \"articleNumber\": \"<string>\",\n        \"supplement\": \"<string>\"\n      },\n      \"names\": {\n        \"authors\": [\n          {\n            \"displayName\": \"<string>\",\n            \"wosStandard\": \"<string>\",\n            \"researcherId\": \"<string>\"\n          },\n          {\n            \"displayName\": \"<string>\",\n            \"wosStandard\": \"<string>\",\n            \"researcherId\": \"<string>\"\n          }\n        ]\n      },\n      \"links\": {\n        \"record\": \"<uri>\",\n        \"references\": \"<uri>\",\n        \"related\": \"<uri>\"\n      },\n      \"citations\": [\n        {\n          \"db\": \"<string>\",\n          \"count\": \"<integer>\"\n        },\n        {\n          \"db\": \"<string>\",\n          \"count\": \"<integer>\"\n        }\n      ],\n      \"identifiers\": {\n        \"doi\": \"<string>\",\n        \"pmid\": \"<string>\",\n        \"issn\": \"<string>\",\n        \"eissn\": \"<string>\"\n      },\n      \"keywords\": {\n        \"authorKeywords\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"keywordsPlus\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"uid\": \"<string>\",\n      \"title\": \"<string>\",\n      \"types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"sourceTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"source\": {\n        \"sourceTitle\": \"<string>\",\n        \"publishYear\": \"<integer>\",\n        \"publishMonth\": \"<string>\",\n        \"volume\": \"<string>\",\n        \"issue\": \"<string>\",\n        \"pages\": {\n          \"range\": \"<string>\",\n          \"begin\": \"<string>\",\n          \"end\": \"<string>\",\n          \"count\": \"<integer>\"\n        },\n        \"articleNumber\": \"<string>\",\n        \"supplement\": \"<string>\"\n      },\n      \"names\": {\n        \"authors\": [\n          {\n            \"displayName\": \"<string>\",\n            \"wosStandard\": \"<string>\",\n            \"researcherId\": \"<string>\"\n          },\n          {\n            \"displayName\": \"<string>\",\n            \"wosStandard\": \"<string>\",\n            \"researcherId\": \"<string>\"\n          }\n        ]\n      },\n      \"links\": {\n        \"record\": \"<uri>\",\n        \"references\": \"<uri>\",\n        \"related\": \"<uri>\"\n      },\n      \"citations\": [\n        {\n          \"db\": \"<string>\",\n          \"count\": \"<integer>\"\n        },\n        {\n          \"db\": \"<string>\",\n          \"count\": \"<integer>\"\n        }\n      ],\n      \"identifiers\": {\n        \"doi\": \"<string>\",\n        \"pmid\": \"<string>\",\n        \"issn\": \"<string>\",\n        \"eissn\": \"<string>\"\n      },\n      \"keywords\": {\n        \"authorKeywords\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"keywordsPlus\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-922e668d-ee50-48e7-b764-820bddcd9513"
+            },
+            {
+              "id": "a83cffc3-10f0-4c19-9dd3-7c7bd5c05226",
+              "name": "Bad request - invalid query syntax",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/documents?q=<string>&db=WOS&limit=10&page=1&sortField=RS&publishTimeSpan=<string>&modifiedTimeSpan=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "documents"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Advanced query syntax string. Supports field tags such as TS (topic), AU (author), SO (source), DO (DOI), and others.",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Database to search. Options include WOS, BIOABS, MEDLINE, etc. Defaults to WOS (Web of Science Core Collection).",
+                      "key": "db",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "Number of records to return per page (1-50).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Field to sort results by.",
+                      "key": "sortField",
+                      "value": "RS"
+                    },
+                    {
+                      "description": "Time span for publication date filter in format YYYY-MM-DD+YYYY-MM-DD.",
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Time span for last modified date filter in format YYYY-MM-DD+YYYY-MM-DD.",
+                      "key": "modifiedTimeSpan",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-a83cffc3-10f0-4c19-9dd3-7c7bd5c05226"
+            },
+            {
+              "id": "dc9bf1c8-f723-4705-9e0c-8dffd04d63b5",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/documents?q=<string>&db=WOS&limit=10&page=1&sortField=RS&publishTimeSpan=<string>&modifiedTimeSpan=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "documents"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Advanced query syntax string. Supports field tags such as TS (topic), AU (author), SO (source), DO (DOI), and others.",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Database to search. Options include WOS, BIOABS, MEDLINE, etc. Defaults to WOS (Web of Science Core Collection).",
+                      "key": "db",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "Number of records to return per page (1-50).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Field to sort results by.",
+                      "key": "sortField",
+                      "value": "RS"
+                    },
+                    {
+                      "description": "Time span for publication date filter in format YYYY-MM-DD+YYYY-MM-DD.",
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Time span for last modified date filter in format YYYY-MM-DD+YYYY-MM-DD.",
+                      "key": "modifiedTimeSpan",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-dc9bf1c8-f723-4705-9e0c-8dffd04d63b5"
+            },
+            {
+              "id": "8950fc98-54d3-4fa9-923a-56c19714192a",
+              "name": "Too many requests - rate limit exceeded",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/documents?q=<string>&db=WOS&limit=10&page=1&sortField=RS&publishTimeSpan=<string>&modifiedTimeSpan=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "documents"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Advanced query syntax string. Supports field tags such as TS (topic), AU (author), SO (source), DO (DOI), and others.",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Database to search. Options include WOS, BIOABS, MEDLINE, etc. Defaults to WOS (Web of Science Core Collection).",
+                      "key": "db",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "Number of records to return per page (1-50).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Field to sort results by.",
+                      "key": "sortField",
+                      "value": "RS"
+                    },
+                    {
+                      "description": "Time span for publication date filter in format YYYY-MM-DD+YYYY-MM-DD.",
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Time span for last modified date filter in format YYYY-MM-DD+YYYY-MM-DD.",
+                      "key": "modifiedTimeSpan",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:38.000Z",
+              "updatedAt": "2026-07-28T03:29:38.000Z",
+              "uid": "35240-8950fc98-54d3-4fa9-923a-56c19714192a"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:38.000Z",
+          "updatedAt": "2026-07-28T03:29:38.000Z",
+          "uid": "35240-a6565218-558b-49a8-983c-b371cee811ff"
+        }
+      ],
+      "id": "b7782170-e3a3-42c1-8939-ecc4da638afe",
+      "createdAt": "2026-07-28T03:29:38.000Z",
+      "updatedAt": "2026-07-28T03:29:38.000Z",
+      "uid": "35240-b7782170-e3a3-42c1-8939-ecc4da638afe"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-ApiKey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.clarivate.com/api/wos"
+    }
+  ]
+}

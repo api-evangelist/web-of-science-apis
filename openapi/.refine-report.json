@@ -1,0 +1,24 @@
+{
+  "provider": "web-of-science-apis",
+  "sources": [
+    "web-of-science-apis-citations-api-openapi.yml",
+    "web-of-science-apis-documents-api-openapi.yml",
+    "web-of-science-apis-journals-api-openapi.yml",
+    "web-of-science-apis-records-api-openapi.yml",
+    "web-of-science-apis-reports-api-openapi.yml",
+    "web-of-science-apis-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "web-of-science-apis-citations-api-openapi.yml",
+    "web-of-science-apis-documents-api-openapi.yml",
+    "web-of-science-apis-journals-api-openapi.yml",
+    "web-of-science-apis-records-api-openapi.yml",
+    "web-of-science-apis-reports-api-openapi.yml",
+    "web-of-science-apis-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

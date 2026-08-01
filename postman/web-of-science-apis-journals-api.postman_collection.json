@@ -1,0 +1,487 @@
+{
+  "info": {
+    "_postman_id": "4ed263ee-51fc-42ce-bd41-cfb9d37c115c",
+    "name": "Web of Science API Expanded citations journals API",
+    "description": "The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.\n\nContact Support:\n Name: Clarivate Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:39.000Z",
+    "updatedAt": "2026-07-28T03:29:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4ed263ee-51fc-42ce-bd41-cfb9d37c115c"
+  },
+  "item": [
+    {
+      "name": "journals",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Web of Science Starter Get Journal by ID",
+              "id": "f6b8240f-3c5b-4c5e-96de-3cbb4d225555",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/journals/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "journals",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a6dd32e4-883d-4bcb-9c24-8ae6d1affad7",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Web of Science journal identifier."
+                    }
+                  ]
+                },
+                "description": "Retrieve detailed information about a specific journal using its Web of Science journal identifier. Returns journal title, ISSN, publisher, categories, impact metrics, and JCR profile URL."
+              },
+              "response": [
+                {
+                  "id": "72619bea-351d-430d-af05-4c580bf28dea",
+                  "name": "Successful response with journal details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-ApiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/journals/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "journals",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"issn\": \"<string>\",\n  \"eissn\": \"<string>\",\n  \"publisher\": \"<string>\",\n  \"country\": \"<string>\",\n  \"openAccess\": {\n    \"value\": \"<string>\"\n  },\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"jcrProfile\": \"<uri>\",\n  \"links\": {\n    \"record\": \"<uri>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:29:40.000Z",
+                  "updatedAt": "2026-07-28T03:29:40.000Z",
+                  "uid": "35240-72619bea-351d-430d-af05-4c580bf28dea"
+                },
+                {
+                  "id": "d5c9e842-b100-403a-99a3-b6d5db7f3493",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-ApiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/journals/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "journals",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:29:40.000Z",
+                  "updatedAt": "2026-07-28T03:29:40.000Z",
+                  "uid": "35240-d5c9e842-b100-403a-99a3-b6d5db7f3493"
+                },
+                {
+                  "id": "fd5c119c-e752-49c7-9cd5-b2e22a5b26fb",
+                  "name": "Journal not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-ApiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/journals/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "journals",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:29:40.000Z",
+                  "updatedAt": "2026-07-28T03:29:40.000Z",
+                  "uid": "35240-fd5c119c-e752-49c7-9cd5-b2e22a5b26fb"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:40.000Z",
+              "updatedAt": "2026-07-28T03:29:40.000Z",
+              "uid": "35240-f6b8240f-3c5b-4c5e-96de-3cbb4d225555"
+            }
+          ],
+          "id": "b050f53a-9c7b-47aa-9e28-bd906b0cf760",
+          "createdAt": "2026-07-28T03:29:40.000Z",
+          "updatedAt": "2026-07-28T03:29:40.000Z",
+          "uid": "35240-b050f53a-9c7b-47aa-9e28-bd906b0cf760"
+        },
+        {
+          "name": "Web of Science Starter Search Journals by ISSN",
+          "id": "645cd0b4-cb4e-4c66-9f47-32cd3a0e6215",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/journals?issn=<string>&q=<string>&limit=10&page=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "journals"
+              ],
+              "query": [
+                {
+                  "description": "ISSN (print or electronic) of the journal to retrieve.",
+                  "key": "issn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Free-text query to search journals by name or related terms.",
+                  "key": "q",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of journals to return.",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Page number for pagination.",
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Search and retrieve journal information from the Web of Science Journal Citation Reports. Query journals by ISSN to get metadata including impact factor, category, and JCR profile URL."
+          },
+          "response": [
+            {
+              "id": "6e092db4-20c9-4c8f-987b-683dd00b46db",
+              "name": "Successful response with journal search results",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/journals?issn=<string>&q=<string>&limit=10&page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "journals"
+                  ],
+                  "query": [
+                    {
+                      "description": "ISSN (print or electronic) of the journal to retrieve.",
+                      "key": "issn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Free-text query to search journals by name or related terms.",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of journals to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"page\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"hits\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"issn\": \"<string>\",\n      \"eissn\": \"<string>\",\n      \"publisher\": \"<string>\",\n      \"country\": \"<string>\",\n      \"openAccess\": {\n        \"value\": \"<string>\"\n      },\n      \"categories\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"jcrProfile\": \"<uri>\",\n      \"links\": {\n        \"record\": \"<uri>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"issn\": \"<string>\",\n      \"eissn\": \"<string>\",\n      \"publisher\": \"<string>\",\n      \"country\": \"<string>\",\n      \"openAccess\": {\n        \"value\": \"<string>\"\n      },\n      \"categories\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"jcrProfile\": \"<uri>\",\n      \"links\": {\n        \"record\": \"<uri>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:29:40.000Z",
+              "updatedAt": "2026-07-28T03:29:40.000Z",
+              "uid": "35240-6e092db4-20c9-4c8f-987b-683dd00b46db"
+            },
+            {
+              "id": "6aac17c6-ca73-491d-8764-04766b21ad2d",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/journals?issn=<string>&q=<string>&limit=10&page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "journals"
+                  ],
+                  "query": [
+                    {
+                      "description": "ISSN (print or electronic) of the journal to retrieve.",
+                      "key": "issn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Free-text query to search journals by name or related terms.",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of journals to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:40.000Z",
+              "updatedAt": "2026-07-28T03:29:40.000Z",
+              "uid": "35240-6aac17c6-ca73-491d-8764-04766b21ad2d"
+            },
+            {
+              "id": "1175507e-5d71-4232-82e4-c47574686dd6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/journals?issn=<string>&q=<string>&limit=10&page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "journals"
+                  ],
+                  "query": [
+                    {
+                      "description": "ISSN (print or electronic) of the journal to retrieve.",
+                      "key": "issn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Free-text query to search journals by name or related terms.",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of journals to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"detail\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:40.000Z",
+              "updatedAt": "2026-07-28T03:29:40.000Z",
+              "uid": "35240-1175507e-5d71-4232-82e4-c47574686dd6"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:40.000Z",
+          "updatedAt": "2026-07-28T03:29:40.000Z",
+          "uid": "35240-645cd0b4-cb4e-4c66-9f47-32cd3a0e6215"
+        }
+      ],
+      "id": "2912f65e-4aaf-47f5-bdae-d0a78e8c98c6",
+      "createdAt": "2026-07-28T03:29:40.000Z",
+      "updatedAt": "2026-07-28T03:29:40.000Z",
+      "uid": "35240-2912f65e-4aaf-47f5-bdae-d0a78e8c98c6"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-ApiKey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.clarivate.com/api/wos"
+    }
+  ]
+}

@@ -1,0 +1,889 @@
+openapi: 3.0.3
+info:
+  title: Web of Science API Expanded
+  description: >-
+    The Web of Science API Expanded provides rich searching across the Web of
+    Science based on your subscription to retrieve item-level metadata,
+    including times-cited counts and contributor addresses and affiliations.
+    It supports advanced search, citation analysis, related records discovery,
+    reference retrieval, and bibliometric reporting with both JSON and XML
+    output formats.
+  version: 1.0.0
+  contact:
+    name: Clarivate Developer Support
+    url: https://developer.clarivate.com/support
+  license:
+    name: Clarivate Terms of Use
+    url: https://clarivate.com/legal/terms-conditions/
+servers:
+  - url: https://api.clarivate.com/api/wos
+    description: Web of Science API Expanded
+security:
+  - ApiKeyAuth: []
+paths:
+  /:
+    get:
+      summary: Web of Science Expanded Search Documents via GET
+      description: >-
+        Submit search queries to retrieve Web of Science document metadata.
+        Supports the Web of Science Advanced Search Query syntax with field
+        tags, boolean operators, and wildcard characters. Returns a query ID
+        and initial results page for subsequent pagination.
+      operationId: searchDocumentsGet
+      tags:
+        - search
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: databaseId
+          in: query
+          required: true
+          description: Database to search (e.g., WOS for Web of Science Core Collection).
+          schema:
+            type: string
+            default: WOS
+            enum:
+              - WOS
+              - BIOABS
+              - BCI
+              - CCC
+              - DIIDW
+              - MEDLINE
+              - ZOOREC
+        - name: usrQuery
+          in: query
+          required: true
+          description: >-
+            Advanced search query string using Web of Science query syntax.
+            Field tags include TS (topic), AU (author), TI (title), SO
+            (source), DO (DOI), OG (organization), etc.
+          schema:
+            type: string
+            example: TS=machine learning AND PY=2024
+        - name: count
+          in: query
+          required: false
+          description: Number of records to return (1-100).
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: firstRecord
+          in: query
+          required: false
+          description: Starting record number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: lang
+          in: query
+          required: false
+          description: Language of the results (default en).
+          schema:
+            type: string
+            default: en
+        - name: editions
+          in: query
+          required: false
+          description: Comma-separated list of WOS database editions to search.
+          schema:
+            type: string
+        - name: publishTimeSpan
+          in: query
+          required: false
+          description: >-
+            Publication date range filter in format begin=YYYY-MM-DD&end=YYYY-MM-DD.
+          schema:
+            type: string
+        - name: sortField
+          in: query
+          required: false
+          description: Field and direction for sorting results.
+          schema:
+            type: string
+            enum:
+              - LD+D
+              - PY+D
+              - TC+D
+              - RS+D
+              - LD+A
+              - PY+A
+        - name: loadRecord
+          in: query
+          required: false
+          description: Include full record in response.
+          schema:
+            type: string
+            enum:
+              - Yes
+              - No
+      responses:
+        '200':
+          description: Successful response with search results and query ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: Bad request - invalid query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      summary: Web of Science Expanded Search Documents via POST
+      description: >-
+        Submit search queries via POST to retrieve Web of Science document
+        metadata. Equivalent to the GET search endpoint but allows larger
+        query parameters in the request body.
+      operationId: searchDocumentsPost
+      tags:
+        - search
+      x-microcks-operation:
+        delay: 100
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Successful response with search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /query/{queryId}:
+    get:
+      summary: Web of Science Expanded Fetch Query Results
+      description: >-
+        Retrieve records from a previously submitted search query using the
+        query ID returned from the search endpoint. Supports pagination through
+        large result sets with configurable record counts and sorting.
+      operationId: getQueryResults
+      tags:
+        - search
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: queryId
+          in: path
+          required: true
+          description: Query identifier returned from the search endpoint.
+          schema:
+            type: integer
+        - name: count
+          in: query
+          required: false
+          description: Number of records to return (1-100).
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: firstRecord
+          in: query
+          required: false
+          description: Starting record number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: sortField
+          in: query
+          required: false
+          description: Field and direction for sorting results.
+          schema:
+            type: string
+        - name: viewField
+          in: query
+          required: false
+          description: Comma-separated list of fields to include in response.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with query results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '404':
+          description: Query not found or expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /recordids/{queryId}:
+    get:
+      summary: Web of Science Expanded Get Record IDs for Query
+      description: >-
+        Retrieve only the unique identifiers for records matching a previously
+        submitted search query. More efficient than retrieving full records
+        when only UIDs are needed for deduplication or subsequent lookups.
+      operationId: getRecordIds
+      tags:
+        - search
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: queryId
+          in: path
+          required: true
+          description: Query identifier returned from the search endpoint.
+          schema:
+            type: integer
+        - name: count
+          in: query
+          required: false
+          description: Number of record IDs to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: firstRecord
+          in: query
+          required: false
+          description: Starting record number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+      responses:
+        '200':
+          description: Successful response with array of unique identifiers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordIdsResponse'
+        '404':
+          description: Query not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /id/{uniqueId}:
+    get:
+      summary: Web of Science Expanded Get Records by Unique ID
+      description: >-
+        Retrieve one or more Web of Science records directly by their unique
+        identifiers. Supports comma-separated lists of UIDs for batch
+        retrieval. Returns full item-level metadata including addresses and
+        affiliations.
+      operationId: getRecordById
+      tags:
+        - records
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: uniqueId
+          in: path
+          required: true
+          description: >-
+            Single WOS unique identifier or comma-separated list of UIDs
+            (e.g., WOS:000349044100001,WOS:000349044100002).
+          schema:
+            type: string
+            example: WOS:000349044100001
+        - name: databaseId
+          in: query
+          required: false
+          description: Database identifier. Defaults to WOS.
+          schema:
+            type: string
+            default: WOS
+        - name: count
+          in: query
+          required: false
+          description: Number of records to return.
+          schema:
+            type: integer
+            default: 10
+        - name: firstRecord
+          in: query
+          required: false
+          description: Starting record number.
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Successful response with record details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /citing:
+    get:
+      summary: Web of Science Expanded Get Citing Articles
+      description: >-
+        Find articles that cite a specific Web of Science document identified
+        by its unique identifier. Returns citation metadata and times-cited
+        counts from the Web of Science Core Collection.
+      operationId: getCitingArticles
+      tags:
+        - citations
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: databaseId
+          in: query
+          required: true
+          description: Database identifier (WOS for Core Collection).
+          schema:
+            type: string
+            default: WOS
+        - name: uniqueId
+          in: query
+          required: true
+          description: WOS unique identifier of the article to find citing articles for.
+          schema:
+            type: string
+            example: WOS:000349044100001
+        - name: count
+          in: query
+          required: false
+          description: Number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: firstRecord
+          in: query
+          required: false
+          description: Starting record number.
+          schema:
+            type: integer
+            default: 1
+        - name: publishTimeSpan
+          in: query
+          required: false
+          description: Publication time span filter.
+          schema:
+            type: string
+        - name: sortField
+          in: query
+          required: false
+          description: Sort field and direction.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with citing articles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /references:
+    get:
+      summary: Web of Science Expanded Get References for Article
+      description: >-
+        Retrieve the reference list cited by a specific Web of Science
+        document. Returns all cited works including those outside the
+        Web of Science Core Collection.
+      operationId: getReferences
+      tags:
+        - citations
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: databaseId
+          in: query
+          required: true
+          description: Database identifier.
+          schema:
+            type: string
+            default: WOS
+        - name: uniqueId
+          in: query
+          required: true
+          description: WOS unique identifier of the article to get references for.
+          schema:
+            type: string
+            example: WOS:000349044100001
+        - name: count
+          in: query
+          required: false
+          description: Number of references to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: firstRecord
+          in: query
+          required: false
+          description: Starting record number.
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Successful response with reference list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /related:
+    get:
+      summary: Web of Science Expanded Get Related Records
+      description: >-
+        Discover records that share cited references with a specified Web of
+        Science article. Returns the parent record plus related documents
+        ranked by the number of shared references.
+      operationId: getRelatedRecords
+      tags:
+        - citations
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: databaseId
+          in: query
+          required: true
+          description: Database identifier.
+          schema:
+            type: string
+            default: WOS
+        - name: uniqueId
+          in: query
+          required: true
+          description: WOS unique identifier of the article to find related records for.
+          schema:
+            type: string
+            example: WOS:000349044100001
+        - name: count
+          in: query
+          required: false
+          description: Number of related records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: firstRecord
+          in: query
+          required: false
+          description: Starting record number.
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Successful response with related records
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /citation-report/{queryId}:
+    get:
+      summary: Web of Science Expanded Get Citation Report for Query
+      description: >-
+        Generate a citation report for a query result set, providing aggregate
+        citation statistics including total citations, average citations per
+        item, h-index, and year-by-year citation counts.
+      operationId: getCitationReport
+      tags:
+        - reports
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: queryId
+          in: path
+          required: true
+          description: Query identifier for the result set to report on.
+          schema:
+            type: integer
+        - name: databaseId
+          in: query
+          required: false
+          description: Database identifier.
+          schema:
+            type: string
+            default: WOS
+        - name: reportLevel
+          in: query
+          required: false
+          description: Report aggregation level (WOS or AllDB).
+          schema:
+            type: string
+            enum:
+              - WOS
+              - AllDB
+            default: WOS
+      responses:
+        '200':
+          description: Successful response with citation report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CitationReport'
+        '400':
+          description: Bad request or result set too large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /category-context/{uniqueId}:
+    get:
+      summary: Web of Science Expanded Get Category Context for Record
+      description: >-
+        Retrieve the categorization context for citing and cited references of
+        a Web of Science article. Returns ASCA traditional category distribution
+        for the specified scope.
+      operationId: getCategoryContext
+      tags:
+        - reports
+      x-microcks-operation:
+        delay: 100
+      parameters:
+        - name: uniqueId
+          in: path
+          required: true
+          description: WOS unique identifier of the article.
+          schema:
+            type: string
+            example: WOS:000349044100001
+        - name: databaseId
+          in: query
+          required: false
+          description: Database identifier.
+          schema:
+            type: string
+            default: WOS
+        - name: citeType
+          in: query
+          required: false
+          description: Scope of category context (Citing, Referenced, or Aggregated).
+          schema:
+            type: string
+            enum:
+              - Citing
+              - Referenced
+              - Aggregated
+            default: Citing
+      responses:
+        '200':
+          description: Successful response with category context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryContext'
+        '404':
+          description: Record not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-ApiKey
+      description: Clarivate API key for Web of Science API Expanded
+
+  schemas:
+    SearchRequest:
+      type: object
+      description: Search request body for POST endpoint
+      properties:
+        databaseId:
+          type: string
+          description: Database to search
+          default: WOS
+        usrQuery:
+          type: string
+          description: Advanced search query using WOS query syntax
+        count:
+          type: integer
+          description: Number of records to return
+          default: 10
+        firstRecord:
+          type: integer
+          description: Starting record number
+          default: 1
+        editions:
+          type: array
+          description: Database editions to search
+          items:
+            type: string
+        publishTimeSpan:
+          $ref: '#/components/schemas/TimeSpan'
+        sortField:
+          type: string
+          description: Sort field and direction
+
+    TimeSpan:
+      type: object
+      description: Date range for filtering
+      properties:
+        begin:
+          type: string
+          description: Start date in YYYY-MM-DD format
+          format: date
+        end:
+          type: string
+          description: End date in YYYY-MM-DD format
+          format: date
+
+    SearchResponse:
+      type: object
+      description: Response from search and retrieval operations
+      properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        records:
+          $ref: '#/components/schemas/Records'
+
+    QueryResult:
+      type: object
+      description: Metadata about the search query and result set
+      properties:
+        queryId:
+          type: integer
+          description: Identifier for this query (for subsequent pagination calls)
+        recordsFound:
+          type: integer
+          description: Total number of records matching the query
+        recordsSearched:
+          type: integer
+          description: Number of records searched (may differ from total database size)
+
+    Records:
+      type: object
+      description: Container for record results
+      properties:
+        records:
+          type: array
+          description: Array of WOS records
+          items:
+            $ref: '#/components/schemas/WosRecord'
+
+    WosRecord:
+      type: object
+      description: A full Web of Science record with all metadata fields
+      properties:
+        UID:
+          type: string
+          description: Web of Science unique identifier
+        static_data:
+          $ref: '#/components/schemas/StaticData'
+        dynamic_data:
+          $ref: '#/components/schemas/DynamicData'
+
+    StaticData:
+      type: object
+      description: Static (non-citation) metadata for a WOS record
+      properties:
+        summary:
+          $ref: '#/components/schemas/RecordSummary'
+        fullrecord_metadata:
+          $ref: '#/components/schemas/FullRecordMetadata'
+
+    RecordSummary:
+      type: object
+      description: Summary fields of a WOS record
+      properties:
+        names:
+          type: object
+          description: Author and editor names
+        doctypes:
+          type: object
+          description: Document types
+        titles:
+          type: object
+          description: Titles (article, source, etc.)
+        pub_info:
+          $ref: '#/components/schemas/PubInfo'
+        identifiers:
+          type: object
+          description: Document identifiers (DOI, ISSN, etc.)
+
+    PubInfo:
+      type: object
+      description: Publication information
+      properties:
+        pubtype:
+          type: string
+          description: Publication type
+        pubyear:
+          type: string
+          description: Year of publication
+        sortdate:
+          type: string
+          description: Sort date
+        issue:
+          type: string
+          description: Issue number
+        vol:
+          type: string
+          description: Volume number
+
+    FullRecordMetadata:
+      type: object
+      description: Full record metadata including keywords and addresses
+      properties:
+        languages:
+          type: object
+          description: Publication language information
+        keywords:
+          type: object
+          description: Author keywords and Keywords Plus
+        addresses:
+          type: object
+          description: Author affiliation addresses
+        fund_ack:
+          type: object
+          description: Funding acknowledgment information
+
+    DynamicData:
+      type: object
+      description: Dynamic data including citation counts
+      properties:
+        citation_related:
+          type: object
+          description: Citation count information
+          properties:
+            tc_list:
+              type: object
+              description: Times-cited list by database
+
+    RecordIdsResponse:
+      type: object
+      description: Response containing only record UIDs
+      properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        ids:
+          type: array
+          description: Array of WOS unique identifiers
+          items:
+            type: string
+
+    CitationReport:
+      type: object
+      description: Citation report for a query result set
+      properties:
+        timesCited:
+          type: integer
+          description: Total times cited for all records in the result set
+        averagePerItem:
+          type: number
+          description: Average citations per item
+          format: float
+        hIndex:
+          type: integer
+          description: h-index for the result set
+        citingArticlesLinks:
+          type: string
+          description: Link to citing articles
+          format: uri
+        yearPublished:
+          type: array
+          description: Year-by-year publication counts
+          items:
+            $ref: '#/components/schemas/YearCount'
+        citationsByYear:
+          type: array
+          description: Year-by-year citation counts
+          items:
+            $ref: '#/components/schemas/YearCount'
+
+    YearCount:
+      type: object
+      description: Count value for a specific year
+      properties:
+        year:
+          type: integer
+          description: Year
+        count:
+          type: integer
+          description: Count for that year
+
+    CategoryContext:
+      type: object
+      description: Category context for citing or referenced records
+      properties:
+        categories:
+          type: array
+          description: ASCA traditional categories with counts
+          items:
+            $ref: '#/components/schemas/CategoryCount'
+
+    CategoryCount:
+      type: object
+      description: A category with its record count
+      properties:
+        name:
+          type: string
+          description: Category name
+        count:
+          type: integer
+          description: Number of records in this category
+
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP error code
+        message:
+          type: string
+          description: Human-readable error message

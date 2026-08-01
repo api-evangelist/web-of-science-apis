@@ -1,0 +1,640 @@
+{
+  "info": {
+    "_postman_id": "ae731fa2-e4c8-4b99-a8e6-cef7b1d340fb",
+    "name": "Web of Science API Expanded citations API",
+    "description": "The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.\n\nContact Support:\n Name: Clarivate Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:36.000Z",
+    "updatedAt": "2026-07-28T03:29:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ae731fa2-e4c8-4b99-a8e6-cef7b1d340fb"
+  },
+  "item": [
+    {
+      "name": "citing",
+      "item": [
+        {
+          "name": "Web of Science Expanded Get Citing Articles",
+          "id": "9ba2c5d9-4f58-438e-9c19-2f23a377a3f1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/citing?databaseId=WOS&uniqueId=<string>&count=10&firstRecord=1&publishTimeSpan=<string>&sortField=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "citing"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Database identifier (WOS for Core Collection).",
+                  "key": "databaseId",
+                  "value": "WOS"
+                },
+                {
+                  "description": "(Required) WOS unique identifier of the article to find citing articles for.",
+                  "key": "uniqueId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of records to return.",
+                  "key": "count",
+                  "value": "10"
+                },
+                {
+                  "description": "Starting record number.",
+                  "key": "firstRecord",
+                  "value": "1"
+                },
+                {
+                  "description": "Publication time span filter.",
+                  "key": "publishTimeSpan",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Sort field and direction.",
+                  "key": "sortField",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Find articles that cite a specific Web of Science document identified by its unique identifier. Returns citation metadata and times-cited counts from the Web of Science Core Collection."
+          },
+          "response": [
+            {
+              "id": "486bd072-0bce-456a-90a7-4d11d155eea1",
+              "name": "Successful response with citing articles",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/citing?databaseId=WOS&uniqueId=<string>&count=10&firstRecord=1&publishTimeSpan=<string>&sortField=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "citing"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Database identifier (WOS for Core Collection).",
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "(Required) WOS unique identifier of the article to find citing articles for.",
+                      "key": "uniqueId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of records to return.",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Publication time span filter.",
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort field and direction.",
+                      "key": "sortField",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"queryResult\": {\n    \"queryId\": \"<integer>\",\n    \"recordsFound\": \"<integer>\",\n    \"recordsSearched\": \"<integer>\"\n  },\n  \"records\": {\n    \"records\": [\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      },\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T03:29:37.000Z",
+              "updatedAt": "2026-07-28T03:29:37.000Z",
+              "uid": "35240-486bd072-0bce-456a-90a7-4d11d155eea1"
+            },
+            {
+              "id": "d2d6dad0-9a6d-41f2-8c8a-2e1ef98fcfea",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/citing?databaseId=WOS&uniqueId=<string>&count=10&firstRecord=1&publishTimeSpan=<string>&sortField=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "citing"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Database identifier (WOS for Core Collection).",
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "(Required) WOS unique identifier of the article to find citing articles for.",
+                      "key": "uniqueId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of records to return.",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Publication time span filter.",
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort field and direction.",
+                      "key": "sortField",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:37.000Z",
+              "updatedAt": "2026-07-28T03:29:37.000Z",
+              "uid": "35240-d2d6dad0-9a6d-41f2-8c8a-2e1ef98fcfea"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:37.000Z",
+          "updatedAt": "2026-07-28T03:29:37.000Z",
+          "uid": "35240-9ba2c5d9-4f58-438e-9c19-2f23a377a3f1"
+        }
+      ],
+      "id": "4c8ea664-055e-4aaf-8823-e7e25ad2239c",
+      "createdAt": "2026-07-28T03:29:37.000Z",
+      "updatedAt": "2026-07-28T03:29:37.000Z",
+      "uid": "35240-4c8ea664-055e-4aaf-8823-e7e25ad2239c"
+    },
+    {
+      "name": "references",
+      "item": [
+        {
+          "name": "Web of Science Expanded Get References for Article",
+          "id": "e3dc1f35-91b1-4736-8b37-a5521085af18",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/references?databaseId=WOS&uniqueId=<string>&count=10&firstRecord=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "references"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Database identifier.",
+                  "key": "databaseId",
+                  "value": "WOS"
+                },
+                {
+                  "description": "(Required) WOS unique identifier of the article to get references for.",
+                  "key": "uniqueId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of references to return.",
+                  "key": "count",
+                  "value": "10"
+                },
+                {
+                  "description": "Starting record number.",
+                  "key": "firstRecord",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Retrieve the reference list cited by a specific Web of Science document. Returns all cited works including those outside the Web of Science Core Collection."
+          },
+          "response": [
+            {
+              "id": "23ab064d-ad2d-4c5c-843b-8c2fdc182f03",
+              "name": "Successful response with reference list",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/references?databaseId=WOS&uniqueId=<string>&count=10&firstRecord=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "references"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Database identifier.",
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "(Required) WOS unique identifier of the article to get references for.",
+                      "key": "uniqueId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of references to return.",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"queryResult\": {\n    \"queryId\": \"<integer>\",\n    \"recordsFound\": \"<integer>\",\n    \"recordsSearched\": \"<integer>\"\n  },\n  \"records\": {\n    \"records\": [\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      },\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T03:29:37.000Z",
+              "updatedAt": "2026-07-28T03:29:37.000Z",
+              "uid": "35240-23ab064d-ad2d-4c5c-843b-8c2fdc182f03"
+            },
+            {
+              "id": "5a4933c1-1e1c-4f35-8bda-a942087b1175",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/references?databaseId=WOS&uniqueId=<string>&count=10&firstRecord=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "references"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Database identifier.",
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "(Required) WOS unique identifier of the article to get references for.",
+                      "key": "uniqueId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of references to return.",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:37.000Z",
+              "updatedAt": "2026-07-28T03:29:37.000Z",
+              "uid": "35240-5a4933c1-1e1c-4f35-8bda-a942087b1175"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:37.000Z",
+          "updatedAt": "2026-07-28T03:29:37.000Z",
+          "uid": "35240-e3dc1f35-91b1-4736-8b37-a5521085af18"
+        }
+      ],
+      "id": "000837dd-310b-4db0-9e6a-1a14e4287a13",
+      "createdAt": "2026-07-28T03:29:37.000Z",
+      "updatedAt": "2026-07-28T03:29:37.000Z",
+      "uid": "35240-000837dd-310b-4db0-9e6a-1a14e4287a13"
+    },
+    {
+      "name": "related",
+      "item": [
+        {
+          "name": "Web of Science Expanded Get Related Records",
+          "id": "b9b0ca25-6d3b-422f-b4d6-bd4fef4c27a2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/related?databaseId=WOS&uniqueId=<string>&count=10&firstRecord=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "related"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Database identifier.",
+                  "key": "databaseId",
+                  "value": "WOS"
+                },
+                {
+                  "description": "(Required) WOS unique identifier of the article to find related records for.",
+                  "key": "uniqueId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of related records to return.",
+                  "key": "count",
+                  "value": "10"
+                },
+                {
+                  "description": "Starting record number.",
+                  "key": "firstRecord",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Discover records that share cited references with a specified Web of Science article. Returns the parent record plus related documents ranked by the number of shared references."
+          },
+          "response": [
+            {
+              "id": "abfbc6d4-fd78-4b93-b437-75212f582fa7",
+              "name": "Successful response with related records",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/related?databaseId=WOS&uniqueId=<string>&count=10&firstRecord=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "related"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Database identifier.",
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "(Required) WOS unique identifier of the article to find related records for.",
+                      "key": "uniqueId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of related records to return.",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"queryResult\": {\n    \"queryId\": \"<integer>\",\n    \"recordsFound\": \"<integer>\",\n    \"recordsSearched\": \"<integer>\"\n  },\n  \"records\": {\n    \"records\": [\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      },\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T03:29:37.000Z",
+              "updatedAt": "2026-07-28T03:29:37.000Z",
+              "uid": "35240-abfbc6d4-fd78-4b93-b437-75212f582fa7"
+            },
+            {
+              "id": "433922c0-a086-423f-b0ae-5104bedbd272",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/related?databaseId=WOS&uniqueId=<string>&count=10&firstRecord=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "related"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Database identifier.",
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "(Required) WOS unique identifier of the article to find related records for.",
+                      "key": "uniqueId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of related records to return.",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:37.000Z",
+              "updatedAt": "2026-07-28T03:29:37.000Z",
+              "uid": "35240-433922c0-a086-423f-b0ae-5104bedbd272"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:37.000Z",
+          "updatedAt": "2026-07-28T03:29:37.000Z",
+          "uid": "35240-b9b0ca25-6d3b-422f-b4d6-bd4fef4c27a2"
+        }
+      ],
+      "id": "fb2b7414-f412-4b7f-b796-0d8c1742adb9",
+      "createdAt": "2026-07-28T03:29:37.000Z",
+      "updatedAt": "2026-07-28T03:29:37.000Z",
+      "uid": "35240-fb2b7414-f412-4b7f-b796-0d8c1742adb9"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-ApiKey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.clarivate.com/api/wos"
+    }
+  ]
+}

@@ -1,0 +1,1017 @@
+{
+  "info": {
+    "_postman_id": "d6d2ac38-2d76-4e05-bb99-f7da6b81581f",
+    "name": "Web of Science API Expanded citations search API",
+    "description": "The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.\n\nContact Support:\n Name: Clarivate Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:29:42.000Z",
+    "updatedAt": "2026-07-28T03:29:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d6d2ac38-2d76-4e05-bb99-f7da6b81581f"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Web of Science Expanded Search Documents via GET",
+          "id": "4817f842-e695-4f8c-b026-3f3621f05c16",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?databaseId=WOS&usrQuery=<string>&count=10&firstRecord=1&lang=en&editions=<string>&publishTimeSpan=<string>&sortField=TC+D&loadRecord=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Database to search (e.g., WOS for Web of Science Core Collection).",
+                  "key": "databaseId",
+                  "value": "WOS"
+                },
+                {
+                  "description": "(Required) Advanced search query string using Web of Science query syntax. Field tags include TS (topic), AU (author), TI (title), SO (source), DO (DOI), OG (organization), etc.",
+                  "key": "usrQuery",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of records to return (1-100).",
+                  "key": "count",
+                  "value": "10"
+                },
+                {
+                  "description": "Starting record number for pagination.",
+                  "key": "firstRecord",
+                  "value": "1"
+                },
+                {
+                  "description": "Language of the results (default en).",
+                  "key": "lang",
+                  "value": "en"
+                },
+                {
+                  "description": "Comma-separated list of WOS database editions to search.",
+                  "key": "editions",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Publication date range filter in format begin=YYYY-MM-DD&end=YYYY-MM-DD.",
+                  "key": "publishTimeSpan",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Field and direction for sorting results.",
+                  "key": "sortField",
+                  "value": "TC+D"
+                },
+                {
+                  "description": "Include full record in response.",
+                  "key": "loadRecord",
+                  "value": "true"
+                }
+              ]
+            },
+            "description": "Submit search queries to retrieve Web of Science document metadata. Supports the Web of Science Advanced Search Query syntax with field tags, boolean operators, and wildcard characters. Returns a query ID and initial results page for subsequent pagination."
+          },
+          "response": [
+            {
+              "id": "a874720b-70a8-46a0-af91-085baf6c9485",
+              "name": "Successful response with search results and query ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?databaseId=WOS&usrQuery=<string>&count=10&firstRecord=1&lang=en&editions=<string>&publishTimeSpan=<string>&sortField=TC+D&loadRecord=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Database to search (e.g., WOS for Web of Science Core Collection).",
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "(Required) Advanced search query string using Web of Science query syntax. Field tags include TS (topic), AU (author), TI (title), SO (source), DO (DOI), OG (organization), etc.",
+                      "key": "usrQuery",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of records to return (1-100).",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number for pagination.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Language of the results (default en).",
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "description": "Comma-separated list of WOS database editions to search.",
+                      "key": "editions",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Publication date range filter in format begin=YYYY-MM-DD&end=YYYY-MM-DD.",
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Field and direction for sorting results.",
+                      "key": "sortField",
+                      "value": "TC+D"
+                    },
+                    {
+                      "description": "Include full record in response.",
+                      "key": "loadRecord",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"queryResult\": {\n    \"queryId\": \"<integer>\",\n    \"recordsFound\": \"<integer>\",\n    \"recordsSearched\": \"<integer>\"\n  },\n  \"records\": {\n    \"records\": [\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      },\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T03:29:43.000Z",
+              "updatedAt": "2026-07-28T03:29:43.000Z",
+              "uid": "35240-a874720b-70a8-46a0-af91-085baf6c9485"
+            },
+            {
+              "id": "fb8db300-1ba7-4a39-a076-d37bda8a4c98",
+              "name": "Bad request - invalid query",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?databaseId=WOS&usrQuery=<string>&count=10&firstRecord=1&lang=en&editions=<string>&publishTimeSpan=<string>&sortField=TC+D&loadRecord=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Database to search (e.g., WOS for Web of Science Core Collection).",
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "(Required) Advanced search query string using Web of Science query syntax. Field tags include TS (topic), AU (author), TI (title), SO (source), DO (DOI), OG (organization), etc.",
+                      "key": "usrQuery",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of records to return (1-100).",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number for pagination.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Language of the results (default en).",
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "description": "Comma-separated list of WOS database editions to search.",
+                      "key": "editions",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Publication date range filter in format begin=YYYY-MM-DD&end=YYYY-MM-DD.",
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Field and direction for sorting results.",
+                      "key": "sortField",
+                      "value": "TC+D"
+                    },
+                    {
+                      "description": "Include full record in response.",
+                      "key": "loadRecord",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:43.000Z",
+              "updatedAt": "2026-07-28T03:29:43.000Z",
+              "uid": "35240-fb8db300-1ba7-4a39-a076-d37bda8a4c98"
+            },
+            {
+              "id": "8a0fed14-c220-4ee4-b8b0-a0b287f4225b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?databaseId=WOS&usrQuery=<string>&count=10&firstRecord=1&lang=en&editions=<string>&publishTimeSpan=<string>&sortField=TC+D&loadRecord=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Database to search (e.g., WOS for Web of Science Core Collection).",
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "description": "(Required) Advanced search query string using Web of Science query syntax. Field tags include TS (topic), AU (author), TI (title), SO (source), DO (DOI), OG (organization), etc.",
+                      "key": "usrQuery",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of records to return (1-100).",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number for pagination.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Language of the results (default en).",
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "description": "Comma-separated list of WOS database editions to search.",
+                      "key": "editions",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Publication date range filter in format begin=YYYY-MM-DD&end=YYYY-MM-DD.",
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Field and direction for sorting results.",
+                      "key": "sortField",
+                      "value": "TC+D"
+                    },
+                    {
+                      "description": "Include full record in response.",
+                      "key": "loadRecord",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:43.000Z",
+              "updatedAt": "2026-07-28T03:29:43.000Z",
+              "uid": "35240-8a0fed14-c220-4ee4-b8b0-a0b287f4225b"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:43.000Z",
+          "updatedAt": "2026-07-28T03:29:43.000Z",
+          "uid": "35240-4817f842-e695-4f8c-b026-3f3621f05c16"
+        },
+        {
+          "name": "Web of Science Expanded Search Documents via POST",
+          "id": "4d10cbfe-f35e-4a6b-b138-1861991bb976",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"databaseId\": \"WOS\",\n  \"usrQuery\": \"<string>\",\n  \"count\": 10,\n  \"firstRecord\": 1,\n  \"editions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publishTimeSpan\": {\n    \"begin\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"sortField\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ]
+            },
+            "description": "Submit search queries via POST to retrieve Web of Science document metadata. Equivalent to the GET search endpoint but allows larger query parameters in the request body."
+          },
+          "response": [
+            {
+              "id": "a58274ea-6dc6-4df2-a6b1-f48a90ecaff6",
+              "name": "Successful response with search results",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"databaseId\": \"WOS\",\n  \"usrQuery\": \"<string>\",\n  \"count\": 10,\n  \"firstRecord\": 1,\n  \"editions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publishTimeSpan\": {\n    \"begin\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"sortField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"queryResult\": {\n    \"queryId\": \"<integer>\",\n    \"recordsFound\": \"<integer>\",\n    \"recordsSearched\": \"<integer>\"\n  },\n  \"records\": {\n    \"records\": [\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      },\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T03:29:43.000Z",
+              "updatedAt": "2026-07-28T03:29:43.000Z",
+              "uid": "35240-a58274ea-6dc6-4df2-a6b1-f48a90ecaff6"
+            },
+            {
+              "id": "daa7bded-690d-4af8-b16e-9670cd237af0",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"databaseId\": \"WOS\",\n  \"usrQuery\": \"<string>\",\n  \"count\": 10,\n  \"firstRecord\": 1,\n  \"editions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publishTimeSpan\": {\n    \"begin\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"sortField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:43.000Z",
+              "updatedAt": "2026-07-28T03:29:43.000Z",
+              "uid": "35240-daa7bded-690d-4af8-b16e-9670cd237af0"
+            },
+            {
+              "id": "59e63ebc-a4b8-4c4d-b913-195aa8bea8a1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"databaseId\": \"WOS\",\n  \"usrQuery\": \"<string>\",\n  \"count\": 10,\n  \"firstRecord\": 1,\n  \"editions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publishTimeSpan\": {\n    \"begin\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"sortField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:29:43.000Z",
+              "updatedAt": "2026-07-28T03:29:43.000Z",
+              "uid": "35240-59e63ebc-a4b8-4c4d-b913-195aa8bea8a1"
+            }
+          ],
+          "createdAt": "2026-07-28T03:29:43.000Z",
+          "updatedAt": "2026-07-28T03:29:43.000Z",
+          "uid": "35240-4d10cbfe-f35e-4a6b-b138-1861991bb976"
+        }
+      ],
+      "id": "43b093eb-429c-4360-8c84-bb6a9ed358a7",
+      "createdAt": "2026-07-28T03:29:43.000Z",
+      "updatedAt": "2026-07-28T03:29:43.000Z",
+      "uid": "35240-43b093eb-429c-4360-8c84-bb6a9ed358a7"
+    },
+    {
+      "name": "query",
+      "item": [
+        {
+          "name": "{queryId}",
+          "item": [
+            {
+              "name": "Web of Science Expanded Fetch Query Results",
+              "id": "97ccdf1c-43ab-4716-88bd-3484ed2ca573",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/query/:queryId?count=10&firstRecord=1&sortField=<string>&viewField=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "query",
+                    ":queryId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (1-100).",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number for pagination.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Field and direction for sorting results.",
+                      "key": "sortField",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of fields to include in response.",
+                      "key": "viewField",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "cbc0495d-fbb3-4550-a2af-7aa84768cfd0",
+                      "key": "queryId",
+                      "value": "<integer>",
+                      "description": "(Required) Query identifier returned from the search endpoint."
+                    }
+                  ]
+                },
+                "description": "Retrieve records from a previously submitted search query using the query ID returned from the search endpoint. Supports pagination through large result sets with configurable record counts and sorting."
+              },
+              "response": [
+                {
+                  "id": "e0235171-ad25-44f1-9714-0199f70ae650",
+                  "name": "Successful response with query results",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-ApiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/query/:queryId?count=10&firstRecord=1&sortField=<string>&viewField=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "query",
+                        ":queryId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return (1-100).",
+                          "key": "count",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Starting record number for pagination.",
+                          "key": "firstRecord",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Field and direction for sorting results.",
+                          "key": "sortField",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated list of fields to include in response.",
+                          "key": "viewField",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "queryId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"queryResult\": {\n    \"queryId\": \"<integer>\",\n    \"recordsFound\": \"<integer>\",\n    \"recordsSearched\": \"<integer>\"\n  },\n  \"records\": {\n    \"records\": [\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      },\n      {\n        \"UID\": \"<string>\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {},\n            \"doctypes\": {},\n            \"titles\": {},\n            \"pub_info\": {\n              \"pubtype\": \"<string>\",\n              \"pubyear\": \"<string>\",\n              \"sortdate\": \"<string>\",\n              \"issue\": \"<string>\",\n              \"vol\": \"<string>\"\n            },\n            \"identifiers\": {}\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {},\n            \"keywords\": {},\n            \"addresses\": {},\n            \"fund_ack\": {}\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T03:29:43.000Z",
+                  "updatedAt": "2026-07-28T03:29:43.000Z",
+                  "uid": "35240-e0235171-ad25-44f1-9714-0199f70ae650"
+                },
+                {
+                  "id": "c4b07d0c-3426-41b8-9266-9eeec02b186f",
+                  "name": "Query not found or expired",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-ApiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/query/:queryId?count=10&firstRecord=1&sortField=<string>&viewField=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "query",
+                        ":queryId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return (1-100).",
+                          "key": "count",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Starting record number for pagination.",
+                          "key": "firstRecord",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Field and direction for sorting results.",
+                          "key": "sortField",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated list of fields to include in response.",
+                          "key": "viewField",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "queryId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:29:43.000Z",
+                  "updatedAt": "2026-07-28T03:29:43.000Z",
+                  "uid": "35240-c4b07d0c-3426-41b8-9266-9eeec02b186f"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:43.000Z",
+              "updatedAt": "2026-07-28T03:29:43.000Z",
+              "uid": "35240-97ccdf1c-43ab-4716-88bd-3484ed2ca573"
+            }
+          ],
+          "id": "2dd13a76-616a-43d1-8ab7-48438272c1c8",
+          "createdAt": "2026-07-28T03:29:43.000Z",
+          "updatedAt": "2026-07-28T03:29:43.000Z",
+          "uid": "35240-2dd13a76-616a-43d1-8ab7-48438272c1c8"
+        }
+      ],
+      "id": "7b571cf5-91cd-4b32-b419-1390ed54dd1c",
+      "createdAt": "2026-07-28T03:29:43.000Z",
+      "updatedAt": "2026-07-28T03:29:43.000Z",
+      "uid": "35240-7b571cf5-91cd-4b32-b419-1390ed54dd1c"
+    },
+    {
+      "name": "recordids",
+      "item": [
+        {
+          "name": "{queryId}",
+          "item": [
+            {
+              "name": "Web of Science Expanded Get Record IDs for Query",
+              "id": "f7b74b17-f624-4bf7-ae29-f7558f483941",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/recordids/:queryId?count=10&firstRecord=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recordids",
+                    ":queryId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of record IDs to return.",
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Starting record number for pagination.",
+                      "key": "firstRecord",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "25f16732-f969-47cf-ad33-999fa56ad037",
+                      "key": "queryId",
+                      "value": "<integer>",
+                      "description": "(Required) Query identifier returned from the search endpoint."
+                    }
+                  ]
+                },
+                "description": "Retrieve only the unique identifiers for records matching a previously submitted search query. More efficient than retrieving full records when only UIDs are needed for deduplication or subsequent lookups."
+              },
+              "response": [
+                {
+                  "id": "60ba5272-7968-4f8a-9e78-ebf099e737c7",
+                  "name": "Successful response with array of unique identifiers",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-ApiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/recordids/:queryId?count=10&firstRecord=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recordids",
+                        ":queryId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of record IDs to return.",
+                          "key": "count",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Starting record number for pagination.",
+                          "key": "firstRecord",
+                          "value": "1"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "queryId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"queryResult\": {\n    \"queryId\": \"<integer>\",\n    \"recordsFound\": \"<integer>\",\n    \"recordsSearched\": \"<integer>\"\n  },\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T03:29:43.000Z",
+                  "updatedAt": "2026-07-28T03:29:43.000Z",
+                  "uid": "35240-60ba5272-7968-4f8a-9e78-ebf099e737c7"
+                },
+                {
+                  "id": "8e0bcc9c-7a82-4e6f-b056-bbbf15b89fa9",
+                  "name": "Query not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-ApiKey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/recordids/:queryId?count=10&firstRecord=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recordids",
+                        ":queryId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of record IDs to return.",
+                          "key": "count",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Starting record number for pagination.",
+                          "key": "firstRecord",
+                          "value": "1"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "queryId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:29:43.000Z",
+                  "updatedAt": "2026-07-28T03:29:43.000Z",
+                  "uid": "35240-8e0bcc9c-7a82-4e6f-b056-bbbf15b89fa9"
+                }
+              ],
+              "createdAt": "2026-07-28T03:29:43.000Z",
+              "updatedAt": "2026-07-28T03:29:43.000Z",
+              "uid": "35240-f7b74b17-f624-4bf7-ae29-f7558f483941"
+            }
+          ],
+          "id": "65f12730-2577-4d5f-94e7-c561264a6f95",
+          "createdAt": "2026-07-28T03:29:43.000Z",
+          "updatedAt": "2026-07-28T03:29:43.000Z",
+          "uid": "35240-65f12730-2577-4d5f-94e7-c561264a6f95"
+        }
+      ],
+      "id": "ef25ac95-fbca-45ab-9a6f-40b8c298ad68",
+      "createdAt": "2026-07-28T03:29:43.000Z",
+      "updatedAt": "2026-07-28T03:29:43.000Z",
+      "uid": "35240-ef25ac95-fbca-45ab-9a6f-40b8c298ad68"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-ApiKey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.clarivate.com/api/wos"
+    }
+  ]
+}
