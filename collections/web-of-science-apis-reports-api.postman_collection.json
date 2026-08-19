@@ -1,0 +1,407 @@
+{
+  "item": [
+    {
+      "id": "05f2b1de-55e5-4352-a117-7db4c0e60310",
+      "name": "reports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e49fea6-9e95-4f28-b26e-096375594a6d",
+          "name": "Web of Science Expanded Get Citation Report for Query",
+          "request": {
+            "name": "Web of Science Expanded Get Citation Report for Query",
+            "description": {
+              "content": "Generate a citation report for a query result set, providing aggregate citation statistics including total citations, average citations per item, h-index, and year-by-year citation counts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "citation-report",
+                ":queryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "databaseId",
+                  "value": "WOS",
+                  "description": "Database identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "reportLevel",
+                  "value": "WOS",
+                  "description": "Report aggregation level (WOS or AllDB)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "queryId",
+                  "description": "(Required) Query identifier for the result set to report on."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58472259-1dce-43c1-a856-61ace267bd41",
+              "name": "Successful response with citation report",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "citation-report",
+                    ":queryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "reportLevel",
+                      "value": "WOS"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "queryId",
+                      "description": "(Required) Query identifier for the result set to report on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timesCited\": 6588,\n  \"averagePerItem\": 8573.989920620565,\n  \"hIndex\": 345,\n  \"citingArticlesLinks\": \"https://igurAyoThKaoOHCmJvkrz.idyxJwYKhymWMcYldEK7cqFhf15Bawm5zlUkfB\",\n  \"yearPublished\": [\n    {\n      \"year\": 4114,\n      \"count\": 610\n    },\n    {\n      \"year\": 2209,\n      \"count\": 6001\n    }\n  ],\n  \"citationsByYear\": [\n    {\n      \"year\": 2315,\n      \"count\": 9731\n    },\n    {\n      \"year\": 87,\n      \"count\": 7741\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb0cc1d3-cdb6-4a37-80a4-368fec717e14",
+              "name": "Bad request or result set too large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "citation-report",
+                    ":queryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "reportLevel",
+                      "value": "WOS"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "queryId",
+                      "description": "(Required) Query identifier for the result set to report on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6246,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e14185b-f365-4113-b0a8-42ffd38502a0",
+          "name": "Web of Science Expanded Get Category Context for Record",
+          "request": {
+            "name": "Web of Science Expanded Get Category Context for Record",
+            "description": {
+              "content": "Retrieve the categorization context for citing and cited references of a Web of Science article. Returns ASCA traditional category distribution for the specified scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "category-context",
+                ":uniqueId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "databaseId",
+                  "value": "WOS",
+                  "description": "Database identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "citeType",
+                  "value": "Citing",
+                  "description": "Scope of category context (Citing, Referenced, or Aggregated)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uniqueId",
+                  "description": "(Required) WOS unique identifier of the article."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89dbee6e-5420-4799-a9a9-62baf25bc465",
+              "name": "Successful response with category context",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "category-context",
+                    ":uniqueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "citeType",
+                      "value": "Citing"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uniqueId",
+                      "description": "(Required) WOS unique identifier of the article."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"count\": 85\n    },\n    {\n      \"name\": \"string\",\n      \"count\": 4807\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c826bec3-16da-42be-9a3c-daa9461687b2",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "category-context",
+                    ":uniqueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "citeType",
+                      "value": "Citing"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uniqueId",
+                      "description": "(Required) WOS unique identifier of the article."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6246,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clarivate.com/api/wos",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-ApiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "61b847e1-24dd-4d6a-b352-8f3a49e0c353",
+    "name": "Web of Science API Expanded citations reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.\n\nContact Support:\n Name: Clarivate Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

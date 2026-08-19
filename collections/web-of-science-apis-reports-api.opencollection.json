@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Web of Science API Expanded citations reports API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-ApiKey",
+      "value": "{{X-ApiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Citation Report for Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/citation-report/:queryId",
+            "params": [
+              {
+                "name": "queryId",
+                "value": "",
+                "type": "path",
+                "description": "Query identifier for the result set to report on."
+              },
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier."
+              },
+              {
+                "name": "reportLevel",
+                "value": "",
+                "type": "query",
+                "description": "Report aggregation level (WOS or AllDB)."
+              }
+            ]
+          },
+          "docs": "Generate a citation report for a query result set, providing aggregate citation statistics including total citations, average citations per item, h-index, and year-by-year citation counts."
+        },
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Category Context for Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/category-context/:uniqueId",
+            "params": [
+              {
+                "name": "uniqueId",
+                "value": "",
+                "type": "path",
+                "description": "WOS unique identifier of the article."
+              },
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier."
+              },
+              {
+                "name": "citeType",
+                "value": "",
+                "type": "query",
+                "description": "Scope of category context (Citing, Referenced, or Aggregated)."
+              }
+            ]
+          },
+          "docs": "Retrieve the categorization context for citing and cited references of a Web of Science article. Returns ASCA traditional category distribution for the specified scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

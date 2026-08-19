@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Web of Science API Expanded citations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-ApiKey",
+      "value": "{{X-ApiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "citations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Citing Articles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/citing",
+            "params": [
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier (WOS for Core Collection)."
+              },
+              {
+                "name": "uniqueId",
+                "value": "",
+                "type": "query",
+                "description": "WOS unique identifier of the article to find citing articles for."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number."
+              },
+              {
+                "name": "publishTimeSpan",
+                "value": "",
+                "type": "query",
+                "description": "Publication time span filter."
+              },
+              {
+                "name": "sortField",
+                "value": "",
+                "type": "query",
+                "description": "Sort field and direction."
+              }
+            ]
+          },
+          "docs": "Find articles that cite a specific Web of Science document identified by its unique identifier. Returns citation metadata and times-cited counts from the Web of Science Core Collection."
+        },
+        {
+          "info": {
+            "name": "Web of Science Expanded Get References for Article",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/references",
+            "params": [
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier."
+              },
+              {
+                "name": "uniqueId",
+                "value": "",
+                "type": "query",
+                "description": "WOS unique identifier of the article to get references for."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of references to return."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number."
+              }
+            ]
+          },
+          "docs": "Retrieve the reference list cited by a specific Web of Science document. Returns all cited works including those outside the Web of Science Core Collection."
+        },
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Related Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/related",
+            "params": [
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier."
+              },
+              {
+                "name": "uniqueId",
+                "value": "",
+                "type": "query",
+                "description": "WOS unique identifier of the article to find related records for."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of related records to return."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number."
+              }
+            ]
+          },
+          "docs": "Discover records that share cited references with a specified Web of Science article. Returns the parent record plus related documents ranked by the number of shared references."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

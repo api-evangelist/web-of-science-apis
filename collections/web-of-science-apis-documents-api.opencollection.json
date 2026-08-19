@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Web of Science API Expanded citations documents API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-ApiKey",
+      "value": "{{X-ApiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Web of Science Starter Search Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/documents",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Advanced query syntax string. Supports field tags such as TS (topic), AU (author), SO (source), DO (DOI), and others."
+              },
+              {
+                "name": "db",
+                "value": "",
+                "type": "query",
+                "description": "Database to search. Options include WOS, BIOABS, MEDLINE, etc. Defaults to WOS (Web of Science Core Collection)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page (1-50)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "sortField",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort results by."
+              },
+              {
+                "name": "publishTimeSpan",
+                "value": "",
+                "type": "query",
+                "description": "Time span for publication date filter in format YYYY-MM-DD+YYYY-MM-DD."
+              },
+              {
+                "name": "modifiedTimeSpan",
+                "value": "",
+                "type": "query",
+                "description": "Time span for last modified date filter in format YYYY-MM-DD+YYYY-MM-DD."
+              }
+            ]
+          },
+          "docs": "Search Web of Science documents using the advanced query syntax. Returns bibliographic metadata including titles, authors, sources, DOIs, and times-cited counts. Supports pagination, sorting, and filtering by database and time span."
+        },
+        {
+          "info": {
+            "name": "Web of Science Starter Get Document by UID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/documents/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Web of Science unique identifier (e.g., WOS:000000000000001)."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific Web of Science document by its unique identifier (UID). Returns full bibliographic metadata including title, authors, source, abstract, keywords, DOI, and times-cited count."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

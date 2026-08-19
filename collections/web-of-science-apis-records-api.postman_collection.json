@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "bc7841b3-9bca-4503-ab7f-5093c8bb83fc",
+      "name": "records",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c82f88a4-c82a-4ba8-963f-4d496e049005",
+          "name": "Web of Science Expanded Get Records by Unique ID",
+          "request": {
+            "name": "Web of Science Expanded Get Records by Unique ID",
+            "description": {
+              "content": "Retrieve one or more Web of Science records directly by their unique identifiers. Supports comma-separated lists of UIDs for batch retrieval. Returns full item-level metadata including addresses and affiliations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "id",
+                ":uniqueId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "databaseId",
+                  "value": "WOS",
+                  "description": "Database identifier. Defaults to WOS."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "10",
+                  "description": "Number of records to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "firstRecord",
+                  "value": "1",
+                  "description": "Starting record number."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uniqueId",
+                  "description": "(Required) Single WOS unique identifier or comma-separated list of UIDs (e.g., WOS:000349044100001,WOS:000349044100002)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc9e3266-247e-4cbd-8e1c-7257e1afb8c7",
+              "name": "Successful response with record details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "id",
+                    ":uniqueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "key": "firstRecord",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uniqueId",
+                      "description": "(Required) Single WOS unique identifier or comma-separated list of UIDs (e.g., WOS:000349044100001,WOS:000349044100002)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryResult\": {\n    \"queryId\": 4154,\n    \"recordsFound\": 6538,\n    \"recordsSearched\": 8509\n  },\n  \"records\": {\n    \"records\": [\n      {\n        \"UID\": \"string\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doctypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"titles\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pub_info\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identifiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"keywords\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fund_ack\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      },\n      {\n        \"UID\": \"string\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doctypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"titles\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pub_info\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identifiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"keywords\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fund_ack\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a59e3d86-34a4-4f07-925b-13f7c53ed5ec",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "id",
+                    ":uniqueId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "key": "firstRecord",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uniqueId",
+                      "description": "(Required) Single WOS unique identifier or comma-separated list of UIDs (e.g., WOS:000349044100001,WOS:000349044100002)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3444,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clarivate.com/api/wos",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-ApiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "41d4d3ee-7306-4fc1-a39c-ea7e873ec529",
+    "name": "Web of Science API Expanded citations records API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.\n\nContact Support:\n Name: Clarivate Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

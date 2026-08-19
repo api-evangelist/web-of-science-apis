@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Web of Science API Expanded citations records API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-ApiKey",
+      "value": "{{X-ApiKey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Web of Science Expanded Get Records by Unique ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clarivate.com/api/wos/id/:uniqueId",
+            "params": [
+              {
+                "name": "uniqueId",
+                "value": "",
+                "type": "path",
+                "description": "Single WOS unique identifier or comma-separated list of UIDs (e.g., WOS:000349044100001,WOS:000349044100002)."
+              },
+              {
+                "name": "databaseId",
+                "value": "",
+                "type": "query",
+                "description": "Database identifier. Defaults to WOS."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return."
+              },
+              {
+                "name": "firstRecord",
+                "value": "",
+                "type": "query",
+                "description": "Starting record number."
+              }
+            ]
+          },
+          "docs": "Retrieve one or more Web of Science records directly by their unique identifiers. Supports comma-separated lists of UIDs for batch retrieval. Returns full item-level metadata including addresses and affiliations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,966 @@
+{
+  "item": [
+    {
+      "id": "ad30e9ce-de1b-496e-b7c5-eec70d422e56",
+      "name": "search",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e356abf-1cce-492f-a8b0-f2638f492029",
+          "name": "Web of Science Expanded Search Documents via GET",
+          "request": {
+            "name": "Web of Science Expanded Search Documents via GET",
+            "description": {
+              "content": "Submit search queries to retrieve Web of Science document metadata. Supports the Web of Science Advanced Search Query syntax with field tags, boolean operators, and wildcard characters. Returns a query ID and initial results page for subsequent pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "databaseId",
+                  "value": "WOS",
+                  "description": "(Required) Database to search (e.g., WOS for Web of Science Core Collection)."
+                },
+                {
+                  "disabled": false,
+                  "key": "usrQuery",
+                  "value": "<string>",
+                  "description": "(Required) Advanced search query string using Web of Science query syntax. Field tags include TS (topic), AU (author), TI (title), SO (source), DO (DOI), OG (organization), etc."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "10",
+                  "description": "Number of records to return (1-100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "firstRecord",
+                  "value": "1",
+                  "description": "Starting record number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "en",
+                  "description": "Language of the results (default en)."
+                },
+                {
+                  "disabled": false,
+                  "key": "editions",
+                  "value": "<string>",
+                  "description": "Comma-separated list of WOS database editions to search."
+                },
+                {
+                  "disabled": false,
+                  "key": "publishTimeSpan",
+                  "value": "<string>",
+                  "description": "Publication date range filter in format begin=YYYY-MM-DD&end=YYYY-MM-DD."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortField",
+                  "value": "<string>",
+                  "description": "Field and direction for sorting results."
+                },
+                {
+                  "disabled": false,
+                  "key": "loadRecord",
+                  "value": "<string>",
+                  "description": "Include full record in response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37703c6c-4926-43a3-905e-e287f626b5ba",
+              "name": "Successful response with search results and query ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "usrQuery",
+                      "value": "TS=machine learning AND PY=2024"
+                    },
+                    {
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "editions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "loadRecord",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryResult\": {\n    \"queryId\": 7713,\n    \"recordsFound\": 4122,\n    \"recordsSearched\": 7871\n  },\n  \"records\": {\n    \"records\": [\n      {\n        \"UID\": \"string\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doctypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"titles\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pub_info\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identifiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"keywords\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fund_ack\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      },\n      {\n        \"UID\": \"string\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doctypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"titles\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pub_info\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identifiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"keywords\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fund_ack\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0f0c25c-8e61-49f6-99c2-4696e7f1e724",
+              "name": "Bad request - invalid query",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "usrQuery",
+                      "value": "TS=machine learning AND PY=2024"
+                    },
+                    {
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "editions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "loadRecord",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3447,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38af3071-5417-4379-98c3-91452afd9f90",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "databaseId",
+                      "value": "WOS"
+                    },
+                    {
+                      "key": "usrQuery",
+                      "value": "TS=machine learning AND PY=2024"
+                    },
+                    {
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "editions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "publishTimeSpan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "loadRecord",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3447,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b53eef2c-1200-4dc9-8741-e166917e6c41",
+          "name": "Web of Science Expanded Search Documents via POST",
+          "request": {
+            "name": "Web of Science Expanded Search Documents via POST",
+            "description": {
+              "content": "Submit search queries via POST to retrieve Web of Science document metadata. Equivalent to the GET search endpoint but allows larger query parameters in the request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"databaseId\": \"WOS\",\n  \"usrQuery\": \"<string>\",\n  \"count\": 10,\n  \"firstRecord\": 1,\n  \"editions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publishTimeSpan\": {\n    \"begin\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"sortField\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "91b58105-4531-43fc-be38-d7e606dd6c0d",
+              "name": "Successful response with search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"databaseId\": \"WOS\",\n  \"usrQuery\": \"<string>\",\n  \"count\": 10,\n  \"firstRecord\": 1,\n  \"editions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publishTimeSpan\": {\n    \"begin\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"sortField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryResult\": {\n    \"queryId\": 5754,\n    \"recordsFound\": 7436,\n    \"recordsSearched\": 6487\n  },\n  \"records\": {\n    \"records\": [\n      {\n        \"UID\": \"string\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doctypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"titles\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pub_info\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identifiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"keywords\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fund_ack\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      },\n      {\n        \"UID\": \"string\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doctypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"titles\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pub_info\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identifiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"keywords\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fund_ack\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a4bcf6e-4ca2-4f50-a1c8-f352b298cb4b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"databaseId\": \"WOS\",\n  \"usrQuery\": \"<string>\",\n  \"count\": 10,\n  \"firstRecord\": 1,\n  \"editions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publishTimeSpan\": {\n    \"begin\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"sortField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3447,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09afcb5a-ab14-4e65-be2d-dbbd0a4c40a6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"databaseId\": \"WOS\",\n  \"usrQuery\": \"<string>\",\n  \"count\": 10,\n  \"firstRecord\": 1,\n  \"editions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"publishTimeSpan\": {\n    \"begin\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"sortField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3447,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50aaf52c-260f-4aa8-b6dc-0ea09649cb15",
+          "name": "Web of Science Expanded Fetch Query Results",
+          "request": {
+            "name": "Web of Science Expanded Fetch Query Results",
+            "description": {
+              "content": "Retrieve records from a previously submitted search query using the query ID returned from the search endpoint. Supports pagination through large result sets with configurable record counts and sorting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "query",
+                ":queryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "10",
+                  "description": "Number of records to return (1-100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "firstRecord",
+                  "value": "1",
+                  "description": "Starting record number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortField",
+                  "value": "<string>",
+                  "description": "Field and direction for sorting results."
+                },
+                {
+                  "disabled": false,
+                  "key": "viewField",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields to include in response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "queryId",
+                  "description": "(Required) Query identifier returned from the search endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b18a5f2c-9bc9-4f99-9bb3-69d196020b02",
+              "name": "Successful response with query results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    ":queryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "viewField",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "queryId",
+                      "description": "(Required) Query identifier returned from the search endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryResult\": {\n    \"queryId\": 5754,\n    \"recordsFound\": 7436,\n    \"recordsSearched\": 6487\n  },\n  \"records\": {\n    \"records\": [\n      {\n        \"UID\": \"string\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doctypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"titles\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pub_info\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identifiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"keywords\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fund_ack\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      },\n      {\n        \"UID\": \"string\",\n        \"static_data\": {\n          \"summary\": {\n            \"names\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doctypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"titles\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pub_info\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"identifiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"fullrecord_metadata\": {\n            \"languages\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"keywords\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"addresses\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fund_ack\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dynamic_data\": {\n          \"citation_related\": {\n            \"tc_list\": {}\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cd5237a-bc4a-477d-b785-4f7f0776fc5f",
+              "name": "Query not found or expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    ":queryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "key": "firstRecord",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "viewField",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "queryId",
+                      "description": "(Required) Query identifier returned from the search endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3447,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4298af41-15ae-46c4-a4b3-089b4b0e285d",
+          "name": "Web of Science Expanded Get Record IDs for Query",
+          "request": {
+            "name": "Web of Science Expanded Get Record IDs for Query",
+            "description": {
+              "content": "Retrieve only the unique identifiers for records matching a previously submitted search query. More efficient than retrieving full records when only UIDs are needed for deduplication or subsequent lookups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recordids",
+                ":queryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "10",
+                  "description": "Number of record IDs to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "firstRecord",
+                  "value": "1",
+                  "description": "Starting record number for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "queryId",
+                  "description": "(Required) Query identifier returned from the search endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8aedec37-9f3a-4f65-99a2-2fc7cda49232",
+              "name": "Successful response with array of unique identifiers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recordids",
+                    ":queryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "key": "firstRecord",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "queryId",
+                      "description": "(Required) Query identifier returned from the search endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryResult\": {\n    \"queryId\": 4375,\n    \"recordsFound\": 8331,\n    \"recordsSearched\": 340\n  },\n  \"ids\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e35c8117-d390-41ee-a7da-9ca997da3e90",
+              "name": "Query not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recordids",
+                    ":queryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "10"
+                    },
+                    {
+                      "key": "firstRecord",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "queryId",
+                      "description": "(Required) Query identifier returned from the search endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-ApiKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3447,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clarivate.com/api/wos",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-ApiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3f1b6f7f-9c93-49e6-94f2-1701e6991b5c",
+    "name": "Web of Science API Expanded citations search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.\n\nContact Support:\n Name: Clarivate Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
