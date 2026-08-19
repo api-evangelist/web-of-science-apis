@@ -33,7 +33,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/web-of-science-apis/refs/heads/main/apis.yml
 created: '2025-02-06'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: web-of-science-apis:web-of-science-apis-citations-api
   name: Web of Science APIs citations API
