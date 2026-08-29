@@ -162,6 +162,9 @@ apis:
   - type: SwaggerUI
     url: https://developer.clarivate.com/apis/wos/swagger
 common:
+  - type: CapabilityMap
+    url: capabilities/web-of-science-apis-capability-edges.yml
+    name: Web of Science APIs Business Capability Map
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/web-of-science-apis/overview
   - type: AgenticAccess
