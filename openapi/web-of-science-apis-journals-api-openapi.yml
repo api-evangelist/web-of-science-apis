@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Web of Science API Expanded citations journals API
+  title: Web of Science API Expanded citations Journals API
   description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
   version: 1.0.0
   contact:
@@ -113,6 +113,24 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    JournalsSearchResponse:
+      type: object
+      description: Response from journal search containing results and metadata
+      properties:
+        total:
+          type: integer
+          description: Total number of journals matching the query
+        page:
+          type: integer
+          description: Current page number
+        limit:
+          type: integer
+          description: Number of records per page
+        hits:
+          type: array
+          description: Array of journal records
+          items:
+            $ref: '#/components/schemas/Journal'
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -170,24 +188,6 @@ components:
             record:
               type: string
               format: uri
-    JournalsSearchResponse:
-      type: object
-      description: Response from journal search containing results and metadata
-      properties:
-        total:
-          type: integer
-          description: Total number of journals matching the query
-        page:
-          type: integer
-          description: Current page number
-        limit:
-          type: integer
-          description: Number of records per page
-        hits:
-          type: array
-          description: Array of journal records
-          items:
-            $ref: '#/components/schemas/Journal'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

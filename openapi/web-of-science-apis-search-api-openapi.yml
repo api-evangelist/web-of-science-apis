@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Web of Science API Expanded citations search API
+  title: Web of Science API Expanded citations Search API
   description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
   version: 1.0.0
   contact:
@@ -264,6 +264,96 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    QueryResult:
+      type: object
+      description: Metadata about the search query and result set
+      properties:
+        queryId:
+          type: integer
+          description: Identifier for this query (for subsequent pagination calls)
+        recordsFound:
+          type: integer
+          description: Total number of records matching the query
+        recordsSearched:
+          type: integer
+          description: Number of records searched (may differ from total database size)
+    PubInfo:
+      type: object
+      description: Publication information
+      properties:
+        pubtype:
+          type: string
+          description: Publication type
+        pubyear:
+          type: string
+          description: Year of publication
+        sortdate:
+          type: string
+          description: Sort date
+        issue:
+          type: string
+          description: Issue number
+        vol:
+          type: string
+          description: Volume number
+    SearchRequest:
+      type: object
+      description: Search request body for POST endpoint
+      properties:
+        databaseId:
+          type: string
+          description: Database to search
+          default: WOS
+        usrQuery:
+          type: string
+          description: Advanced search query using WOS query syntax
+        count:
+          type: integer
+          description: Number of records to return
+          default: 10
+        firstRecord:
+          type: integer
+          description: Starting record number
+          default: 1
+        editions:
+          type: array
+          description: Database editions to search
+          items:
+            type: string
+        publishTimeSpan:
+          $ref: '#/components/schemas/TimeSpan'
+        sortField:
+          type: string
+          description: Sort field and direction
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP error code
+        message:
+          type: string
+          description: Human-readable error message
+    RecordIdsResponse:
+      type: object
+      description: Response containing only record UIDs
+      properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        ids:
+          type: array
+          description: Array of WOS unique identifiers
+          items:
+            type: string
+    StaticData:
+      type: object
+      description: Static (non-citation) metadata for a WOS record
+      properties:
+        summary:
+          $ref: '#/components/schemas/RecordSummary'
+        fullrecord_metadata:
+          $ref: '#/components/schemas/FullRecordMetadata'
     TimeSpan:
       type: object
       description: Date range for filtering
@@ -295,19 +385,26 @@ components:
           $ref: '#/components/schemas/QueryResult'
         records:
           $ref: '#/components/schemas/Records'
-    QueryResult:
+    Records:
       type: object
-      description: Metadata about the search query and result set
+      description: Container for record results
       properties:
-        queryId:
-          type: integer
-          description: Identifier for this query (for subsequent pagination calls)
-        recordsFound:
-          type: integer
-          description: Total number of records matching the query
-        recordsSearched:
-          type: integer
-          description: Number of records searched (may differ from total database size)
+        records:
+          type: array
+          description: Array of WOS records
+          items:
+            $ref: '#/components/schemas/WosRecord'
+    WosRecord:
+      type: object
+      description: A full Web of Science record with all metadata fields
+      properties:
+        UID:
+          type: string
+          description: Web of Science unique identifier
+        static_data:
+          $ref: '#/components/schemas/StaticData'
+        dynamic_data:
+          $ref: '#/components/schemas/DynamicData'
     FullRecordMetadata:
       type: object
       description: Full record metadata including keywords and addresses
@@ -324,46 +421,6 @@ components:
         fund_ack:
           type: object
           description: Funding acknowledgment information
-    PubInfo:
-      type: object
-      description: Publication information
-      properties:
-        pubtype:
-          type: string
-          description: Publication type
-        pubyear:
-          type: string
-          description: Year of publication
-        sortdate:
-          type: string
-          description: Sort date
-        issue:
-          type: string
-          description: Issue number
-        vol:
-          type: string
-          description: Volume number
-    WosRecord:
-      type: object
-      description: A full Web of Science record with all metadata fields
-      properties:
-        UID:
-          type: string
-          description: Web of Science unique identifier
-        static_data:
-          $ref: '#/components/schemas/StaticData'
-        dynamic_data:
-          $ref: '#/components/schemas/DynamicData'
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        code:
-          type: integer
-          description: HTTP error code
-        message:
-          type: string
-          description: Human-readable error message
     RecordSummary:
       type: object
       description: Summary fields of a WOS record
@@ -382,63 +439,6 @@ components:
         identifiers:
           type: object
           description: Document identifiers (DOI, ISSN, etc.)
-    Records:
-      type: object
-      description: Container for record results
-      properties:
-        records:
-          type: array
-          description: Array of WOS records
-          items:
-            $ref: '#/components/schemas/WosRecord'
-    RecordIdsResponse:
-      type: object
-      description: Response containing only record UIDs
-      properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        ids:
-          type: array
-          description: Array of WOS unique identifiers
-          items:
-            type: string
-    SearchRequest:
-      type: object
-      description: Search request body for POST endpoint
-      properties:
-        databaseId:
-          type: string
-          description: Database to search
-          default: WOS
-        usrQuery:
-          type: string
-          description: Advanced search query using WOS query syntax
-        count:
-          type: integer
-          description: Number of records to return
-          default: 10
-        firstRecord:
-          type: integer
-          description: Starting record number
-          default: 1
-        editions:
-          type: array
-          description: Database editions to search
-          items:
-            type: string
-        publishTimeSpan:
-          $ref: '#/components/schemas/TimeSpan'
-        sortField:
-          type: string
-          description: Sort field and direction
-    StaticData:
-      type: object
-      description: Static (non-citation) metadata for a WOS record
-      properties:
-        summary:
-          $ref: '#/components/schemas/RecordSummary'
-        fullrecord_metadata:
-          $ref: '#/components/schemas/FullRecordMetadata'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

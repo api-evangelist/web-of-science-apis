@@ -237,3 +237,5 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-parent: clarivate
+x-relationship: product

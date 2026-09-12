@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Web of Science API Expanded citations documents API
+  title: Web of Science API Expanded citations Documents API
   description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
   version: 1.0.0
   contact:
@@ -158,86 +158,22 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    DocumentLinks:
+    DocumentPages:
       type: object
-      description: Links to the document in Web of Science
+      description: Page range information
       properties:
-        record:
+        range:
           type: string
-          description: Direct link to the full record in Web of Science
-          format: uri
-        references:
+          description: Page range (e.g., 145-152)
+        begin:
           type: string
-          description: Link to the references list
-          format: uri
-        related:
+          description: First page number
+        end:
           type: string
-          description: Link to related records
-          format: uri
-    CitationCount:
-      type: object
-      description: Citation count for a specific database
-      properties:
-        db:
-          type: string
-          description: Database code (e.g., WOS)
+          description: Last page number
         count:
           type: integer
-          description: Number of times cited
-    DocumentsSearchResponse:
-      type: object
-      description: Response from document search containing results and metadata
-      properties:
-        total:
-          type: integer
-          description: Total number of documents matching the query
-        page:
-          type: integer
-          description: Current page number
-        limit:
-          type: integer
-          description: Number of records per page
-        hits:
-          type: array
-          description: Array of document records
-          items:
-            $ref: '#/components/schemas/Document'
-    DocumentNames:
-      type: object
-      description: Author and editor names
-      properties:
-        authors:
-          type: array
-          description: List of authors
-          items:
-            $ref: '#/components/schemas/Author'
-    DocumentSource:
-      type: object
-      description: Source publication information
-      properties:
-        sourceTitle:
-          type: string
-          description: Title of the source journal or book
-        publishYear:
-          type: integer
-          description: Year of publication
-        publishMonth:
-          type: string
-          description: Month of publication
-        volume:
-          type: string
-          description: Volume number
-        issue:
-          type: string
-          description: Issue number
-        pages:
-          $ref: '#/components/schemas/DocumentPages'
-        articleNumber:
-          type: string
-          description: Article number (for electronic journals)
-        supplement:
-          type: string
-          description: Supplement identifier
+          description: Total number of pages
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -251,22 +187,6 @@ components:
         detail:
           type: string
           description: Additional error details
-    DocumentIdentifiers:
-      type: object
-      description: Document identifiers (DOI, PMID, etc.)
-      properties:
-        doi:
-          type: string
-          description: Digital Object Identifier
-        pmid:
-          type: string
-          description: PubMed identifier
-        issn:
-          type: string
-          description: ISSN of the source journal
-        eissn:
-          type: string
-          description: Electronic ISSN of the source journal
     Author:
       type: object
       description: An author of a Web of Science document
@@ -315,6 +235,92 @@ components:
           $ref: '#/components/schemas/DocumentIdentifiers'
         keywords:
           $ref: '#/components/schemas/DocumentKeywords'
+    DocumentsSearchResponse:
+      type: object
+      description: Response from document search containing results and metadata
+      properties:
+        total:
+          type: integer
+          description: Total number of documents matching the query
+        page:
+          type: integer
+          description: Current page number
+        limit:
+          type: integer
+          description: Number of records per page
+        hits:
+          type: array
+          description: Array of document records
+          items:
+            $ref: '#/components/schemas/Document'
+    DocumentLinks:
+      type: object
+      description: Links to the document in Web of Science
+      properties:
+        record:
+          type: string
+          description: Direct link to the full record in Web of Science
+          format: uri
+        references:
+          type: string
+          description: Link to the references list
+          format: uri
+        related:
+          type: string
+          description: Link to related records
+          format: uri
+    DocumentNames:
+      type: object
+      description: Author and editor names
+      properties:
+        authors:
+          type: array
+          description: List of authors
+          items:
+            $ref: '#/components/schemas/Author'
+    DocumentIdentifiers:
+      type: object
+      description: Document identifiers (DOI, PMID, etc.)
+      properties:
+        doi:
+          type: string
+          description: Digital Object Identifier
+        pmid:
+          type: string
+          description: PubMed identifier
+        issn:
+          type: string
+          description: ISSN of the source journal
+        eissn:
+          type: string
+          description: Electronic ISSN of the source journal
+    DocumentSource:
+      type: object
+      description: Source publication information
+      properties:
+        sourceTitle:
+          type: string
+          description: Title of the source journal or book
+        publishYear:
+          type: integer
+          description: Year of publication
+        publishMonth:
+          type: string
+          description: Month of publication
+        volume:
+          type: string
+          description: Volume number
+        issue:
+          type: string
+          description: Issue number
+        pages:
+          $ref: '#/components/schemas/DocumentPages'
+        articleNumber:
+          type: string
+          description: Article number (for electronic journals)
+        supplement:
+          type: string
+          description: Supplement identifier
     DocumentKeywords:
       type: object
       description: Keywords associated with the document
@@ -329,22 +335,16 @@ components:
           description: Keywords Plus generated from references
           items:
             type: string
-    DocumentPages:
+    CitationCount:
       type: object
-      description: Page range information
+      description: Citation count for a specific database
       properties:
-        range:
+        db:
           type: string
-          description: Page range (e.g., 145-152)
-        begin:
-          type: string
-          description: First page number
-        end:
-          type: string
-          description: Last page number
+          description: Database code (e.g., WOS)
         count:
           type: integer
-          description: Total number of pages
+          description: Number of times cited
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -19,6 +19,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "web-of-science-apis-citations-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "web-of-science-apis-documents-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "web-of-science-apis-journals-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "web-of-science-apis-records-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "web-of-science-apis-reports-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "web-of-science-apis-search-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

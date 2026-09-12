@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Web of Science API Expanded citations reports API
+  title: Web of Science API Expanded citations Reports API
   description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
   version: 1.0.0
   contact:
@@ -113,6 +113,35 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP error code
+        message:
+          type: string
+          description: Human-readable error message
+    YearCount:
+      type: object
+      description: Count value for a specific year
+      properties:
+        year:
+          type: integer
+          description: Year
+        count:
+          type: integer
+          description: Count for that year
+    CategoryContext:
+      type: object
+      description: Category context for citing or referenced records
+      properties:
+        categories:
+          type: array
+          description: ASCA traditional categories with counts
+          items:
+            $ref: '#/components/schemas/CategoryCount'
     CitationReport:
       type: object
       description: Citation report for a query result set
@@ -151,35 +180,6 @@ components:
         count:
           type: integer
           description: Number of records in this category
-    YearCount:
-      type: object
-      description: Count value for a specific year
-      properties:
-        year:
-          type: integer
-          description: Year
-        count:
-          type: integer
-          description: Count for that year
-    CategoryContext:
-      type: object
-      description: Category context for citing or referenced records
-      properties:
-        categories:
-          type: array
-          description: ASCA traditional categories with counts
-          items:
-            $ref: '#/components/schemas/CategoryCount'
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        code:
-          type: integer
-          description: HTTP error code
-        message:
-          type: string
-          description: Human-readable error message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

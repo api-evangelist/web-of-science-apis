@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Web of Science API Expanded citations API
+  title: Web of Science API Expanded Citations API
   description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
   version: 1.0.0
   contact:
@@ -190,25 +190,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    DynamicData:
-      type: object
-      description: Dynamic data including citation counts
-      properties:
-        citation_related:
-          type: object
-          description: Citation count information
-          properties:
-            tc_list:
-              type: object
-              description: Times-cited list by database
-    SearchResponse:
-      type: object
-      description: Response from search and retrieval operations
-      properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        records:
-          $ref: '#/components/schemas/Records'
     QueryResult:
       type: object
       description: Metadata about the search query and result set
@@ -222,22 +203,6 @@ components:
         recordsSearched:
           type: integer
           description: Number of records searched (may differ from total database size)
-    FullRecordMetadata:
-      type: object
-      description: Full record metadata including keywords and addresses
-      properties:
-        languages:
-          type: object
-          description: Publication language information
-        keywords:
-          type: object
-          description: Author keywords and Keywords Plus
-        addresses:
-          type: object
-          description: Author affiliation addresses
-        fund_ack:
-          type: object
-          description: Funding acknowledgment information
     PubInfo:
       type: object
       description: Publication information
@@ -257,6 +222,52 @@ components:
         vol:
           type: string
           description: Volume number
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP error code
+        message:
+          type: string
+          description: Human-readable error message
+    StaticData:
+      type: object
+      description: Static (non-citation) metadata for a WOS record
+      properties:
+        summary:
+          $ref: '#/components/schemas/RecordSummary'
+        fullrecord_metadata:
+          $ref: '#/components/schemas/FullRecordMetadata'
+    DynamicData:
+      type: object
+      description: Dynamic data including citation counts
+      properties:
+        citation_related:
+          type: object
+          description: Citation count information
+          properties:
+            tc_list:
+              type: object
+              description: Times-cited list by database
+    SearchResponse:
+      type: object
+      description: Response from search and retrieval operations
+      properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        records:
+          $ref: '#/components/schemas/Records'
+    Records:
+      type: object
+      description: Container for record results
+      properties:
+        records:
+          type: array
+          description: Array of WOS records
+          items:
+            $ref: '#/components/schemas/WosRecord'
     WosRecord:
       type: object
       description: A full Web of Science record with all metadata fields
@@ -268,16 +279,22 @@ components:
           $ref: '#/components/schemas/StaticData'
         dynamic_data:
           $ref: '#/components/schemas/DynamicData'
-    ErrorResponse:
+    FullRecordMetadata:
       type: object
-      description: Error response from the API
+      description: Full record metadata including keywords and addresses
       properties:
-        code:
-          type: integer
-          description: HTTP error code
-        message:
-          type: string
-          description: Human-readable error message
+        languages:
+          type: object
+          description: Publication language information
+        keywords:
+          type: object
+          description: Author keywords and Keywords Plus
+        addresses:
+          type: object
+          description: Author affiliation addresses
+        fund_ack:
+          type: object
+          description: Funding acknowledgment information
     RecordSummary:
       type: object
       description: Summary fields of a WOS record
@@ -296,23 +313,6 @@ components:
         identifiers:
           type: object
           description: Document identifiers (DOI, ISSN, etc.)
-    Records:
-      type: object
-      description: Container for record results
-      properties:
-        records:
-          type: array
-          description: Array of WOS records
-          items:
-            $ref: '#/components/schemas/WosRecord'
-    StaticData:
-      type: object
-      description: Static (non-citation) metadata for a WOS record
-      properties:
-        summary:
-          $ref: '#/components/schemas/RecordSummary'
-        fullrecord_metadata:
-          $ref: '#/components/schemas/FullRecordMetadata'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
