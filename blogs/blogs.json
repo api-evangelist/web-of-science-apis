@@ -3,10 +3,13 @@
   "feeds": [
     {
       "source": "https://clarivate.com/blog/",
-      "error": "TimeoutError"
+      "feed_url": "https://clarivate.com/blog/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-09-13T13:00:00Z",
+  "fetched": "2026-09-19T20:17:39Z",
   "post_count": 8,
   "agent_pulled": "2026-06-27",
   "feed_nature": "vendor-blog",
