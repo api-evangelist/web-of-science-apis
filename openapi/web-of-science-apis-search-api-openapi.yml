@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Web of Science API Expanded citations Search API
+  title: Web of Science API Expanded Search API
   description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
   version: 1.0.0
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: search
+- name: Search
 paths:
   /:
     get:
@@ -23,7 +23,7 @@ paths:
       description: Submit search queries to retrieve Web of Science document metadata. Supports the Web of Science Advanced Search Query syntax with field tags, boolean operators, and wildcard characters. Returns a query ID and initial results page for subsequent pagination.
       operationId: searchDocumentsGet
       tags:
-      - search
+      - Search
       x-microcks-operation:
         delay: 100
       parameters:
@@ -131,7 +131,7 @@ paths:
       description: Submit search queries via POST to retrieve Web of Science document metadata. Equivalent to the GET search endpoint but allows larger query parameters in the request body.
       operationId: searchDocumentsPost
       tags:
-      - search
+      - Search
       x-microcks-operation:
         delay: 100
       requestBody:
@@ -164,7 +164,7 @@ paths:
       description: Retrieve records from a previously submitted search query using the query ID returned from the search endpoint. Supports pagination through large result sets with configurable record counts and sorting.
       operationId: getQueryResults
       tags:
-      - search
+      - Search
       x-microcks-operation:
         delay: 100
       parameters:
@@ -222,7 +222,7 @@ paths:
       description: Retrieve only the unique identifiers for records matching a previously submitted search query. More efficient than retrieving full records when only UIDs are needed for deduplication or subsequent lookups.
       operationId: getRecordIds
       tags:
-      - search
+      - Search
       x-microcks-operation:
         delay: 100
       parameters:
@@ -264,19 +264,104 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    QueryResult:
+    WosRecord:
       type: object
-      description: Metadata about the search query and result set
+      description: A full Web of Science record with all metadata fields
       properties:
-        queryId:
+        UID:
+          type: string
+          description: Web of Science unique identifier
+        static_data:
+          $ref: '#/components/schemas/StaticData'
+        dynamic_data:
+          $ref: '#/components/schemas/DynamicData'
+    SearchResponse:
+      type: object
+      description: Response from search and retrieval operations
+      properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        records:
+          $ref: '#/components/schemas/Records'
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
           type: integer
-          description: Identifier for this query (for subsequent pagination calls)
-        recordsFound:
-          type: integer
-          description: Total number of records matching the query
-        recordsSearched:
-          type: integer
-          description: Number of records searched (may differ from total database size)
+          description: HTTP error code
+        message:
+          type: string
+          description: Human-readable error message
+    StaticData:
+      type: object
+      description: Static (non-citation) metadata for a WOS record
+      properties:
+        summary:
+          $ref: '#/components/schemas/RecordSummary'
+        fullrecord_metadata:
+          $ref: '#/components/schemas/FullRecordMetadata'
+    RecordSummary:
+      type: object
+      description: Summary fields of a WOS record
+      properties:
+        names:
+          type: object
+          description: Author and editor names
+        doctypes:
+          type: object
+          description: Document types
+        titles:
+          type: object
+          description: Titles (article, source, etc.)
+        pub_info:
+          $ref: '#/components/schemas/PubInfo'
+        identifiers:
+          type: object
+          description: Document identifiers (DOI, ISSN, etc.)
+    RecordIdsResponse:
+      type: object
+      description: Response containing only record UIDs
+      properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        ids:
+          type: array
+          description: Array of WOS unique identifiers
+          items:
+            type: string
+    TimeSpan:
+      type: object
+      description: Date range for filtering
+      properties:
+        begin:
+          type: string
+          description: Start date in YYYY-MM-DD format
+          format: date
+        end:
+          type: string
+          description: End date in YYYY-MM-DD format
+          format: date
+    DynamicData:
+      type: object
+      description: Dynamic data including citation counts
+      properties:
+        citation_related:
+          type: object
+          description: Citation count information
+          properties:
+            tc_list:
+              type: object
+              description: Times-cited list by database
+    Records:
+      type: object
+      description: Container for record results
+      properties:
+        records:
+          type: array
+          description: Array of WOS records
+          items:
+            $ref: '#/components/schemas/WosRecord'
     PubInfo:
       type: object
       description: Publication information
@@ -296,6 +381,19 @@ components:
         vol:
           type: string
           description: Volume number
+    QueryResult:
+      type: object
+      description: Metadata about the search query and result set
+      properties:
+        queryId:
+          type: integer
+          description: Identifier for this query (for subsequent pagination calls)
+        recordsFound:
+          type: integer
+          description: Total number of records matching the query
+        recordsSearched:
+          type: integer
+          description: Number of records searched (may differ from total database size)
     SearchRequest:
       type: object
       description: Search request body for POST endpoint
@@ -325,86 +423,6 @@ components:
         sortField:
           type: string
           description: Sort field and direction
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        code:
-          type: integer
-          description: HTTP error code
-        message:
-          type: string
-          description: Human-readable error message
-    RecordIdsResponse:
-      type: object
-      description: Response containing only record UIDs
-      properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        ids:
-          type: array
-          description: Array of WOS unique identifiers
-          items:
-            type: string
-    StaticData:
-      type: object
-      description: Static (non-citation) metadata for a WOS record
-      properties:
-        summary:
-          $ref: '#/components/schemas/RecordSummary'
-        fullrecord_metadata:
-          $ref: '#/components/schemas/FullRecordMetadata'
-    TimeSpan:
-      type: object
-      description: Date range for filtering
-      properties:
-        begin:
-          type: string
-          description: Start date in YYYY-MM-DD format
-          format: date
-        end:
-          type: string
-          description: End date in YYYY-MM-DD format
-          format: date
-    DynamicData:
-      type: object
-      description: Dynamic data including citation counts
-      properties:
-        citation_related:
-          type: object
-          description: Citation count information
-          properties:
-            tc_list:
-              type: object
-              description: Times-cited list by database
-    SearchResponse:
-      type: object
-      description: Response from search and retrieval operations
-      properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        records:
-          $ref: '#/components/schemas/Records'
-    Records:
-      type: object
-      description: Container for record results
-      properties:
-        records:
-          type: array
-          description: Array of WOS records
-          items:
-            $ref: '#/components/schemas/WosRecord'
-    WosRecord:
-      type: object
-      description: A full Web of Science record with all metadata fields
-      properties:
-        UID:
-          type: string
-          description: Web of Science unique identifier
-        static_data:
-          $ref: '#/components/schemas/StaticData'
-        dynamic_data:
-          $ref: '#/components/schemas/DynamicData'
     FullRecordMetadata:
       type: object
       description: Full record metadata including keywords and addresses
@@ -421,24 +439,6 @@ components:
         fund_ack:
           type: object
           description: Funding acknowledgment information
-    RecordSummary:
-      type: object
-      description: Summary fields of a WOS record
-      properties:
-        names:
-          type: object
-          description: Author and editor names
-        doctypes:
-          type: object
-          description: Document types
-        titles:
-          type: object
-          description: Titles (article, source, etc.)
-        pub_info:
-          $ref: '#/components/schemas/PubInfo'
-        identifiers:
-          type: object
-          description: Document identifiers (DOI, ISSN, etc.)
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

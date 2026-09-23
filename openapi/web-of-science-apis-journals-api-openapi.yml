@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Web of Science API Expanded citations Journals API
-  description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
+  title: Web of Science Starter Journals API
+  description: The Web of Science Starter API provides basic metadata and search functionality for Web of Science documents and journals. It enables real-time check of bibliographic metadata such as DOI, author, source title, and times-cited counts against the Web of Science Core Collection and other Web of Science product databases. The API uses REST-based GET endpoints with JSON output.
   version: 1.0.0
   contact:
     name: Clarivate Developer Support
@@ -10,12 +10,12 @@ info:
     name: Clarivate Terms of Use
     url: https://clarivate.com/legal/terms-conditions/
 servers:
-- url: https://api.clarivate.com/api/wos
-  description: Web of Science API Expanded
+- url: https://api.clarivate.com/apis/wos-starter/v1
+  description: Web of Science Starter API v1
 security:
 - ApiKeyAuth: []
 tags:
-- name: journals
+- name: Journals
 paths:
   /journals:
     get:
@@ -23,7 +23,7 @@ paths:
       description: Search and retrieve journal information from the Web of Science Journal Citation Reports. Query journals by ISSN to get metadata including impact factor, category, and JCR profile URL.
       operationId: getJournals
       tags:
-      - journals
+      - Journals
       x-microcks-operation:
         delay: 100
       parameters:
@@ -82,7 +82,7 @@ paths:
       description: Retrieve detailed information about a specific journal using its Web of Science journal identifier. Returns journal title, ISSN, publisher, categories, impact metrics, and JCR profile URL.
       operationId: getJournal
       tags:
-      - journals
+      - Journals
       x-microcks-operation:
         delay: 100
       parameters:
@@ -113,37 +113,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    JournalsSearchResponse:
-      type: object
-      description: Response from journal search containing results and metadata
-      properties:
-        total:
-          type: integer
-          description: Total number of journals matching the query
-        page:
-          type: integer
-          description: Current page number
-        limit:
-          type: integer
-          description: Number of records per page
-        hits:
-          type: array
-          description: Array of journal records
-          items:
-            $ref: '#/components/schemas/Journal'
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        error:
-          type: string
-          description: Error code or type
-        message:
-          type: string
-          description: Human-readable error message
-        detail:
-          type: string
-          description: Additional error details
     Journal:
       type: object
       description: A Web of Science journal record
@@ -188,9 +157,40 @@ components:
             record:
               type: string
               format: uri
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        error:
+          type: string
+          description: Error code or type
+        message:
+          type: string
+          description: Human-readable error message
+        detail:
+          type: string
+          description: Additional error details
+    JournalsSearchResponse:
+      type: object
+      description: Response from journal search containing results and metadata
+      properties:
+        total:
+          type: integer
+          description: Total number of journals matching the query
+        page:
+          type: integer
+          description: Current page number
+        limit:
+          type: integer
+          description: Number of records per page
+        hits:
+          type: array
+          description: Array of journal records
+          items:
+            $ref: '#/components/schemas/Journal'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: X-ApiKey
-      description: Clarivate API key for Web of Science API Expanded
+      description: Clarivate API key for authentication

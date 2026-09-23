@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Web of Science API Expanded citations Reports API
+  title: Web of Science API Expanded Reports API
   description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
   version: 1.0.0
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: reports
+- name: Reports
 paths:
   /citation-report/{queryId}:
     get:
@@ -23,7 +23,7 @@ paths:
       description: Generate a citation report for a query result set, providing aggregate citation statistics including total citations, average citations per item, h-index, and year-by-year citation counts.
       operationId: getCitationReport
       tags:
-      - reports
+      - Reports
       x-microcks-operation:
         delay: 100
       parameters:
@@ -69,7 +69,7 @@ paths:
       description: Retrieve the categorization context for citing and cited references of a Web of Science article. Returns ASCA traditional category distribution for the specified scope.
       operationId: getCategoryContext
       tags:
-      - reports
+      - Reports
       x-microcks-operation:
         delay: 100
       parameters:
@@ -113,16 +113,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        code:
-          type: integer
-          description: HTTP error code
-        message:
-          type: string
-          description: Human-readable error message
     YearCount:
       type: object
       description: Count value for a specific year
@@ -133,15 +123,16 @@ components:
         count:
           type: integer
           description: Count for that year
-    CategoryContext:
+    ErrorResponse:
       type: object
-      description: Category context for citing or referenced records
+      description: Error response from the API
       properties:
-        categories:
-          type: array
-          description: ASCA traditional categories with counts
-          items:
-            $ref: '#/components/schemas/CategoryCount'
+        code:
+          type: integer
+          description: HTTP error code
+        message:
+          type: string
+          description: Human-readable error message
     CitationReport:
       type: object
       description: Citation report for a query result set
@@ -180,6 +171,15 @@ components:
         count:
           type: integer
           description: Number of records in this category
+    CategoryContext:
+      type: object
+      description: Category context for citing or referenced records
+      properties:
+        categories:
+          type: array
+          description: ASCA traditional categories with counts
+          items:
+            $ref: '#/components/schemas/CategoryCount'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

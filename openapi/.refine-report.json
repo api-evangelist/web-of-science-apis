@@ -1,32 +1,38 @@
 {
   "provider": "web-of-science-apis",
   "sources": [
-    "web-of-science-apis-citations-api-openapi.yml",
-    "web-of-science-apis-documents-api-openapi.yml",
-    "web-of-science-apis-journals-api-openapi.yml",
-    "web-of-science-apis-records-api-openapi.yml",
-    "web-of-science-apis-reports-api-openapi.yml",
-    "web-of-science-apis-search-api-openapi.yml"
+    "_original/web-of-science-expanded-openapi.yml",
+    "_original/web-of-science-starter-openapi.yml"
   ],
   "outputs": [
     "web-of-science-apis-citations-api-openapi.yml",
-    "web-of-science-apis-documents-api-openapi.yml",
-    "web-of-science-apis-journals-api-openapi.yml",
     "web-of-science-apis-records-api-openapi.yml",
     "web-of-science-apis-reports-api-openapi.yml",
-    "web-of-science-apis-search-api-openapi.yml"
+    "web-of-science-apis-search-api-openapi.yml",
+    "web-of-science-apis-documents-api-openapi.yml",
+    "web-of-science-apis-journals-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "web-of-science-apis-citations-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "web-of-science-apis-documents-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "web-of-science-apis-journals-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "web-of-science-apis-records-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "web-of-science-apis-reports-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "web-of-science-apis-search-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "web-of-science-expanded-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "web-of-science-expanded-openapi.yml: declared missing tag: citations",
+    "web-of-science-expanded-openapi.yml: declared missing tag: records",
+    "web-of-science-expanded-openapi.yml: declared missing tag: reports",
+    "web-of-science-expanded-openapi.yml: declared missing tag: search",
+    "web-of-science-starter-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "web-of-science-starter-openapi.yml: declared missing tag: documents",
+    "web-of-science-starter-openapi.yml: declared missing tag: journals",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "web-of-science-apis-citations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "web-of-science-apis-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "web-of-science-apis-journals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "web-of-science-apis-records-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "web-of-science-apis-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "web-of-science-apis-search-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

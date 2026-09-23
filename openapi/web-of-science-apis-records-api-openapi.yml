@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Web of Science API Expanded citations Records API
+  title: Web of Science API Expanded Records API
   description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
   version: 1.0.0
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: records
+- name: Records
 paths:
   /id/{uniqueId}:
     get:
@@ -23,7 +23,7 @@ paths:
       description: Retrieve one or more Web of Science records directly by their unique identifiers. Supports comma-separated lists of UIDs for batch retrieval. Returns full item-level metadata including addresses and affiliations.
       operationId: getRecordById
       tags:
-      - records
+      - Records
       x-microcks-operation:
         delay: 100
       parameters:
@@ -70,6 +70,53 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    WosRecord:
+      type: object
+      description: A full Web of Science record with all metadata fields
+      properties:
+        UID:
+          type: string
+          description: Web of Science unique identifier
+        static_data:
+          $ref: '#/components/schemas/StaticData'
+        dynamic_data:
+          $ref: '#/components/schemas/DynamicData'
+    SearchResponse:
+      type: object
+      description: Response from search and retrieval operations
+      properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        records:
+          $ref: '#/components/schemas/Records'
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP error code
+        message:
+          type: string
+          description: Human-readable error message
+    RecordSummary:
+      type: object
+      description: Summary fields of a WOS record
+      properties:
+        names:
+          type: object
+          description: Author and editor names
+        doctypes:
+          type: object
+          description: Document types
+        titles:
+          type: object
+          description: Titles (article, source, etc.)
+        pub_info:
+          $ref: '#/components/schemas/PubInfo'
+        identifiers:
+          type: object
+          description: Document identifiers (DOI, ISSN, etc.)
     QueryResult:
       type: object
       description: Metadata about the search query and result set
@@ -83,6 +130,26 @@ components:
         recordsSearched:
           type: integer
           description: Number of records searched (may differ from total database size)
+    DynamicData:
+      type: object
+      description: Dynamic data including citation counts
+      properties:
+        citation_related:
+          type: object
+          description: Citation count information
+          properties:
+            tc_list:
+              type: object
+              description: Times-cited list by database
+    Records:
+      type: object
+      description: Container for record results
+      properties:
+        records:
+          type: array
+          description: Array of WOS records
+          items:
+            $ref: '#/components/schemas/WosRecord'
     PubInfo:
       type: object
       description: Publication information
@@ -102,16 +169,6 @@ components:
         vol:
           type: string
           description: Volume number
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        code:
-          type: integer
-          description: HTTP error code
-        message:
-          type: string
-          description: Human-readable error message
     StaticData:
       type: object
       description: Static (non-citation) metadata for a WOS record
@@ -120,45 +177,6 @@ components:
           $ref: '#/components/schemas/RecordSummary'
         fullrecord_metadata:
           $ref: '#/components/schemas/FullRecordMetadata'
-    DynamicData:
-      type: object
-      description: Dynamic data including citation counts
-      properties:
-        citation_related:
-          type: object
-          description: Citation count information
-          properties:
-            tc_list:
-              type: object
-              description: Times-cited list by database
-    SearchResponse:
-      type: object
-      description: Response from search and retrieval operations
-      properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        records:
-          $ref: '#/components/schemas/Records'
-    Records:
-      type: object
-      description: Container for record results
-      properties:
-        records:
-          type: array
-          description: Array of WOS records
-          items:
-            $ref: '#/components/schemas/WosRecord'
-    WosRecord:
-      type: object
-      description: A full Web of Science record with all metadata fields
-      properties:
-        UID:
-          type: string
-          description: Web of Science unique identifier
-        static_data:
-          $ref: '#/components/schemas/StaticData'
-        dynamic_data:
-          $ref: '#/components/schemas/DynamicData'
     FullRecordMetadata:
       type: object
       description: Full record metadata including keywords and addresses
@@ -175,24 +193,6 @@ components:
         fund_ack:
           type: object
           description: Funding acknowledgment information
-    RecordSummary:
-      type: object
-      description: Summary fields of a WOS record
-      properties:
-        names:
-          type: object
-          description: Author and editor names
-        doctypes:
-          type: object
-          description: Document types
-        titles:
-          type: object
-          description: Titles (article, source, etc.)
-        pub_info:
-          $ref: '#/components/schemas/PubInfo'
-        identifiers:
-          type: object
-          description: Document identifiers (DOI, ISSN, etc.)
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

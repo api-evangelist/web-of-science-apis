@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Web of Science API Expanded citations Documents API
-  description: The Web of Science API Expanded provides rich searching across the Web of Science based on your subscription to retrieve item-level metadata, including times-cited counts and contributor addresses and affiliations. It supports advanced search, citation analysis, related records discovery, reference retrieval, and bibliometric reporting with both JSON and XML output formats.
+  title: Web of Science Starter Documents API
+  description: The Web of Science Starter API provides basic metadata and search functionality for Web of Science documents and journals. It enables real-time check of bibliographic metadata such as DOI, author, source title, and times-cited counts against the Web of Science Core Collection and other Web of Science product databases. The API uses REST-based GET endpoints with JSON output.
   version: 1.0.0
   contact:
     name: Clarivate Developer Support
@@ -10,12 +10,12 @@ info:
     name: Clarivate Terms of Use
     url: https://clarivate.com/legal/terms-conditions/
 servers:
-- url: https://api.clarivate.com/api/wos
-  description: Web of Science API Expanded
+- url: https://api.clarivate.com/apis/wos-starter/v1
+  description: Web of Science Starter API v1
 security:
 - ApiKeyAuth: []
 tags:
-- name: documents
+- name: Documents
 paths:
   /documents:
     get:
@@ -23,7 +23,7 @@ paths:
       description: Search Web of Science documents using the advanced query syntax. Returns bibliographic metadata including titles, authors, sources, DOIs, and times-cited counts. Supports pagination, sorting, and filtering by database and time span.
       operationId: searchDocuments
       tags:
-      - documents
+      - Documents
       x-microcks-operation:
         delay: 100
       parameters:
@@ -126,7 +126,7 @@ paths:
       description: Retrieve a specific Web of Science document by its unique identifier (UID). Returns full bibliographic metadata including title, authors, source, abstract, keywords, DOI, and times-cited count.
       operationId: getDocument
       tags:
-      - documents
+      - Documents
       x-microcks-operation:
         delay: 100
       parameters:
@@ -158,48 +158,34 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    DocumentPages:
+    CitationCount:
       type: object
-      description: Page range information
+      description: Citation count for a specific database
       properties:
-        range:
+        db:
           type: string
-          description: Page range (e.g., 145-152)
-        begin:
-          type: string
-          description: First page number
-        end:
-          type: string
-          description: Last page number
+          description: Database code (e.g., WOS)
         count:
           type: integer
-          description: Total number of pages
-    ErrorResponse:
+          description: Number of times cited
+    DocumentsSearchResponse:
       type: object
-      description: Error response from the API
+      description: Response from document search containing results and metadata
       properties:
-        error:
-          type: string
-          description: Error code or type
-        message:
-          type: string
-          description: Human-readable error message
-        detail:
-          type: string
-          description: Additional error details
-    Author:
-      type: object
-      description: An author of a Web of Science document
-      properties:
-        displayName:
-          type: string
-          description: Full display name of the author
-        wosStandard:
-          type: string
-          description: Standardized author name format used in Web of Science
-        researcherId:
-          type: string
-          description: Researcher ID if available
+        total:
+          type: integer
+          description: Total number of documents matching the query
+        page:
+          type: integer
+          description: Current page number
+        limit:
+          type: integer
+          description: Number of records per page
+        hits:
+          type: array
+          description: Array of document records
+          items:
+            $ref: '#/components/schemas/Document'
     Document:
       type: object
       description: A Web of Science document record with bibliographic metadata
@@ -235,49 +221,6 @@ components:
           $ref: '#/components/schemas/DocumentIdentifiers'
         keywords:
           $ref: '#/components/schemas/DocumentKeywords'
-    DocumentsSearchResponse:
-      type: object
-      description: Response from document search containing results and metadata
-      properties:
-        total:
-          type: integer
-          description: Total number of documents matching the query
-        page:
-          type: integer
-          description: Current page number
-        limit:
-          type: integer
-          description: Number of records per page
-        hits:
-          type: array
-          description: Array of document records
-          items:
-            $ref: '#/components/schemas/Document'
-    DocumentLinks:
-      type: object
-      description: Links to the document in Web of Science
-      properties:
-        record:
-          type: string
-          description: Direct link to the full record in Web of Science
-          format: uri
-        references:
-          type: string
-          description: Link to the references list
-          format: uri
-        related:
-          type: string
-          description: Link to related records
-          format: uri
-    DocumentNames:
-      type: object
-      description: Author and editor names
-      properties:
-        authors:
-          type: array
-          description: List of authors
-          items:
-            $ref: '#/components/schemas/Author'
     DocumentIdentifiers:
       type: object
       description: Document identifiers (DOI, PMID, etc.)
@@ -294,6 +237,35 @@ components:
         eissn:
           type: string
           description: Electronic ISSN of the source journal
+    DocumentPages:
+      type: object
+      description: Page range information
+      properties:
+        range:
+          type: string
+          description: Page range (e.g., 145-152)
+        begin:
+          type: string
+          description: First page number
+        end:
+          type: string
+          description: Last page number
+        count:
+          type: integer
+          description: Total number of pages
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        error:
+          type: string
+          description: Error code or type
+        message:
+          type: string
+          description: Human-readable error message
+        detail:
+          type: string
+          description: Additional error details
     DocumentSource:
       type: object
       description: Source publication information
@@ -321,6 +293,44 @@ components:
         supplement:
           type: string
           description: Supplement identifier
+    DocumentLinks:
+      type: object
+      description: Links to the document in Web of Science
+      properties:
+        record:
+          type: string
+          description: Direct link to the full record in Web of Science
+          format: uri
+        references:
+          type: string
+          description: Link to the references list
+          format: uri
+        related:
+          type: string
+          description: Link to related records
+          format: uri
+    Author:
+      type: object
+      description: An author of a Web of Science document
+      properties:
+        displayName:
+          type: string
+          description: Full display name of the author
+        wosStandard:
+          type: string
+          description: Standardized author name format used in Web of Science
+        researcherId:
+          type: string
+          description: Researcher ID if available
+    DocumentNames:
+      type: object
+      description: Author and editor names
+      properties:
+        authors:
+          type: array
+          description: List of authors
+          items:
+            $ref: '#/components/schemas/Author'
     DocumentKeywords:
       type: object
       description: Keywords associated with the document
@@ -335,19 +345,9 @@ components:
           description: Keywords Plus generated from references
           items:
             type: string
-    CitationCount:
-      type: object
-      description: Citation count for a specific database
-      properties:
-        db:
-          type: string
-          description: Database code (e.g., WOS)
-        count:
-          type: integer
-          description: Number of times cited
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: X-ApiKey
-      description: Clarivate API key for Web of Science API Expanded
+      description: Clarivate API key for authentication
