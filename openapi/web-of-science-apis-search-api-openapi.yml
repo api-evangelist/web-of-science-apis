@@ -264,72 +264,17 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    WosRecord:
+    DynamicData:
       type: object
-      description: A full Web of Science record with all metadata fields
+      description: Dynamic data including citation counts
       properties:
-        UID:
-          type: string
-          description: Web of Science unique identifier
-        static_data:
-          $ref: '#/components/schemas/StaticData'
-        dynamic_data:
-          $ref: '#/components/schemas/DynamicData'
-    SearchResponse:
-      type: object
-      description: Response from search and retrieval operations
-      properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        records:
-          $ref: '#/components/schemas/Records'
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        code:
-          type: integer
-          description: HTTP error code
-        message:
-          type: string
-          description: Human-readable error message
-    StaticData:
-      type: object
-      description: Static (non-citation) metadata for a WOS record
-      properties:
-        summary:
-          $ref: '#/components/schemas/RecordSummary'
-        fullrecord_metadata:
-          $ref: '#/components/schemas/FullRecordMetadata'
-    RecordSummary:
-      type: object
-      description: Summary fields of a WOS record
-      properties:
-        names:
+        citation_related:
           type: object
-          description: Author and editor names
-        doctypes:
-          type: object
-          description: Document types
-        titles:
-          type: object
-          description: Titles (article, source, etc.)
-        pub_info:
-          $ref: '#/components/schemas/PubInfo'
-        identifiers:
-          type: object
-          description: Document identifiers (DOI, ISSN, etc.)
-    RecordIdsResponse:
-      type: object
-      description: Response containing only record UIDs
-      properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        ids:
-          type: array
-          description: Array of WOS unique identifiers
-          items:
-            type: string
+          description: Citation count information
+          properties:
+            tc_list:
+              type: object
+              description: Times-cited list by database
     TimeSpan:
       type: object
       description: Date range for filtering
@@ -342,26 +287,17 @@ components:
           type: string
           description: End date in YYYY-MM-DD format
           format: date
-    DynamicData:
+    WosRecord:
       type: object
-      description: Dynamic data including citation counts
+      description: A full Web of Science record with all metadata fields
       properties:
-        citation_related:
-          type: object
-          description: Citation count information
-          properties:
-            tc_list:
-              type: object
-              description: Times-cited list by database
-    Records:
-      type: object
-      description: Container for record results
-      properties:
-        records:
-          type: array
-          description: Array of WOS records
-          items:
-            $ref: '#/components/schemas/WosRecord'
+        UID:
+          type: string
+          description: Web of Science unique identifier
+        static_data:
+          $ref: '#/components/schemas/StaticData'
+        dynamic_data:
+          $ref: '#/components/schemas/DynamicData'
     PubInfo:
       type: object
       description: Publication information
@@ -381,19 +317,6 @@ components:
         vol:
           type: string
           description: Volume number
-    QueryResult:
-      type: object
-      description: Metadata about the search query and result set
-      properties:
-        queryId:
-          type: integer
-          description: Identifier for this query (for subsequent pagination calls)
-        recordsFound:
-          type: integer
-          description: Total number of records matching the query
-        recordsSearched:
-          type: integer
-          description: Number of records searched (may differ from total database size)
     SearchRequest:
       type: object
       description: Search request body for POST endpoint
@@ -423,6 +346,31 @@ components:
         sortField:
           type: string
           description: Sort field and direction
+    Records:
+      type: object
+      description: Container for record results
+      properties:
+        records:
+          type: array
+          description: Array of WOS records
+          items:
+            $ref: '#/components/schemas/WosRecord'
+    StaticData:
+      type: object
+      description: Static (non-citation) metadata for a WOS record
+      properties:
+        summary:
+          $ref: '#/components/schemas/RecordSummary'
+        fullrecord_metadata:
+          $ref: '#/components/schemas/FullRecordMetadata'
+    SearchResponse:
+      type: object
+      description: Response from search and retrieval operations
+      properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        records:
+          $ref: '#/components/schemas/Records'
     FullRecordMetadata:
       type: object
       description: Full record metadata including keywords and addresses
@@ -439,6 +387,58 @@ components:
         fund_ack:
           type: object
           description: Funding acknowledgment information
+    QueryResult:
+      type: object
+      description: Metadata about the search query and result set
+      properties:
+        queryId:
+          type: integer
+          description: Identifier for this query (for subsequent pagination calls)
+        recordsFound:
+          type: integer
+          description: Total number of records matching the query
+        recordsSearched:
+          type: integer
+          description: Number of records searched (may differ from total database size)
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP error code
+        message:
+          type: string
+          description: Human-readable error message
+    RecordSummary:
+      type: object
+      description: Summary fields of a WOS record
+      properties:
+        names:
+          type: object
+          description: Author and editor names
+        doctypes:
+          type: object
+          description: Document types
+        titles:
+          type: object
+          description: Titles (article, source, etc.)
+        pub_info:
+          $ref: '#/components/schemas/PubInfo'
+        identifiers:
+          type: object
+          description: Document identifiers (DOI, ISSN, etc.)
+    RecordIdsResponse:
+      type: object
+      description: Response containing only record UIDs
+      properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        ids:
+          type: array
+          description: Array of WOS unique identifiers
+          items:
+            type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

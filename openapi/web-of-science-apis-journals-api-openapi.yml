@@ -113,6 +113,37 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    JournalsSearchResponse:
+      type: object
+      description: Response from journal search containing results and metadata
+      properties:
+        total:
+          type: integer
+          description: Total number of journals matching the query
+        page:
+          type: integer
+          description: Current page number
+        limit:
+          type: integer
+          description: Number of records per page
+        hits:
+          type: array
+          description: Array of journal records
+          items:
+            $ref: '#/components/schemas/Journal'
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        error:
+          type: string
+          description: Error code or type
+        message:
+          type: string
+          description: Human-readable error message
+        detail:
+          type: string
+          description: Additional error details
     Journal:
       type: object
       description: A Web of Science journal record
@@ -157,37 +188,6 @@ components:
             record:
               type: string
               format: uri
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        error:
-          type: string
-          description: Error code or type
-        message:
-          type: string
-          description: Human-readable error message
-        detail:
-          type: string
-          description: Additional error details
-    JournalsSearchResponse:
-      type: object
-      description: Response from journal search containing results and metadata
-      properties:
-        total:
-          type: integer
-          description: Total number of journals matching the query
-        page:
-          type: integer
-          description: Current page number
-        limit:
-          type: integer
-          description: Number of records per page
-        hits:
-          type: array
-          description: Array of journal records
-          items:
-            $ref: '#/components/schemas/Journal'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

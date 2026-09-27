@@ -49,7 +49,7 @@ modified: '2026-05-19'
 specificationVersion: '0.23'
 apis:
 - aid: web-of-science-apis:web-of-science-apis-citations-api
-  name: Web of Science APIs citations API
+  name: Web of Science APIs Citations API
   description: The citations API from Web of Science APIs — 3 operation(s) for citations.
   humanURL: https://developer.clarivate.com/apis/wos-starter
   tags:
@@ -68,7 +68,7 @@ apis:
   - type: SwaggerUI
     url: https://developer.clarivate.com/apis/wos/swagger
 - aid: web-of-science-apis:web-of-science-apis-documents-api
-  name: Web of Science APIs documents API
+  name: Web of Science APIs Documents API
   description: The documents API from Web of Science APIs — 2 operation(s) for documents.
   humanURL: https://developer.clarivate.com/apis/wos-starter
   tags:
@@ -87,7 +87,7 @@ apis:
   - type: SwaggerUI
     url: https://developer.clarivate.com/apis/wos/swagger
 - aid: web-of-science-apis:web-of-science-apis-journals-api
-  name: Web of Science APIs journals API
+  name: Web of Science APIs Journals API
   description: The journals API from Web of Science APIs — 2 operation(s) for journals.
   humanURL: https://developer.clarivate.com/apis/wos-starter
   tags:
@@ -106,7 +106,7 @@ apis:
   - type: SwaggerUI
     url: https://developer.clarivate.com/apis/wos/swagger
 - aid: web-of-science-apis:web-of-science-apis-records-api
-  name: Web of Science APIs records API
+  name: Web of Science APIs Records API
   description: The records API from Web of Science APIs — 1 operation(s) for records.
   humanURL: https://developer.clarivate.com/apis/wos-starter
   tags:
@@ -125,7 +125,7 @@ apis:
   - type: SwaggerUI
     url: https://developer.clarivate.com/apis/wos/swagger
 - aid: web-of-science-apis:web-of-science-apis-reports-api
-  name: Web of Science APIs reports API
+  name: Web of Science APIs Reports API
   description: The reports API from Web of Science APIs — 2 operation(s) for reports.
   humanURL: https://developer.clarivate.com/apis/wos-starter
   tags:
@@ -144,7 +144,7 @@ apis:
   - type: SwaggerUI
     url: https://developer.clarivate.com/apis/wos/swagger
 - aid: web-of-science-apis:web-of-science-apis-search-api
-  name: Web of Science APIs search API
+  name: Web of Science APIs Search API
   description: The search API from Web of Science APIs — 3 operation(s) for search.
   humanURL: https://developer.clarivate.com/apis/wos-starter
   tags:
