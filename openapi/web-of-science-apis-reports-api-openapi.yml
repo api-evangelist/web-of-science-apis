@@ -113,6 +113,36 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    YearCount:
+      type: object
+      description: Count value for a specific year
+      properties:
+        year:
+          type: integer
+          description: Year
+        count:
+          type: integer
+          description: Count for that year
+    CategoryCount:
+      type: object
+      description: A category with its record count
+      properties:
+        name:
+          type: string
+          description: Category name
+        count:
+          type: integer
+          description: Number of records in this category
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP error code
+        message:
+          type: string
+          description: Human-readable error message
     CitationReport:
       type: object
       description: Citation report for a query result set
@@ -150,36 +180,6 @@ components:
           description: ASCA traditional categories with counts
           items:
             $ref: '#/components/schemas/CategoryCount'
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        code:
-          type: integer
-          description: HTTP error code
-        message:
-          type: string
-          description: Human-readable error message
-    YearCount:
-      type: object
-      description: Count value for a specific year
-      properties:
-        year:
-          type: integer
-          description: Year
-        count:
-          type: integer
-          description: Count for that year
-    CategoryCount:
-      type: object
-      description: A category with its record count
-      properties:
-        name:
-          type: string
-          description: Category name
-        count:
-          type: integer
-          description: Number of records in this category
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

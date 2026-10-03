@@ -190,17 +190,14 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    DynamicData:
+    SearchResponse:
       type: object
-      description: Dynamic data including citation counts
+      description: Response from search and retrieval operations
       properties:
-        citation_related:
-          type: object
-          description: Citation count information
-          properties:
-            tc_list:
-              type: object
-              description: Times-cited list by database
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        records:
+          $ref: '#/components/schemas/Records'
     WosRecord:
       type: object
       description: A full Web of Science record with all metadata fields
@@ -212,6 +209,27 @@ components:
           $ref: '#/components/schemas/StaticData'
         dynamic_data:
           $ref: '#/components/schemas/DynamicData'
+    StaticData:
+      type: object
+      description: Static (non-citation) metadata for a WOS record
+      properties:
+        summary:
+          $ref: '#/components/schemas/RecordSummary'
+        fullrecord_metadata:
+          $ref: '#/components/schemas/FullRecordMetadata'
+    QueryResult:
+      type: object
+      description: Metadata about the search query and result set
+      properties:
+        queryId:
+          type: integer
+          description: Identifier for this query (for subsequent pagination calls)
+        recordsFound:
+          type: integer
+          description: Total number of records matching the query
+        recordsSearched:
+          type: integer
+          description: Number of records searched (may differ from total database size)
     PubInfo:
       type: object
       description: Publication information
@@ -231,60 +249,6 @@ components:
         vol:
           type: string
           description: Volume number
-    Records:
-      type: object
-      description: Container for record results
-      properties:
-        records:
-          type: array
-          description: Array of WOS records
-          items:
-            $ref: '#/components/schemas/WosRecord'
-    StaticData:
-      type: object
-      description: Static (non-citation) metadata for a WOS record
-      properties:
-        summary:
-          $ref: '#/components/schemas/RecordSummary'
-        fullrecord_metadata:
-          $ref: '#/components/schemas/FullRecordMetadata'
-    SearchResponse:
-      type: object
-      description: Response from search and retrieval operations
-      properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        records:
-          $ref: '#/components/schemas/Records'
-    FullRecordMetadata:
-      type: object
-      description: Full record metadata including keywords and addresses
-      properties:
-        languages:
-          type: object
-          description: Publication language information
-        keywords:
-          type: object
-          description: Author keywords and Keywords Plus
-        addresses:
-          type: object
-          description: Author affiliation addresses
-        fund_ack:
-          type: object
-          description: Funding acknowledgment information
-    QueryResult:
-      type: object
-      description: Metadata about the search query and result set
-      properties:
-        queryId:
-          type: integer
-          description: Identifier for this query (for subsequent pagination calls)
-        recordsFound:
-          type: integer
-          description: Total number of records matching the query
-        recordsSearched:
-          type: integer
-          description: Number of records searched (may differ from total database size)
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -313,6 +277,42 @@ components:
         identifiers:
           type: object
           description: Document identifiers (DOI, ISSN, etc.)
+    FullRecordMetadata:
+      type: object
+      description: Full record metadata including keywords and addresses
+      properties:
+        languages:
+          type: object
+          description: Publication language information
+        keywords:
+          type: object
+          description: Author keywords and Keywords Plus
+        addresses:
+          type: object
+          description: Author affiliation addresses
+        fund_ack:
+          type: object
+          description: Funding acknowledgment information
+    DynamicData:
+      type: object
+      description: Dynamic data including citation counts
+      properties:
+        citation_related:
+          type: object
+          description: Citation count information
+          properties:
+            tc_list:
+              type: object
+              description: Times-cited list by database
+    Records:
+      type: object
+      description: Container for record results
+      properties:
+        records:
+          type: array
+          description: Array of WOS records
+          items:
+            $ref: '#/components/schemas/WosRecord'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

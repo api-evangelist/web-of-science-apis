@@ -158,122 +158,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CitationCount:
-      type: object
-      description: Citation count for a specific database
-      properties:
-        db:
-          type: string
-          description: Database code (e.g., WOS)
-        count:
-          type: integer
-          description: Number of times cited
-    DocumentKeywords:
-      type: object
-      description: Keywords associated with the document
-      properties:
-        authorKeywords:
-          type: array
-          description: Keywords provided by the authors
-          items:
-            type: string
-        keywordsPlus:
-          type: array
-          description: Keywords Plus generated from references
-          items:
-            type: string
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        error:
-          type: string
-          description: Error code or type
-        message:
-          type: string
-          description: Human-readable error message
-        detail:
-          type: string
-          description: Additional error details
-    Author:
-      type: object
-      description: An author of a Web of Science document
-      properties:
-        displayName:
-          type: string
-          description: Full display name of the author
-        wosStandard:
-          type: string
-          description: Standardized author name format used in Web of Science
-        researcherId:
-          type: string
-          description: Researcher ID if available
-    DocumentLinks:
-      type: object
-      description: Links to the document in Web of Science
-      properties:
-        record:
-          type: string
-          description: Direct link to the full record in Web of Science
-          format: uri
-        references:
-          type: string
-          description: Link to the references list
-          format: uri
-        related:
-          type: string
-          description: Link to related records
-          format: uri
-    DocumentsSearchResponse:
-      type: object
-      description: Response from document search containing results and metadata
-      properties:
-        total:
-          type: integer
-          description: Total number of documents matching the query
-        page:
-          type: integer
-          description: Current page number
-        limit:
-          type: integer
-          description: Number of records per page
-        hits:
-          type: array
-          description: Array of document records
-          items:
-            $ref: '#/components/schemas/Document'
-    DocumentPages:
-      type: object
-      description: Page range information
-      properties:
-        range:
-          type: string
-          description: Page range (e.g., 145-152)
-        begin:
-          type: string
-          description: First page number
-        end:
-          type: string
-          description: Last page number
-        count:
-          type: integer
-          description: Total number of pages
-    DocumentIdentifiers:
-      type: object
-      description: Document identifiers (DOI, PMID, etc.)
-      properties:
-        doi:
-          type: string
-          description: Digital Object Identifier
-        pmid:
-          type: string
-          description: PubMed identifier
-        issn:
-          type: string
-          description: ISSN of the source journal
-        eissn:
-          type: string
-          description: Electronic ISSN of the source journal
     DocumentSource:
       type: object
       description: Source publication information
@@ -301,6 +185,19 @@ components:
         supplement:
           type: string
           description: Supplement identifier
+    Author:
+      type: object
+      description: An author of a Web of Science document
+      properties:
+        displayName:
+          type: string
+          description: Full display name of the author
+        wosStandard:
+          type: string
+          description: Standardized author name format used in Web of Science
+        researcherId:
+          type: string
+          description: Researcher ID if available
     Document:
       type: object
       description: A Web of Science document record with bibliographic metadata
@@ -336,6 +233,56 @@ components:
           $ref: '#/components/schemas/DocumentIdentifiers'
         keywords:
           $ref: '#/components/schemas/DocumentKeywords'
+    DocumentLinks:
+      type: object
+      description: Links to the document in Web of Science
+      properties:
+        record:
+          type: string
+          description: Direct link to the full record in Web of Science
+          format: uri
+        references:
+          type: string
+          description: Link to the references list
+          format: uri
+        related:
+          type: string
+          description: Link to related records
+          format: uri
+    DocumentsSearchResponse:
+      type: object
+      description: Response from document search containing results and metadata
+      properties:
+        total:
+          type: integer
+          description: Total number of documents matching the query
+        page:
+          type: integer
+          description: Current page number
+        limit:
+          type: integer
+          description: Number of records per page
+        hits:
+          type: array
+          description: Array of document records
+          items:
+            $ref: '#/components/schemas/Document'
+    DocumentIdentifiers:
+      type: object
+      description: Document identifiers (DOI, PMID, etc.)
+      properties:
+        doi:
+          type: string
+          description: Digital Object Identifier
+        pmid:
+          type: string
+          description: PubMed identifier
+        issn:
+          type: string
+          description: ISSN of the source journal
+        eissn:
+          type: string
+          description: Electronic ISSN of the source journal
     DocumentNames:
       type: object
       description: Author and editor names
@@ -345,6 +292,59 @@ components:
           description: List of authors
           items:
             $ref: '#/components/schemas/Author'
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        error:
+          type: string
+          description: Error code or type
+        message:
+          type: string
+          description: Human-readable error message
+        detail:
+          type: string
+          description: Additional error details
+    DocumentPages:
+      type: object
+      description: Page range information
+      properties:
+        range:
+          type: string
+          description: Page range (e.g., 145-152)
+        begin:
+          type: string
+          description: First page number
+        end:
+          type: string
+          description: Last page number
+        count:
+          type: integer
+          description: Total number of pages
+    DocumentKeywords:
+      type: object
+      description: Keywords associated with the document
+      properties:
+        authorKeywords:
+          type: array
+          description: Keywords provided by the authors
+          items:
+            type: string
+        keywordsPlus:
+          type: array
+          description: Keywords Plus generated from references
+          items:
+            type: string
+    CitationCount:
+      type: object
+      description: Citation count for a specific database
+      properties:
+        db:
+          type: string
+          description: Database code (e.g., WOS)
+        count:
+          type: integer
+          description: Number of times cited
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
