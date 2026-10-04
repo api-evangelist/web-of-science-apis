@@ -113,26 +113,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    YearCount:
-      type: object
-      description: Count value for a specific year
-      properties:
-        year:
-          type: integer
-          description: Year
-        count:
-          type: integer
-          description: Count for that year
-    CategoryCount:
-      type: object
-      description: A category with its record count
-      properties:
-        name:
-          type: string
-          description: Category name
-        count:
-          type: integer
-          description: Number of records in this category
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -143,6 +123,25 @@ components:
         message:
           type: string
           description: Human-readable error message
+    CategoryContext:
+      type: object
+      description: Category context for citing or referenced records
+      properties:
+        categories:
+          type: array
+          description: ASCA traditional categories with counts
+          items:
+            $ref: '#/components/schemas/CategoryCount'
+    CategoryCount:
+      type: object
+      description: A category with its record count
+      properties:
+        name:
+          type: string
+          description: Category name
+        count:
+          type: integer
+          description: Number of records in this category
     CitationReport:
       type: object
       description: Citation report for a query result set
@@ -171,15 +170,16 @@ components:
           description: Year-by-year citation counts
           items:
             $ref: '#/components/schemas/YearCount'
-    CategoryContext:
+    YearCount:
       type: object
-      description: Category context for citing or referenced records
+      description: Count value for a specific year
       properties:
-        categories:
-          type: array
-          description: ASCA traditional categories with counts
-          items:
-            $ref: '#/components/schemas/CategoryCount'
+        year:
+          type: integer
+          description: Year
+        count:
+          type: integer
+          description: Count for that year
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

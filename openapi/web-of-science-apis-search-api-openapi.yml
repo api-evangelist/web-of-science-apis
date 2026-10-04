@@ -264,18 +264,16 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    TimeSpan:
+    ErrorResponse:
       type: object
-      description: Date range for filtering
+      description: Error response from the API
       properties:
-        begin:
+        code:
+          type: integer
+          description: HTTP error code
+        message:
           type: string
-          description: Start date in YYYY-MM-DD format
-          format: date
-        end:
-          type: string
-          description: End date in YYYY-MM-DD format
-          format: date
+          description: Human-readable error message
     SearchRequest:
       type: object
       description: Search request body for POST endpoint
@@ -305,14 +303,27 @@ components:
         sortField:
           type: string
           description: Sort field and direction
-    SearchResponse:
+    QueryResult:
       type: object
-      description: Response from search and retrieval operations
+      description: Metadata about the search query and result set
       properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        records:
-          $ref: '#/components/schemas/Records'
+        queryId:
+          type: integer
+          description: Identifier for this query (for subsequent pagination calls)
+        recordsFound:
+          type: integer
+          description: Total number of records matching the query
+        recordsSearched:
+          type: integer
+          description: Number of records searched (may differ from total database size)
+    StaticData:
+      type: object
+      description: Static (non-citation) metadata for a WOS record
+      properties:
+        summary:
+          $ref: '#/components/schemas/RecordSummary'
+        fullrecord_metadata:
+          $ref: '#/components/schemas/FullRecordMetadata'
     WosRecord:
       type: object
       description: A full Web of Science record with all metadata fields
@@ -333,14 +344,18 @@ components:
           description: Array of WOS records
           items:
             $ref: '#/components/schemas/WosRecord'
-    StaticData:
+    TimeSpan:
       type: object
-      description: Static (non-citation) metadata for a WOS record
+      description: Date range for filtering
       properties:
-        summary:
-          $ref: '#/components/schemas/RecordSummary'
-        fullrecord_metadata:
-          $ref: '#/components/schemas/FullRecordMetadata'
+        begin:
+          type: string
+          description: Start date in YYYY-MM-DD format
+          format: date
+        end:
+          type: string
+          description: End date in YYYY-MM-DD format
+          format: date
     PubInfo:
       type: object
       description: Publication information
@@ -360,43 +375,6 @@ components:
         vol:
           type: string
           description: Volume number
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        code:
-          type: integer
-          description: HTTP error code
-        message:
-          type: string
-          description: Human-readable error message
-    RecordIdsResponse:
-      type: object
-      description: Response containing only record UIDs
-      properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        ids:
-          type: array
-          description: Array of WOS unique identifiers
-          items:
-            type: string
-    FullRecordMetadata:
-      type: object
-      description: Full record metadata including keywords and addresses
-      properties:
-        languages:
-          type: object
-          description: Publication language information
-        keywords:
-          type: object
-          description: Author keywords and Keywords Plus
-        addresses:
-          type: object
-          description: Author affiliation addresses
-        fund_ack:
-          type: object
-          description: Funding acknowledgment information
     RecordSummary:
       type: object
       description: Summary fields of a WOS record
@@ -415,6 +393,22 @@ components:
         identifiers:
           type: object
           description: Document identifiers (DOI, ISSN, etc.)
+    FullRecordMetadata:
+      type: object
+      description: Full record metadata including keywords and addresses
+      properties:
+        languages:
+          type: object
+          description: Publication language information
+        keywords:
+          type: object
+          description: Author keywords and Keywords Plus
+        addresses:
+          type: object
+          description: Author affiliation addresses
+        fund_ack:
+          type: object
+          description: Funding acknowledgment information
     DynamicData:
       type: object
       description: Dynamic data including citation counts
@@ -426,19 +420,25 @@ components:
             tc_list:
               type: object
               description: Times-cited list by database
-    QueryResult:
+    RecordIdsResponse:
       type: object
-      description: Metadata about the search query and result set
+      description: Response containing only record UIDs
       properties:
-        queryId:
-          type: integer
-          description: Identifier for this query (for subsequent pagination calls)
-        recordsFound:
-          type: integer
-          description: Total number of records matching the query
-        recordsSearched:
-          type: integer
-          description: Number of records searched (may differ from total database size)
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        ids:
+          type: array
+          description: Array of WOS unique identifiers
+          items:
+            type: string
+    SearchResponse:
+      type: object
+      description: Response from search and retrieval operations
+      properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
+        records:
+          $ref: '#/components/schemas/Records'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -190,33 +190,16 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    SearchResponse:
+    ErrorResponse:
       type: object
-      description: Response from search and retrieval operations
+      description: Error response from the API
       properties:
-        queryResult:
-          $ref: '#/components/schemas/QueryResult'
-        records:
-          $ref: '#/components/schemas/Records'
-    WosRecord:
-      type: object
-      description: A full Web of Science record with all metadata fields
-      properties:
-        UID:
+        code:
+          type: integer
+          description: HTTP error code
+        message:
           type: string
-          description: Web of Science unique identifier
-        static_data:
-          $ref: '#/components/schemas/StaticData'
-        dynamic_data:
-          $ref: '#/components/schemas/DynamicData'
-    StaticData:
-      type: object
-      description: Static (non-citation) metadata for a WOS record
-      properties:
-        summary:
-          $ref: '#/components/schemas/RecordSummary'
-        fullrecord_metadata:
-          $ref: '#/components/schemas/FullRecordMetadata'
+          description: Human-readable error message
     QueryResult:
       type: object
       description: Metadata about the search query and result set
@@ -230,6 +213,34 @@ components:
         recordsSearched:
           type: integer
           description: Number of records searched (may differ from total database size)
+    StaticData:
+      type: object
+      description: Static (non-citation) metadata for a WOS record
+      properties:
+        summary:
+          $ref: '#/components/schemas/RecordSummary'
+        fullrecord_metadata:
+          $ref: '#/components/schemas/FullRecordMetadata'
+    WosRecord:
+      type: object
+      description: A full Web of Science record with all metadata fields
+      properties:
+        UID:
+          type: string
+          description: Web of Science unique identifier
+        static_data:
+          $ref: '#/components/schemas/StaticData'
+        dynamic_data:
+          $ref: '#/components/schemas/DynamicData'
+    Records:
+      type: object
+      description: Container for record results
+      properties:
+        records:
+          type: array
+          description: Array of WOS records
+          items:
+            $ref: '#/components/schemas/WosRecord'
     PubInfo:
       type: object
       description: Publication information
@@ -249,16 +260,6 @@ components:
         vol:
           type: string
           description: Volume number
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        code:
-          type: integer
-          description: HTTP error code
-        message:
-          type: string
-          description: Human-readable error message
     RecordSummary:
       type: object
       description: Summary fields of a WOS record
@@ -304,15 +305,14 @@ components:
             tc_list:
               type: object
               description: Times-cited list by database
-    Records:
+    SearchResponse:
       type: object
-      description: Container for record results
+      description: Response from search and retrieval operations
       properties:
+        queryResult:
+          $ref: '#/components/schemas/QueryResult'
         records:
-          type: array
-          description: Array of WOS records
-          items:
-            $ref: '#/components/schemas/WosRecord'
+          $ref: '#/components/schemas/Records'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
