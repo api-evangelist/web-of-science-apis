@@ -1,0 +1,36 @@
+# Front Door AI Index — web-of-science-apis — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: web-of-science-apis
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: clarivate.com
+  final_host: clarivate.com
+  ownership: shared
+  owner: clarivate
+  shares_host_with:
+  - clarivate
+  inherited_from: null
+  alias_of: null
+  verdict: scored
+  score: null
+  band: null
+  band_label: null
+  host_score: 28
+  density: null
+  words: 3553
+  tiers:
+    agentic: 2
+    core: 26
+    model: 0
+  ambiguous: 57
+  top_terms:
+    intelligence: 53
+    AI: 18
+    artificial intelligence: 8
+    agent: 2
+    AI agent: 1
+    MCP: 1
+    predictive: 1
+    smart: 1

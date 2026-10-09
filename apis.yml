@@ -163,6 +163,12 @@ apis:
   - type: SwaggerUI
     url: https://developer.clarivate.com/apis/wos/swagger
 common:
+  - type: Plans
+    url: plans/web-of-science-apis-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/web-of-science-apis-rate-limits.yml
+  - type: FinOps
+    url: finops/web-of-science-apis-finops.yml
   - type: CapabilityMap
     url: capabilities/web-of-science-apis-capability-edges.yml
     name: Web of Science APIs Business Capability Map
